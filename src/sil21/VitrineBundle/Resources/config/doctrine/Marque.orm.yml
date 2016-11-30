@@ -1,0 +1,22 @@
+sil21\VitrineBundle\Entity\Marque:
+    type: entity
+    table: marque
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '100'
+            column: Name
+            
+    oneToMany:
+        products:
+             targetEntity: Product
+             mappedBy: marque
+             cascade: [ "persist", "remove" ]
+
+    lifecycleCallbacks: {  }

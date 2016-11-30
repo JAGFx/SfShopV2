@@ -1,0 +1,31 @@
+sil21\VitrineBundle\Entity\LigneCommande:
+    type: entity
+    table: lignecommande
+    id:
+        commande:
+            associationKey: trues
+        product:
+            associationKey: true
+          
+    fields:
+        qte:
+            type: integer
+        prix:
+            type: float
+            
+    manyToOne:
+        product:
+             targetEntity: Product
+             joinColumn:
+                 name: product_id
+                 referencedColumnName: id
+                 nullable: false
+                 
+        commande:
+             targetEntity: Commande
+             inversedBy: lignecommandes
+             joinColumn:
+                 name: commande_id
+                 referencedColumnName: id
+                 nullable: false
+

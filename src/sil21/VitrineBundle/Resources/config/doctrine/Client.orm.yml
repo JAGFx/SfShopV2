@@ -1,0 +1,35 @@
+sil21\VitrineBundle\Entity\Client:
+    type: entity
+    table: client
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+            length: '255'
+        password:
+            type: string
+            length: '255'
+        mail:
+            type: string
+            length: '255'
+        address:
+            type: text
+        tel:
+            type: string
+            length: '10'
+        dateBirthday:
+            type: datetime
+            
+    oneToMany:
+        commandes:
+             targetEntity: Commande
+             mappedBy: client
+             cascade: ["persist", "remove"]
+
+    lifecycleCallbacks: {  }

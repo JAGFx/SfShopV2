@@ -1,0 +1,27 @@
+sil21\VitrineBundle\Entity\Commande:
+    type: entity
+    table: commande
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        date:
+            type: datetime
+               
+        etat:
+            type: boolean
+
+    manyToOne:
+        client:
+            targetEntity: Client
+            inversedBy: commandes
+            joinColumn:
+                name: client_id
+                referencedColumnName: id
+
+    oneToMany:
+            lignecommandes:
+                 targetEntity: LigneCommande
+                 mappedBy: commande
+                 cascade: [ "persist", "remove" ]

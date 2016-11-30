@@ -1,0 +1,40 @@
+
+sil21\VitrineBundle\Entity\Product:
+    type: entity
+    table: product                        # La table a laquelle elle correspond
+    id:                                   # Les champs qui composent la clé primaire
+       id:
+           type: integer
+           generator: { strategy: AUTO }
+           
+    fields:                               # Les autres champs de la table
+       name:
+           type: string
+           length: 100
+       image:
+                  type: string
+                  length: 255
+       price:
+           type: decimal
+           scale: 2
+       stock:
+            type: integer
+            options:
+                default: 0
+       description:
+           type: text
+           
+    manyToOne:
+        category:
+             targetEntity: Category
+             inversedBy: products
+             joinColumn:
+                 name: category_id
+                 referencedColumnName: id
+                 
+        marque:
+             targetEntity: Marque
+             inversedBy: products
+             joinColumn:
+                 name: marque_id
+                 referencedColumnName: id

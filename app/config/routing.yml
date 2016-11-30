@@ -1,6 +1,7 @@
-vitrine:
-    resource: "@VitrineBundle/Resources/config/routing.yml"
+sil21_vitrine:
+    resource: "@sil21VitrineBundle/Resources/config/routing.yml"
     prefix:   /
+
 
 app:
     resource: "@AppBundle/Controller/"
