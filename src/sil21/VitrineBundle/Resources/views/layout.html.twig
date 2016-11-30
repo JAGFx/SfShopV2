@@ -5,11 +5,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" >
 		<title >Document</title >
-		{% stylesheets filter="compass" output="css/all.css"
+		{% stylesheets filter="compass, cssrewrite" output="css/all.css"
 			"@sil21VitrineBundle/Resources/public/scss/screen.scss"
 			"@sil21VitrineBundle/Resources/public/scss/print.scss"
 			"@sil21VitrineBundle/Resources/public/scss/ie.scss"
-			"@sil21VitrineBundle/Resources/public/scss/app.scss"%}
+			"@sil21VitrineBundle/Resources/public/scss/app.scss"
+			"@sil21VitrineBundle/Resources/public/bootstrap-sass-3.3.7/stylesheets/*.scss"%}
 		
 			<link rel="stylesheet" href="{{ asset_url }}" />
 		{% endstylesheets %}
