@@ -4,21 +4,33 @@
 		<meta charset="UTF-8" >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" >
-		<title >Document</title >
-		{% stylesheets filter="compass, cssrewrite" output="css/all.css"
-			"@sil21VitrineBundle/Resources/public/scss/screen.scss"
-			"@sil21VitrineBundle/Resources/public/scss/print.scss"
-			"@sil21VitrineBundle/Resources/public/scss/ie.scss"
-			"@sil21VitrineBundle/Resources/public/scss/app.scss"
-			"@sil21VitrineBundle/Resources/public/bootstrap-sass-3.3.7/stylesheets/*.scss"%}
-		
-			<link rel="stylesheet" href="{{ asset_url }}" />
+		<title >SfShop</title >
+		{% stylesheets filter="cssrewrite" output="dist/css/all.css"
+			"assets/css/screen.css"
+			"assets/css/print.css"
+			"assets/css/ie.css"
+			"assets/css/bootstrap.min.css"
+			"assets/css/bootstrap-theme.min.css"
+			"assets/css/app.css"
+		%}
+
+		<link rel="stylesheet" href="{{ asset_url }}" />
 		{% endstylesheets %}
-	
+
 	</head >
 	<body >
-		<h2>PLOP</h2>
-		<p>Yellow</p>
-	
+		{% include '@sil21Vitrine/Default/menu.html.twig' %}
+
+		<section class="container">
+			{% block content %}
+			{% endblock %}
+		</section>
+
+		{% javascripts filter="?jsqueeze" output="dist/js/app.js"
+			"assets/js/jquery-3.1.1.min.js"
+			"assets/js/bootstrap.min.js"
+		%}
+		<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
 	</body >
 </html >

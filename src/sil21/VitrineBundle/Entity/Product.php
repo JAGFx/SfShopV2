@@ -8,8 +8,6 @@
 	 * Product
 	 */
 	class Product {
-		const PATH_IMAGE = '../../uploads/products/';
-		
 		/**
 		 * @var integer
 		 */

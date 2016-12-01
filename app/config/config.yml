@@ -73,7 +73,8 @@ assetic:
     ruby: ~
     filters:
         cssrewrite: ~
-        sass:
-            bin: 'I:\Ruby23-x64\bin\scss'
-        compass:
-            bin: ~
+
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: true

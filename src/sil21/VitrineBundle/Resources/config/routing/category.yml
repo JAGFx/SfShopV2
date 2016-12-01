@@ -1,0 +1,6 @@
+category_articlesByCategory:
+    path:       /{id}/articles
+    defaults: { _controller: sil21VitrineBundle:Category:articlesByCategory, id: 0}
+    methods:  GET
+    requirements:
+        id:  \d+

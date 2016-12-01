@@ -1,3 +1,17 @@
+# ---------- IMPORT ----------
+
+# -- Catégorie
+sil21_categories:
+    resource: "@sil21VitrineBundle/Resources/config/routing/category.yml"
+    prefix: /category
+
+
+# ---------- PAGES ----------
+
 sil21_vitrine_homepage:
     path:     /
     defaults: { _controller: sil21VitrineBundle:Default:index }
+
+sil21_mention:
+    path: /mentions
+    defaults: { _controller: sil21VitrineBundle:Default:mentions }

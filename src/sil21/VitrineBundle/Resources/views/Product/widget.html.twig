@@ -1,0 +1,22 @@
+<article class="col-xs-12 product" >
+	<div class="col-md-2 picture" >
+		<img src="{{ asset('uploads/products/' ~ product.image ) }}" width="170px"/>
+	</div >
+	<div class="col-md-7" >
+		<div class="topArticle col-xs-12" >
+			<h3 >{{ product.name }} <span class="label label-primary" >{{ product.category.name }}</span ></h3 >
+			<p >{{ product.description }}</p >
+		</div >
+	</div >
+	<div class="rightArticle flexbox col-md-3" >
+		<div class="flex-item price" >
+			{{ product.price|number_format(2, ',', ' ') }} €
+		</div >
+		<div class="flex-item stockProduct {% if product.onStock %}available{% else %}unavailable{% endif %}" >
+			<span >{% if product.onStock %}En stock{% else %}Undisponible{% endif %}</span >
+		</div >
+		<div class="flex-item addCart" >
+			<a href="" class="btn btn-primary" ><span class="glyphicon glyphicon-shopping-cart" ></span ></a >
+		</div >
+	</div >
+</article >

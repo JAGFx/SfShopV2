@@ -1,0 +1,27 @@
+@import "variables";
+@import "product";
+
+body{
+	background: $grey;
+}
+
+.navbar-brand {
+	padding: 0;
+	img{
+		height: 50px;
+	}
+}
+
+.flexbox{
+	display: flex;
+	flex-flow: row wrap;
+	
+	.flex-item{
+		flex: 1 auto;
+	}
+}
+
+.btn.btn-primary{
+	background: $mainColor;
+	border-color: darken($mainColor, 5%);
+}
