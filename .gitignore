@@ -35,6 +35,7 @@
 
 # Assets and user uploads
 /web/uploads/
+!/web/uploads/products
 
 # Assets managed by Bower
 /web/assets/vendor/
@@ -48,3 +49,5 @@
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
+
+/**/.sass-cache
