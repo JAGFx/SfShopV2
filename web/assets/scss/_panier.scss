@@ -1,0 +1,37 @@
+article.panier {
+	padding-left: 0;
+	padding-right: 0;
+	
+	table {
+		width: 100%;
+		
+		tr {
+			border-top: 1px solid darken($grey, 20%);
+			
+			th {
+				text-transform: uppercase;
+				font-size:      1.2em;
+				padding:        5px 10px 25px 10px;
+			}
+			
+			td {
+				padding: 25px 10px;
+			}
+			
+			&.mainColorAcent {
+				border-color: $mainColor;
+				
+				td { background:   lighten($mainColor, 32%); }
+			}
+			
+			&:first-child { border: none; }
+		}
+		
+		.infoProduct {
+			h3 {
+				margin:0;
+				
+			}
+		}
+	}
+}

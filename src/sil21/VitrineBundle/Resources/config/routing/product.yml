@@ -1,0 +1,4 @@
+product_list:
+    path:       /
+    defaults: { _controller: sil21VitrineBundle:Product:listAll}
+    methods:  GET

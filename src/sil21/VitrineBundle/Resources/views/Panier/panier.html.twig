@@ -1,0 +1,34 @@
+{% extends "@sil21Vitrine/layout.html.twig" %}
+
+{% set showLeftMenu = 'no' %}
+
+{% block content %}
+	<article class="panier">
+		<table>
+			<tr >
+				<th ></th >
+				<th >Désignation</th >
+				<th >Disponibilité</th >
+				<th >Quantité</th >
+				<th >Prix</th >
+				<th ></th >
+			</tr >
+			<tr >
+				<td >IMG</td >
+				<td class="infoProduct">
+					<h3 >NAME<span class="label label-primary" >CAT</span ></h3 >
+					<p >DESC</p >
+				</td >
+				<td >DIspo</td >
+				<td >1</td >
+				<td >123.32€</td >
+				<td >X</td >
+			</tr >
+			<tr class="mainColorAcent">
+				<td colspan="4"></td >
+				<td >PRX FINAL</td >
+				<td ></td >
+			</tr>
+		</table>
+	</article>
+{% endblock %}

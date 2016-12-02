@@ -1,27 +1,32 @@
 @import "variables";
+@import "menu";
+@import "leftMenu";
 @import "product";
+@import "panier";
 
-body{
-	background: $grey;
+body {
+	background:  $grey;
+	padding-top: $heigthMenu * 2 - 10px;
 }
 
-.navbar-brand {
-	padding: 0;
-	img{
-		height: 50px;
-	}
-}
-
-.flexbox{
-	display: flex;
+.flexbox {
+	display:   flex;
 	flex-flow: row wrap;
 	
-	.flex-item{
+	.flex-item {
 		flex: 1 auto;
 	}
 }
 
-.btn.btn-primary{
-	background: $mainColor;
+article {
+	background:    #FFF;
+	border:        1px solid darken($grey, 5%);
+	border-width:  1px 1px 4px 1px;
+	margin-bottom: 10px;
+	padding:       20px 10px;
+}
+
+.btn.btn-primary {
+	background:   $mainColor;
 	border-color: darken($mainColor, 5%);
 }

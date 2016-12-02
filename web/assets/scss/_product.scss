@@ -1,16 +1,11 @@
 
 article.product {
-	background:    #FFF;
-	border:        1px solid darken($grey, 5%);
-	border-width:  1px 1px 4px 1px;
-	margin-bottom: 10px;
-	padding:       20px 10px;
 	
 	&:hover {
 		border-color: $mainColor;
 	}
 	
-	.picture > img{
+	.picture > img {
 		object-fit: contain;
 	}
 	
@@ -62,10 +57,11 @@ article.product {
 			}
 			
 			span {
-				position:  absolute;
-				top:       50%;
-				left:      50%;
-				transform: translate(-50%, -50%);
+				position:   absolute;
+				top:        50%;
+				left:       50%;
+				transform:  translate(-50%, -50%);
+				text-align: center;
 			}
 			
 		}

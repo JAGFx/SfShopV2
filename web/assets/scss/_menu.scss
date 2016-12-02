@@ -1,0 +1,15 @@
+nav.navbar {
+	min-height: inherit;
+	
+	.navbar-brand {
+		padding: 0;
+		img {
+			height: $heigthMenu;
+		}
+	}
+	
+	.navbar-nav li {
+		padding-top:    6px;
+		padding-bottom: 6px;
+	}
+}

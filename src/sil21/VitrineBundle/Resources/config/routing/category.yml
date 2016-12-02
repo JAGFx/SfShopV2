@@ -1,3 +1,8 @@
+category_liste:
+    path:       /
+    defaults: { _controller: sil21VitrineBundle:Category:list}
+    methods:  GET
+
 category_articlesByCategory:
     path:       /{id}/articles
     defaults: { _controller: sil21VitrineBundle:Category:articlesByCategory, id: 0}

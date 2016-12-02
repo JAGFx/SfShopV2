@@ -6,10 +6,10 @@
 	
 	class DefaultController extends Controller {
 		public function indexAction() {
-			return $this->render( 'sil21VitrineBundle::layout.html.twig' );
+			return $this->redirectToRoute( 'product_list' );
 		}
 		
-		public function mentionsAction(){
+		public function mentionsAction() {
 			return $this->render( '@sil21Vitrine/Default/mentions.html.twig' );
 		}
 	}

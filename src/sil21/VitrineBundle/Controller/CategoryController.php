@@ -6,8 +6,12 @@
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	
 	class CategoryController extends Controller {
-		public function indexAction( $name ) {
-			return $this->render( '', [ 'name' => $name ] );
+		public function indexAction() {
+			$categories = $this->getDoctrine()->getRepository( 'sil21VitrineBundle:Category' )->findAll();
+			
+			return $this->render(
+				'listCategories.html.twig', [ 'categories' => $categories ]
+			);
 		}
 		
 		/**
@@ -21,6 +25,14 @@
 				[
 					'filter' => $category
 				]
+			);
+		}
+		
+		public function listAction() {
+			$categories = $this->getDoctrine()->getRepository( 'sil21VitrineBundle:Category' )->findAll();
+			
+			return $this->render(
+				'sil21VitrineBundle:Category:listCategories.html.twig', [ 'categories' => $categories ]
 			);
 		}
 	}

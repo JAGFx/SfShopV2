@@ -5,6 +5,11 @@ sil21_categories:
     resource: "@sil21VitrineBundle/Resources/config/routing/category.yml"
     prefix: /category
 
+# -- Produit
+sil21_products:
+    resource: "@sil21VitrineBundle/Resources/config/routing/product.yml"
+    prefix: /product
+
 
 # ---------- PAGES ----------
 
@@ -15,3 +20,8 @@ sil21_vitrine_homepage:
 sil21_mention:
     path: /mentions
     defaults: { _controller: sil21VitrineBundle:Default:mentions }
+    
+sil21_panier:
+    path:       /panier
+    defaults: { _controller: sil21VitrineBundle:Panier:contenuPanier }
+    methods:  GET
