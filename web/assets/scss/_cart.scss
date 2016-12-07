@@ -1,0 +1,107 @@
+article.panier {
+	padding-left:  0;
+	padding-right: 0;
+	
+	table {
+		width: 100%;
+		
+		tr {
+			border-top: 1px solid darken($grey, 10%);
+			
+			th {
+				text-transform: uppercase;
+				font-size:      1.1em;
+				letter-spacing: .2em;
+				padding:        5px 10px 25px 10px;
+				text-align:     center;
+				color:          darken($grey, 30%);
+			}
+			
+			td {
+				padding:    25px 10px;
+				text-align: center;
+			}
+			
+			&:first-child { border: none; }
+		}
+		
+		.cartProduct {
+			td:first-child { width: 100px; }
+			
+			.infoProduct {
+				text-align: left;
+				
+				h3 {
+					margin:      0;
+					font-size:   1.3em;
+					font-weight: bold;
+				}
+			}
+			
+			.stockProduct {
+				display:    inline-block;
+				padding:    10px 20px;
+				width:      100%;
+				box-sizing: border-box;
+			}
+			
+			.price { background: lighten($grey, 2%); font-size: 1.2em; }
+			
+			td:last-child a {
+				text-decoration: none;
+				color:           darken($grey, 15%);
+				font-size:       2em;
+				
+				&:hover {
+					color: darken($grey, 30%);
+				}
+			}
+		}
+		
+		.cartQte {
+			display:         flex;
+			height:          40px;
+			justify-content: center;
+			
+			input { width: 50px; height: 40px; }
+			
+			> div {
+				display:        flex;
+				flex-direction: column;
+				width:          30px;
+				height:         40px;
+				
+				a {
+					text-decoration: none;
+					flex:            1 100%;
+					padding:         0;
+					height:          auto;
+					border-width:    0;
+					
+					&:hover { margin-top: 0; }
+				}
+			}
+		}
+		
+		.mainColorAcent {
+			border-color: $mainColor;
+			color:        $mainColor;
+			font-size:    1.4em;
+			
+			td {
+				background: lighten($mainColor, 32%);
+				
+				&.price {
+					background:     lighten($mainColor, 28%);
+					padding-top:    15px;
+					padding-bottom: 20px;
+					
+					small {
+						font-size: .7em;
+						color:     darken($grey, 15%);
+					}
+				}
+			}
+		}
+	}
+}

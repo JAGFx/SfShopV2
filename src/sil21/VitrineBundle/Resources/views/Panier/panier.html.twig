@@ -3,32 +3,73 @@
 {% set showLeftMenu = 'no' %}
 
 {% block content %}
-	<article class="panier">
-		<table>
-			<tr >
-				<th ></th >
-				<th >Désignation</th >
-				<th >Disponibilité</th >
-				<th >Quantité</th >
-				<th >Prix</th >
-				<th ></th >
-			</tr >
-			<tr >
-				<td >IMG</td >
-				<td class="infoProduct">
-					<h3 >NAME<span class="label label-primary" >CAT</span ></h3 >
-					<p >DESC</p >
-				</td >
-				<td >DIspo</td >
-				<td >1</td >
-				<td >123.32€</td >
-				<td >X</td >
-			</tr >
-			<tr class="mainColorAcent">
-				<td colspan="4"></td >
-				<td >PRX FINAL</td >
-				<td ></td >
-			</tr>
-		</table>
-	</article>
+	<h1 class="text-center" >Panier</h1 >
+	{% if panier.products|length > 0 %}
+		<p class="text-center" >
+			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
+		</p >
+	{% endif %}
+	<article class="panier" >
+		<table >
+			{% if panier.products|length > 0 %}
+				<tr >
+					<th ></th >
+					<th >Désignation</th >
+					<th >Disponibilité</th >
+					<th >Quantité</th >
+					<th >Prix</th >
+					<th ></th >
+				</tr >
+
+				{% for item in panier.products %}
+					<tr class="cartProduct" >
+						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}"  class="img-responsive" >
+						</td >
+						<td class="infoProduct" >
+							<h3 >{{ item.product.name }}</h3 >
+							<p >{{ item.product.description|slice(0, 150) }} ...</p >
+						</td >
+						<td >
+							<div class="stockProduct {% if item.product.onStock %}available{% else %}unavailable{% endif %}" >
+								<span >{% if item.product.onStock %}En stock{% else %}Rupture{% endif %}</span >
+							</div >
+						</td >
+						<td >
+							<form class="cartQte" >
+								<input type="number" name="qte" id="qte" class="form-control" value="{{ item.qte }}" >
+								<div >
+									<a href="{{ path("sil21_addArticle" , {id: item.product.id}) }}" class="btn btn-primary" >+</a >
+									<a href="{{ path("sil21_removeQteProduct" , {articleId: item.product.id}) }}" class="btn btn-default" >-</a >
+								</div >
+							</form >
+						</td >
+						<td class="price" >{{ (item.qte * item.product.price)|number_format(2, ',', ' ') }} €</td >
+						<td >
+							<a href="{{ path("sil21_removeProduct" , {articleId: item.product.id}) }}" >&times;</a >
+						</td >
+					</tr >
+				{% endfor %}
+
+				<tr class="mainColorAcent" >
+					<td colspan="4" ></td >
+					<td class="price" >
+						<small >TOTAL:</small >
+						<br />
+						{{ panier.getTotalPanier()|number_format(2, ',', ' ') }} €
+					</td >
+					<td ></td >
+				</tr >
+				<tr >
+					<td colspan="4" ></td >
+					<td ><a href="" class="btn btn-primary" >PASSER COMMANDE</a ></td >
+					<td ></td >
+				</tr >
+			{% else %}
+				<tr >
+					<td colspan="6 text-center" > Pas d'article dans le panier</td >
+				</tr >
+			{% endif %}
+		</table >
+
+	</article >
 {% endblock %}

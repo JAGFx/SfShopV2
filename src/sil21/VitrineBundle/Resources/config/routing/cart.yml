@@ -1,0 +1,48 @@
+# ------------------------------- #
+# ---------- Panier----------- #
+# ------------------------------- #
+
+
+
+# ---------- Application ----------
+
+# -- Liste contenu
+sil21_cartContent:
+     path:     /
+     defaults: { _controller: sil21VitrineBundle:Panier:cartContent}
+
+# -- Ajout d'Article
+sil21_addArticle:
+     path:     /addArticle/{id}/{qte}
+     defaults: { _controller: sil21VitrineBundle:Panier:addArticle, qte: 1}
+     requirements:
+          id: \d+
+          qte: \d+
+
+  # -- Definir qté Article
+sil21_changeQuantityProduct:
+    path:     /changeQuantityProduct/{id}/{qte}
+    defaults: { _controller: sil21VitrineBundle:Panier:changeQutantity, qte: 1}
+    requirements:
+        id: \d+
+        qte: \d+
+
+# -- Retirer une quantité d'un Article
+sil21_removeQteProduct:
+     path:     /removeOneProduct/{articleId}/{qte}
+     defaults: { _controller: sil21VitrineBundle:Panier:removeQteProduct, articleId: 0, qte: 1}
+     requirements:
+          articleId: \d+
+          qte: \d+
+
+# -- Retirer l'Article
+sil21_removeProduct:
+     path:     /removeProduct/{articleId}
+     defaults: { _controller: sil21VitrineBundle:Panier:removeProduct, articleId: 0}
+     requirements:
+          articleId: \d+
+
+# -- Vider
+sil21_emptyCart:
+     path:     /empty
+     defaults: { _controller: sil21VitrineBundle:Panier:emptyCart}

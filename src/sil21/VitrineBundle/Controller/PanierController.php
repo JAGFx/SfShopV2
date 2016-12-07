@@ -25,31 +25,114 @@
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		public function contenuPanierAction() {
-			$panier = $this->getSessionPanier();
-			$articles = [];
-			
-			if ( !empty( $panier->getArticles() ) ) {
-				foreach ( $panier->getArticles() as $item ) {
-					$article = $this->getArticleObj( $item[ 'id' ] );
-					
-					$articles[] = [
-						'article' => $article,
-						'qte'     => $item[ 'qte' ]
-					];
-				}
-			}
+		public function cartContentAction() {
+			$panier   = $this->getSessionPanier();
 			
 			return $this->render(
-				'sil21VitrineBundle:Panier:panier.html.twig',
-				[
-					'articles' => $articles,
-					'panier'   => $panier,
-					'total'    => $this->getTotalPanier()
-				]
+				'sil21VitrineBundle:Panier:panier.html.twig', [ 'panier' => $panier ]
 			);
 		}
 		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function emptyCartAction() {
+			$panier = $this->getSessionPanier();
+			$panier->clearPanier();
+			
+			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
+		
+		/**
+		 * @param Product $product
+		 * @param         $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function addArticleAction( Product $product, $qte ) {
+			$panier = $this->getSessionPanier();
+			
+			$added = $panier->addArticle( $product, $qte );
+			if ( $added ) {
+				$message = [
+					'type'    => 'info',
+					'title'   => "Article ajouté",
+					'message' => 'L\'article à bien été ajouté'
+				];
+			} else {
+				$message = [
+					'type'    => 'warning',
+					'title'   => "Ajout impossible",
+					'message' => 'Le stock de l\'article est insuffisant'
+				];
+			}
+			
+			$this->setSessionPanier( $panier );
+			
+			//$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
+		
+		/**
+		 * @param Product $product
+		 * @param         $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function changeQutantityAction( Product $product, $qte ) {
+			$panier = $this->getSessionPanier();
+			$added  = $panier->changeQuantity( $product, $qte );
+			
+			// TODO Flashbag FAIL
+			if ( $added ) {
+				$message = [
+					'type'    => 'info',
+					'title'   => "Quantité changée",
+					'message' => 'La quantitée à bien été modifiée'
+				];
+			} else {
+				$message = [
+					'type'    => 'warning',
+					'title'   => "Modification impossible",
+					'message' => 'Le stock de l\'article est insuffisant'
+				];
+			}
+			$this->setSessionPanier( $panier );
+			
+			//$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
+			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
+		
+		/**
+		 * @param $articleId
+		 * @param $qte
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function removeQteProductAction( $articleId, $qte ) {
+			$panier = $this->getSessionPanier();
+			
+			$panier->removeOneArticle( $articleId, $qte );
+			
+			$this->setSessionPanier( $panier );
+			
+			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
+		
+		/**
+		 * @param $articleId
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function removeProductAction( $articleId ) {
+			$panier = $this->getSessionPanier();
+			
+			$panier->removeArticles( $articleId );
+			
+			$this->setSessionPanier( $panier );
+			
+			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
 		
 		/**
 		 * @return Panier
@@ -66,35 +149,5 @@
 		private function setSessionPanier( $panier ) {
 			$session = $this->getRequest()->getSession();
 			$session->set( 'panier', $panier );
-		}
-		
-		/**
-		 * @param $id
-		 *
-		 * @return Product
-		 */
-		private function getArticleObj( $id ) {
-			return $this->getDoctrine()->getManager()
-				->getRepository( 'sil21VitrineBundle:Product' )
-				->findOneBy( [ 'id' => $id ] );
-		}
-		
-		
-		/**
-		 * @return int
-		 */
-		private function getTotalPanier() {
-			$total = 0;
-			$panier = $this->getSessionPanier();
-			
-			foreach ( $panier->getArticles() as $item ) {
-				$article = $this->getDoctrine()->getManager()
-					->getRepository( 'sil21VitrineBundle:Product' )
-					->findOneById( $item[ 'id' ] );
-				
-				$total += $article->getPrice() * $item[ 'qte' ];
-			}
-			
-			return $total;
 		}
 	}

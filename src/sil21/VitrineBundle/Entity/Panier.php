@@ -22,26 +22,28 @@
 		/**
 		 * @var array
 		 */
-		private $articles = [];
+		private $products = [];
 		
 		
 		/**
-		 * @param Product $article
+		 * @param Product $product
 		 * @param         $qte
 		 *
 		 * @return bool
 		 */
-		public function addArticle( \sil21\VitrineBundle\Entity\Product $article, $qte ) {
+		public function addArticle( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
 			
-			if ( key_exists( $article->getId(), $this->articles )
-				&& $this->articles[ $article->getId() ][ 'qte' ] < $article->getStock()
+			if ( key_exists( $product->getId(), $this->products )
+			     && $this->products[ $product->getId() ][ 'qte' ] < $product->getStock()
 			) {
-				$this->articles[ $article->getId() ][ 'qte' ] += $qte;
+				$this->products[ $product->getId() ][ 'qte' ] += $qte;
+				$this->products[ $product->getId() ][ 'product' ] = $product;
 				
-			} elseif ( !key_exists( $article->getId(), $this->articles ) && $qte <= $article->getStock() ) {
-				$this->articles[ $article->getId() ] = [
-					'id'  => (int) $article->getId(),
-					'qte' => (int) $qte
+			} elseif ( !key_exists( $product->getId(), $this->products ) && $qte <= $product->getStock() ) {
+				$this->products[ $product->getId() ] = [
+					'id'      => (int) $product->getId(),
+					'product' => $product,
+					'qte'     => (int) $qte
 				];
 				
 			} else {
@@ -52,21 +54,22 @@
 		}
 		
 		/**
-		 * @param Product $article
+		 * @param Product $product
 		 * @param         $qte
 		 *
 		 * @return bool
 		 */
-		public function changeQuantity( \sil21\VitrineBundle\Entity\Product $article, $qte ) {
+		public function changeQuantity( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
 			
-			if ( $qte <= $article->getStock() ) {
-				if ( key_exists( $article->getId(), $this->articles ) ) {
-					$this->articles[ $article->getId() ][ 'qte' ] = $qte;
+			if ( $qte <= $product->getStock() ) {
+				if ( key_exists( $product->getId(), $this->products ) ) {
+					$this->products[ $product->getId() ][ 'qte' ] = $qte;
 					
 				} else {
-					$this->articles[ $article->getId() ] = [
-						'id'  => (int) $article->getId(),
-						'qte' => (int) $qte
+					$this->products[ $product->getId() ] = [
+						'id'      => (int) $product->getId(),
+						'product' => $product,
+						'qte'     => (int) $qte
 					];
 				}
 			} else {
@@ -80,25 +83,25 @@
 		/**
 		 * remove article
 		 *
-		 * @param string $articleID
+		 * @param string $productID
 		 */
-		public function removeOneArticle( $articleID, $qte ) {
-			if ( key_exists( $articleID, $this->articles ) && $this->articles[ $articleID ][ 'qte' ] > 1 ) {
-				$this->articles[ $articleID ][ 'qte' ] -= $qte;
+		public function removeOneArticle( $productID, $qte ) {
+			if ( key_exists( $productID, $this->products ) && $this->products[ $productID ][ 'qte' ] > 1 ) {
+				$this->products[ $productID ][ 'qte' ] -= $qte;
 				
 			} else {
-				unset( $this->articles[ $articleID ] );
+				unset( $this->products[ $productID ] );
 			}
 		}
 		
 		/**
 		 * remove article
 		 *
-		 * @param string $articleID
+		 * @param string $productID
 		 */
-		public function removeArticles( $articleID ) {
-			if ( key_exists( $articleID, $this->articles ) ) {
-				unset( $this->articles[ $articleID ] );
+		public function removeArticles( $productID ) {
+			if ( key_exists( $productID, $this->products ) ) {
+				unset( $this->products[ $productID ] );
 			}
 		}
 		
@@ -106,7 +109,7 @@
 		 *
 		 */
 		public function clearPanier() {
-			unset( $this->articles );
+			unset( $this->products );
 		}
 		
 		/**
@@ -114,21 +117,31 @@
 		 *
 		 * @return array
 		 */
-		public function getArticles() {
-			return $this->articles;
+		public function getProducts() {
+			return $this->products;
 		}
 		
 		/**
 		 * @return int
 		 */
-		public function getNbArticle() {
+		public function getNbProduct() {
 			$nb = 0;
 			
-			foreach ( $this->articles as $article ) {
-				$nb += $article[ 'qte' ];
+			foreach ( $this->products as $product ) {
+				$nb += $product[ 'qte' ];
 			}
 			
 			return $nb;
+		}
+		
+		public function getTotalPanier() {
+			$total = 0;
+			
+			foreach ( $this->getProducts() as $item ) {
+				$total += $item[ 'product' ]->getPrice() * $item[ 'qte' ];
+			}
+			
+			return $total;
 		}
 		
 	}

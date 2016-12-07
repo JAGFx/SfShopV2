@@ -34,8 +34,12 @@
 !bin/symfony_requirements
 
 # Assets and user uploads
-/web/uploads/
-!/web/uploads/products
+/web/uploads/*
+!web/uploads/products/*
+
+/web/dist/
+/web/assets/css/
+!/web/assets/css/*.min.css
 
 # Assets managed by Bower
 /web/assets/vendor/

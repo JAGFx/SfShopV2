@@ -38,23 +38,9 @@ article.product {
 			font-size:      2em;
 			text-align:     center;
 		}
+		
 		.stockProduct {
-			flex:           5 auto;
-			margin:         0 5px 0 0;
-			font-weight:    bold;
-			position:       relative;
-			text-transform: uppercase;
-			letter-spacing: .1em;
-			
-			&.available {
-				background: lighten($green, 55%);
-				color:      $green;
-			}
-			
-			&.unavailable {
-				background: lighten($red, 40%);
-				color:      $red;
-			}
+			flex: 5 auto;
 			
 			span {
 				position:   absolute;
@@ -63,8 +49,27 @@ article.product {
 				transform:  translate(-50%, -50%);
 				text-align: center;
 			}
-			
 		}
+		
 		.addCart .btn { width: 100%; }
+	}
+}
+
+
+.stockProduct {
+	margin:         0 5px 0 0;
+	font-weight:    bold;
+	position:       relative;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	
+	&.available {
+		background: lighten($green, 55%);
+		color:      $green;
+	}
+	
+	&.unavailable {
+		background: lighten($red, 40%);
+		color:      $red;
 	}
 }

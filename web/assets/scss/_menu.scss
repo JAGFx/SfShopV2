@@ -1,5 +1,8 @@
 nav.navbar {
-	min-height: inherit;
+	min-height:   inherit;
+	background:   $dark;
+	border-color: lighten($dark, 20%);
+	color:        $mainColor;
 	
 	.navbar-brand {
 		padding: 0;
@@ -8,8 +11,41 @@ nav.navbar {
 		}
 	}
 	
-	.navbar-nav li {
-		padding-top:    6px;
-		padding-bottom: 6px;
+	.navbar-nav > li {
+		padding:        0;
+		text-transform: capitalize;
+		
+		> a {
+			color:          $mainColor;
+			position:       relative;
+			padding-top:    21px;
+			padding-bottom: 21px;
+			
+			&:after {
+				content:    '';
+				position:   absolute;
+				bottom:     -4px;
+				left:       0;
+				height:     4px;
+				width:      100%;
+				background: transparent;
+			}
+			
+			&:hover {
+				color: $mainColor;
+				
+				&:after {
+					background: $mainColor;
+				}
+			}
+		}
+		
+		&.active a, &.dropdown.open > a {
+			color: $mainColor;
+			
+			&:hover { color: $mainColor; }
+			
+			&:after { background: $mainColor; }
+		}
 	}
 }

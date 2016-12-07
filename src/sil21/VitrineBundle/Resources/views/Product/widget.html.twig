@@ -13,10 +13,10 @@
 			{{ product.price|number_format(2, ',', ' ') }} €
 		</div >
 		<div class="flex-item stockProduct {% if product.onStock %}available{% else %}unavailable{% endif %}" >
-			<span >{% if product.onStock %}En stock{% else %}Undisponible{% endif %}</span >
+			<span >{% if product.onStock %}En stock{% else %}Rupture{% endif %}</span >
 		</div >
 		<div class="flex-item addCart" >
-			<a href="" class="btn btn-primary" ><span class="glyphicon glyphicon-shopping-cart" ></span ></a >
+			<a href="{{ path("sil21_addArticle", { id: product.id } ) }}" class="btn btn-primary" {{ ( product.onStock ) ? '' : 'disabled'  }}><span class="glyphicon glyphicon-shopping-cart" ></span ></a >
 		</div >
 	</div >
 </article >

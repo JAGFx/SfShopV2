@@ -2,12 +2,15 @@
 @import "menu";
 @import "leftMenu";
 @import "product";
-@import "panier";
+@import "cart";
+
 
 body {
 	background:  $grey;
+	color:       $dark !important;
 	padding-top: $heigthMenu * 2 - 10px;
 }
+
 
 .flexbox {
 	display:   flex;
@@ -18,6 +21,7 @@ body {
 	}
 }
 
+
 article {
 	background:    #FFF;
 	border:        1px solid darken($grey, 5%);
@@ -26,7 +30,9 @@ article {
 	padding:       20px 10px;
 }
 
+
 .btn.btn-primary {
-	background:   $mainColor;
-	border-color: darken($mainColor, 5%);
+	background:      $mainColor;
+	border-color:    darken($mainColor, 5%);
+	text-decoration: none;
 }
