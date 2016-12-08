@@ -1,0 +1,27 @@
+{% set  flashMessages = app.session.flashbag.get('message') %}
+{% for flashMessage in flashMessages %}
+	<div class="alertMessage" >
+		<div class="alert alert-cust-{{ flashMessage.type }} alert-dismissible" role="alert" >
+			<div class="ico" >
+			<span class="{% if flashMessage.type == "success" %}
+										glyphicon glyphicon-ok
+									{% elseif flashMessage.type == "info" %}
+										fa fa-info
+									{% elseif flashMessage.type == "warning" %}
+										glyphicon glyphicon-warning-sign
+									{% elseif flashMessage.type == "danger" %}
+										glyphicon glyphicon-remove
+									{% elseif flashMessage.type == "error" %}
+										glyphicon glyphicon-fire
+									{% endif %}" ></span >
+			</div >
+			<div class="info" >
+				<h4 >{{ flashMessage.title }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" title="Fermer" >
+						<span aria-hidden="true" >&times;</span ></button >
+				</h4 >
+				<p >{{ flashMessage.message }}</p >
+			</div >
+		</div >
+	</div >
+{% endfor %}

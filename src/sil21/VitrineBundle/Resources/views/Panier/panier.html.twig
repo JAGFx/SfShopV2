@@ -9,6 +9,9 @@
 			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
 		</p >
 	{% endif %}
+
+	{% include "sil21VitrineBundle:Default:flashMessage.html.twig" %}
+
 	<article class="panier" >
 		<table >
 			{% if panier.products|length > 0 %}

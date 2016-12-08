@@ -1,0 +1,101 @@
+@media (min-width: 768px) {
+	.alertMessage .alert {
+		display: flex;
+		.ico {
+			max-width: 65px;
+			min-width: 65px;
+		}
+	}
+}
+
+
+@media (max-width: 768px) {
+	.alertMessage .alert {
+		display: block;
+	}
+}
+
+
+$green: #5CB85C;
+$blue: #3498DB;
+$orange: #F0AD4E;
+$red: #D9534F;
+
+$colorAlert: #485563;
+$amountTransparent: .2;
+
+.alertMessage .alert {
+	font-family: 'Nunito', sans-serif;
+	padding:     0;
+	
+	.ico {
+		width:      100%;
+		text-align: center;
+		padding:    20px 15px;
+		
+		.glyphicon, .fa {
+			font-size: 2.5em;
+			color:     rgba(0, 0, 0, 0.3);
+		}
+	}
+	
+	.info {
+		width: 100%;
+		h4 {
+			text-transform: uppercase;
+			font-family:    'Quicksand', sans-serif;
+			padding:        20px 15px 0 15px;
+			font-size:      150%;
+			position:       relative;
+			
+			.close {
+				position: relative;
+				top:      inherit;
+				right:    0;
+			}
+		}
+		
+		p {
+			font-style: italic;
+			padding:    0 15px 15px 15px;
+			margin:     0;
+			color:      $colorAlert;
+		}
+	}
+	
+	/* ------------------------------------------- Alert - Succes */
+	&.alert-cust-success > {
+		.ico { background: $green; }
+		.info {
+			background: transparentize($green, $amountTransparent);
+			h4 { color: darken($green, $amountTransparent * 100); }
+		}
+	}
+	
+	/* ------------------------------------------- Alert - Info */
+	&.alert-cust-info > {
+		.ico { background: $blue; }
+		.info {
+			background: transparentize($blue, $amountTransparent);
+			h4 { color: darken($blue, $amountTransparent * 100); }
+		}
+	}
+	
+	/* ------------------------------------------- Alert - Warning */
+	&.alert-cust-warning > {
+		.ico { background: $orange; }
+		.info {
+			background: transparentize($orange, $amountTransparent);
+			h4 { color: darken($orange, $amountTransparent * 100); }
+		}
+	}
+	
+	/* ------------------------------------------- Alert - Danger / Error */
+	&.alert-cust-dangern &.alert-cust-error {
+		.ico { background: $red; }
+		.info {
+			background: transparentize($red, $amountTransparent);
+			h4 { color: darken($red, $amountTransparent * 100); }
+		}
+	}
+}

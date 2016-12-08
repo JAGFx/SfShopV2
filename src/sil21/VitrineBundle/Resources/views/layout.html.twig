@@ -11,16 +11,17 @@
 		"assets/css/ie.css"
 		"assets/css/bootstrap.min.css"
 		"assets/css/bootstrap-theme.min.css"
+		"assets/css/font-awesome.min.css"
 		"assets/css/app.css" %}
-		
+
 		<link rel="stylesheet" href="{{ asset_url }}" />
 		{% endstylesheets %}
-	
+
 	</head >
 	<body class="container" >
 		{% include '@sil21Vitrine/Default/menu.html.twig' %}
 		{% set showLeftMenu = showLeftMenu|default('yes') %}
-		
+
 		{% if showLeftMenu == 'yes' %}
 			<aside class="col-md-3" >
 				{% render ( controller('sil21VitrineBundle:Category:list') ) %}
@@ -30,7 +31,7 @@
 			{% block content %}
 			{% endblock %}
 		</section >
-		
+
 		{% javascripts filter="?jsqueeze" output="dist/js/app.js"
 		"assets/js/jquery-3.1.1.min.js"
 		"assets/js/bootstrap.min.js" %}

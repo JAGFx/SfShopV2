@@ -14,6 +14,7 @@
 	use sil21\VitrineBundle\Entity\Panier;
 	use sil21\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\Session\Session;
 	
 	/**
 	 * Class PanierController
@@ -26,7 +27,7 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function cartContentAction() {
-			$panier   = $this->getSessionPanier();
+			$panier = $this->getSessionPanier();
 			
 			return $this->render(
 				'sil21VitrineBundle:Panier:panier.html.twig', [ 'panier' => $panier ]
@@ -53,23 +54,18 @@
 			$panier = $this->getSessionPanier();
 			
 			$added = $panier->addArticle( $product, $qte );
-			if ( $added ) {
-				$message = [
-					'type'    => 'info',
-					'title'   => "Article ajouté",
-					'message' => 'L\'article à bien été ajouté'
-				];
-			} else {
-				$message = [
-					'type'    => 'warning',
-					'title'   => "Ajout impossible",
-					'message' => 'Le stock de l\'article est insuffisant'
-				];
+			if ( !$added ) {
+				$this->get( 'session' )->getFlashBag()->add(
+					'message', [
+							 'type'    => 'warning',
+							 'title'   => "Modification impossible",
+							 'message' => 'Le stock de l\'article est insuffisant'
+						 ]
+				);
 			}
 			
 			$this->setSessionPanier( $panier );
 			
-			//$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
 		
@@ -83,23 +79,18 @@
 			$panier = $this->getSessionPanier();
 			$added  = $panier->changeQuantity( $product, $qte );
 			
-			// TODO Flashbag FAIL
-			if ( $added ) {
-				$message = [
-					'type'    => 'info',
-					'title'   => "Quantité changée",
-					'message' => 'La quantitée à bien été modifiée'
-				];
-			} else {
-				$message = [
-					'type'    => 'warning',
-					'title'   => "Modification impossible",
-					'message' => 'Le stock de l\'article est insuffisant'
-				];
+			if ( !$added ) {
+				$this->get( 'session' )->getFlashBag()->add(
+					'message', [
+							 'type'    => 'warning',
+							 'title'   => "Modification impossible",
+							 'message' => 'Le stock de l\'article est insuffisant'
+						 ]
+				);
 			}
+			
 			$this->setSessionPanier( $panier );
 			
-			//$this->getRequest()->getSession()->getFlashBag()->add( 'message', $message );
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
 		
