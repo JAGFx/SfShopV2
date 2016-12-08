@@ -1,4 +1,5 @@
 sil21\VitrineBundle\Entity\Category:
+    repositoryClass: sil21\VitrineBundle\Repository\CategoryRepository
     type: entity
     table: category
     id:

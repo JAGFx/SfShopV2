@@ -1,5 +1,6 @@
 
 sil21\VitrineBundle\Entity\Product:
+    repositoryClass: sil21\VitrineBundle\Repository\ProductRepository
     type: entity
     table: product                        # La table a laquelle elle correspond
     id:                                   # Les champs qui composent la clé primaire

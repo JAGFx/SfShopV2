@@ -6,7 +6,15 @@
 	
 	class DefaultController extends Controller {
 		public function indexAction() {
-			return $this->redirectToRoute( 'product_list' );
+			$listProductPop = $this->getDoctrine()->getManager()
+					       ->getRepository( 'sil21VitrineBundle:Product' )
+					       ->findAllBetterSales();
+			
+			return $this->render(
+				'sil21VitrineBundle:Default:index.html.twig', [
+				'listProductPop' => $listProductPop
+			]
+			);
 		}
 		
 		public function mentionsAction() {
