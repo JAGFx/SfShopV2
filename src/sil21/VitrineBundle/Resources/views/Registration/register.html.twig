@@ -1,0 +1,15 @@
+{% extends "::layout.html.twig" %}
+{% set showLeftMenu = 'no' %}
+
+{% block content %}
+	<h1 class="text-center" >Inscription</h1 >
+	
+	{% form_theme form 'bootstrap_3_layout.html.twig' %}
+	<form class="fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" method="POST">
+		{{ form_widget(form) }}
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary">{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}</button >
+			<button type="reset" class="btn btn-default">Annuler</button >
+		</div>
+	</form>
+{% endblock %}
