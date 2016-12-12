@@ -1,6 +1,6 @@
 sil21\VitrineBundle\Entity\Client:
     type: entity
-    table: client
+    table: fos_user
     id:
         id:
             type: integer

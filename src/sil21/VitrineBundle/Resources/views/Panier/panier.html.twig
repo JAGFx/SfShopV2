@@ -38,8 +38,9 @@
 							</div >
 						</td >
 						<td >
-							<form class="cartQte" >
-								<input type="number" name="qte" id="qte" class="form-control" value="{{ item.qte }}" >
+							<form class="cartQte" method="get" >
+								{#<input type="hidden" name="idProduct" value="{{ item.product.id }}">#}
+								<input type="number" name="qte" class="form-control qteProductCart" value="{{ item.qte }}" min="0"/>
 								<div >
 									<a href="{{ path("sil21_addArticle" , {id: item.product.id}) }}" class="btn btn-primary" >+</a >
 									<a href="{{ path("sil21_removeQteProduct" , {articleId: item.product.id}) }}" class="btn btn-default" >-</a >

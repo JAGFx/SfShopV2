@@ -14,6 +14,7 @@
 	use sil21\VitrineBundle\Entity\Panier;
 	use sil21\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\HttpFoundation\JsonResponse;
 	use Symfony\Component\HttpFoundation\Session\Session;
 	
 	/**
@@ -73,13 +74,13 @@
 		 * @param Product $product
 		 * @param         $qte
 		 *
-		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 * @return JsonResponse
 		 */
 		public function changeQutantityAction( Product $product, $qte ) {
 			$panier = $this->getSessionPanier();
-			$added  = $panier->changeQuantity( $product, $qte );
+			$finalQteProduct  = $panier->changeQuantity( $product, $qte );
 			
-			if ( !$added ) {
+			if ( $finalQteProduct == $qte ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
 							 'type'    => 'warning',
@@ -91,7 +92,7 @@
 			
 			$this->setSessionPanier( $panier );
 			
-			return $this->redirectToRoute( 'sil21_cartContent' );
+			return new JsonResponse( ['lastQte' => $finalQteProduct] );
 		}
 		
 		/**

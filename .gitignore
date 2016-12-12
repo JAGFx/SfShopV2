@@ -41,6 +41,8 @@
 /web/assets/css/
 !/web/assets/css/*.min.css
 
+!/web/assets/js/
+
 # Assets managed by Bower
 /web/assets/vendor/
 

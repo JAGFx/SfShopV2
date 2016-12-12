@@ -22,10 +22,10 @@
 		
 		public function findAllBetterSales() {
 			return $this->createQueryBuilder( 'p' )
-				    ->select( 'p' )
+				    ->select( 'IDENTITY(l.product)' )
 				    ->addSelect( 'SUM(l.qte) AS cnt' )
 				    ->from( 'sil21VitrineBundle:LigneCommande', 'l' )
-				    ->groupBy( ( 'l.product' ) )
+				    ->groupBy( 'l.product'  )
 				    ->orderBy( 'cnt' )
 				    ->getQuery()
 				    ->setMaxResults( 5 )

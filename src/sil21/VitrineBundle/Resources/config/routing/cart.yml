@@ -23,6 +23,9 @@ sil21_addArticle:
 sil21_changeQuantityProduct:
     path:     /changeQuantityProduct/{id}/{qte}
     defaults: { _controller: sil21VitrineBundle:Panier:changeQutantity, qte: 1}
+    methods:  [ GET, POST ]
+    options:
+            expose: true
     requirements:
         id: \d+
         qte: \d+

@@ -60,7 +60,6 @@
 		 * @return bool
 		 */
 		public function changeQuantity( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
-			
 			if ( $qte <= $product->getStock() ) {
 				if ( key_exists( $product->getId(), $this->products ) ) {
 					$this->products[ $product->getId() ][ 'qte' ] = $qte;
@@ -72,12 +71,9 @@
 						'qte'     => (int) $qte
 					];
 				}
-			} else {
-				return false;
 			}
 			
-			
-			return true;
+			return $this->products[ $product->getId() ][ 'qte' ] ;
 		}
 		
 		/**
