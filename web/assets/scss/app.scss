@@ -23,13 +23,16 @@ body {
 }
 
 
-article {
+article, form:not(.cartQte) {
 	background:    #FFF;
 	border:        1px solid darken($grey, 5%);
 	border-width:  1px 1px 4px 1px;
 	margin-bottom: 10px;
 	padding:       20px 10px;
 }
+
+
+form:not(.cartQte) { padding-left: 20px; padding-right: 20px; }
 
 
 .btn.btn-primary {
