@@ -10,7 +10,7 @@
 		</p >
 	{% endif %}
 
-	{% include "sil21VitrineBundle:Default:flashMessage.html.twig" %}
+	{% include ":default:flashMessage.html.twig" %}
 
 	<article class="panier" >
 		<table >
@@ -26,7 +26,7 @@
 
 				{% for item in panier.products %}
 					<tr class="cartProduct" >
-						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}"  class="img-responsive" >
+						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}" class="img-responsive" >
 						</td >
 						<td class="infoProduct" >
 							<h3 >{{ item.product.name }}</h3 >
@@ -40,7 +40,7 @@
 						<td >
 							<form class="cartQte" method="get" >
 								{#<input type="hidden" name="idProduct" value="{{ item.product.id }}">#}
-								<input type="number" name="qte" class="form-control qteProductCart" value="{{ item.qte }}" min="0"/>
+								<input type="number" name="qte" class="form-control qteProductCart" value="{{ item.qte }}" min="0" />
 								<div >
 									<a href="{{ path("sil21_addArticle" , {id: item.product.id}) }}" class="btn btn-primary" >+</a >
 									<a href="{{ path("sil21_removeQteProduct" , {articleId: item.product.id}) }}" class="btn btn-default" >-</a >
@@ -65,7 +65,14 @@
 				</tr >
 				<tr >
 					<td colspan="4" ></td >
-					<td ><a href="" class="btn btn-primary" >PASSER COMMANDE</a ></td >
+					<td style="min-width: 150px;" >
+						{% if is_granted('ROLE_USER') %}
+							<a href="" class="btn btn-primary" >PASSER COMMANDE</a >
+						{% else %}
+							Ce connecter avant de valider le panier<br /><br />
+							<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary" >Connexion</a >
+						{% endif %}
+					</td >
 					<td ></td >
 				</tr >
 			{% else %}
