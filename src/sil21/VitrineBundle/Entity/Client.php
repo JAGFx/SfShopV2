@@ -3,17 +3,12 @@
 	namespace sil21\VitrineBundle\Entity;
 	
 	use Doctrine\ORM\Mapping as ORM;
-	use FOS\UserBundle\Model\User as BaseUser;
+	use FOS\UserBundle\Entity\User as BaseUser;
 	
 	/**
 	 * Client
 	 */
 	class Client extends BaseUser {
-		/**
-		 * @var integer
-		 */
-		protected $id;
-		
 		/**
 		 * @var string
 		 */
@@ -22,12 +17,7 @@
 		/**
 		 * @var string
 		 */
-		protected $password;
-		
-		/**
-		 * @var string
-		 */
-		private $mail;
+		private $firstname;
 		
 		/**
 		 * @var string
@@ -58,15 +48,6 @@
 		}
 		
 		/**
-		 * Get id
-		 *
-		 * @return integer
-		 */
-		public function getId() {
-			return $this->id;
-		}
-		
-		/**
 		 * Set name
 		 *
 		 * @param string $name
@@ -86,50 +67,6 @@
 		 */
 		public function getName() {
 			return $this->name;
-		}
-		
-		/**
-		 * Set password
-		 *
-		 * @param string $password
-		 *
-		 * @return Client
-		 */
-		public function setPassword( $password ) {
-			$this->password = $password;
-			
-			return $this;
-		}
-		
-		/**
-		 * Get password
-		 *
-		 * @return string
-		 */
-		public function getPassword() {
-			return $this->password;
-		}
-		
-		/**
-		 * Set mail
-		 *
-		 * @param string $mail
-		 *
-		 * @return Client
-		 */
-		public function setMail( $mail ) {
-			$this->mail = $mail;
-			
-			return $this;
-		}
-		
-		/**
-		 * Get mail
-		 *
-		 * @return string
-		 */
-		public function getMail() {
-			return $this->mail;
 		}
 		
 		/**
@@ -227,5 +164,27 @@
 		 */
 		public function getCommandes() {
 			return $this->commandes;
+		}
+		
+		/**
+		 * Set firstname
+		 *
+		 * @param string $firstname
+		 *
+		 * @return Client
+		 */
+		public function setFirstname( $firstname ) {
+			$this->firstname = $firstname;
+			
+			return $this;
+		}
+		
+		/**
+		 * Get firstname
+		 *
+		 * @return string
+		 */
+		public function getFirstname() {
+			return $this->firstname;
 		}
 	}

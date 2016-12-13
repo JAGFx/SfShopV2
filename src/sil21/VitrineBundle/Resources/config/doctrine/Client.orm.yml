@@ -12,10 +12,7 @@ sil21\VitrineBundle\Entity\Client:
         name:
             type: string
             length: '255'
-        password:
-            type: string
-            length: '255'
-        mail:
+        firstname:
             type: string
             length: '255'
         address:

@@ -1,4 +1,10 @@
 services:
+    sil21.form.registration:
+            class: sil21\VitrineBundle\Form\ClientType
+            arguments: [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: sil21_user_registration }
+
 #    sil21_vitrine.example:
 #        class: sil21\VitrineBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
