@@ -14,6 +14,11 @@
 		private $qte;
 		
 		/**
+		 * @var integer
+		 */
+		private $price;
+		
+		/**
 		 * @var \sil21\VitrineBundle\Entity\Product
 		 */
 		private $product;
@@ -31,9 +36,10 @@
 		 * @param integer  $qte
 		 */
 		public function __construct( Product $product, Commande $commande, $qte = 1 ) {
-			$this->qte = $qte;
-			$this->product = $product;
+			$this->qte      = $qte;
+			$this->product  = $product;
 			$this->commande = $commande;
+			$this->price    = $product->getPrice() * $qte;
 		}
 		
 		
@@ -59,14 +65,29 @@
 			return $this->qte;
 		}
 		
+		
 		/**
-		 * Get prix
+		 * Set price
 		 *
-		 * @return float
+		 * @param integer $price
+		 *
+		 * @return LigneCommande
 		 */
-		public function getPrix() {
-			return $this->qte * $this->product->getPrice();
+		public function setPrice( $price ) {
+			$this->price = $price;
+			
+			return $this;
 		}
+		
+		/**
+		 * Get price
+		 *
+		 * @return integer
+		 */
+		public function getPrice() {
+			return $this->price;
+		}
+		
 		
 		/**
 		 * Set product
@@ -111,4 +132,6 @@
 		public function getCommande() {
 			return $this->commande;
 		}
+		
+		
 	}
