@@ -7,13 +7,11 @@
 	class DefaultController extends Controller {
 		public function indexAction() {
 			$listProductPop = $this->getDoctrine()->getManager()
-					       ->getRepository( 'sil21VitrineBundle:Product' )
-					       ->findAllBetterSales();
+				->getRepository( 'sil21VitrineBundle:Product' )
+				->findAllBetterSales();
 			
 			return $this->render(
-				'sil21VitrineBundle:Default:index.html.twig', [
-				'listProductPop' => $listProductPop
-			]
+				'sil21VitrineBundle:Default:index.html.twig', [ 'listProductPop' => $listProductPop ]
 			);
 		}
 		

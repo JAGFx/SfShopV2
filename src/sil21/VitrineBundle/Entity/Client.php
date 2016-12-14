@@ -187,4 +187,11 @@
 		public function getFirstname() {
 			return $this->firstname;
 		}
+		
+		/**
+		 * @return string
+		 */
+		public function __toString() {
+			return $this->firstname . ' ' . $this->name;
+		}
 	}
