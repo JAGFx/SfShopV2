@@ -37,7 +37,7 @@ security:
         - { path: ^/category/, role: ROLE_ADMIN }
 
         # -- Commande
-        - { path: ^/Commande/\d+/|show, role: ROLE_USER }
+        - { path: ^/Commande/\d+/show, role: ROLE_USER }
         - { path: ^/Commande/listUser, role: ROLE_USER }
         - { path: ^/Commande/, role: ROLE_ADMIN }
 
