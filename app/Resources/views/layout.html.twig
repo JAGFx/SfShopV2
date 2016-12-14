@@ -25,7 +25,9 @@
 		{% if showLeftMenu == 'yes' %}
 			<aside class="col-md-3" >
 				{% render ( controller('sil21VitrineBundle:Category:list') ) %}
+				{% render ( controller('sil21VitrineBundle:Marque:list') ) %}
 			</aside >
+			
 		{% endif %}
 		<section class="{{ showLeftMenu == 'yes'  ? 'col-md-9' : 'col-md-12' }}" >
 			{% block content %}

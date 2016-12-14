@@ -24,7 +24,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ app.user.firstname ~ ' ' ~ app.user.name }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
-							<li ><a href="#" >Commandes</a ></li >
+							<li ><a href="{{ path('commande_index') }}" >Commandes</a ></li >
 							<li ><a href="{{ path('fos_user_profile_show') }}" >Profil</a ></li >
 							<li role="separator" class="divider" ></li >
 							<li ><a href="{{ path( 'fos_user_security_logout' ) }}" >Déconnexion</a ></li >

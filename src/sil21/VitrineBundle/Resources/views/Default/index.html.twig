@@ -1,5 +1,6 @@
 {% extends "::layout.html.twig" %}
 
 {% block content %}
-	{{ listProductPop|json_encode }}
+	<h1 class="text-centers">SFShop</h1>
+	{{ dump(listProductPop) }}
 {% endblock %}
