@@ -198,7 +198,7 @@
 		}
 		
 		/**
-		 * Set marque
+		 * Set Marque
 		 *
 		 * @param \sil21\VitrineBundle\Entity\Marque $marque
 		 *
@@ -211,7 +211,7 @@
 		}
 		
 		/**
-		 * Get marque
+		 * Get Marque
 		 *
 		 * @return \sil21\VitrineBundle\Entity\Marque
 		 */

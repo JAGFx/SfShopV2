@@ -1,0 +1,31 @@
+marque_index:
+    path:     /
+    defaults: { _controller: "sil21VitrineBundle:Marque:index" }
+    methods:  GET
+
+marque_articleByMarque:
+    path:       /{id}/articles
+    defaults: { _controller: "sil21VitrineBundle:Marque:articlesByMarque" , id: 0  }
+    methods:  GET
+    requirements:
+        id:  \d+
+
+marque_show:
+    path:     /{id}/show
+    defaults: { _controller: "sil21VitrineBundle:Marque:show" }
+    methods:  GET
+
+marque_new:
+    path:     /new
+    defaults: { _controller: "sil21VitrineBundle:Marque:new" }
+    methods:  [GET, POST]
+
+marque_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil21VitrineBundle:Marque:edit" }
+    methods:  [GET, POST]
+
+marque_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "sil21VitrineBundle:Marque:delete" }
+    methods:  DELETE

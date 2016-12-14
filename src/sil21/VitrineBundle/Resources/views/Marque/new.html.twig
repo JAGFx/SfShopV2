@@ -1,0 +1,19 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 >Marque creation</h1 >
+	
+	{% form_theme form 'bootstrap_3_layout.html.twig' %}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button type="submit" class="btn btn-primary">Créer</button >
+	<button type="reset" class="btn btn-default">Annuler</button >
+	{{ form_end(form) }}
+	
+	<ul >
+		<li >
+			<a href="{{ path('marque_index') }}" >Back to the list</a >
+		</li >
+	</ul >
+{% endblock %}

@@ -1,8 +1,8 @@
 {% extends '::layout.html.twig' %}
 
 {% block content %}
-	<h1>{{ filter.name }} <small>{{ filter.products|length }} produit(s)</small></h1>
-	{% for product in filter.products %}
+	<h1>{{ name }} <small>{{ products|length }} produit(s)</small></h1>
+	{% for product in products %}
 		{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
 	{% endfor %}
 {% endblock %}

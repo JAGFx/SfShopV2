@@ -1,5 +1,5 @@
 category_liste:
-    path:       /
+    path:       /listUser
     defaults: { _controller: sil21VitrineBundle:Category:list}
     methods:  GET
 
@@ -9,3 +9,28 @@ category_articlesByCategory:
     methods:  GET
     requirements:
         id:  \d+
+
+category_index:
+    path:     /
+    defaults: { _controller: "sil21VitrineBundle:Category:index" }
+    methods:  GET
+
+category_show:
+    path:     /{id}/show
+    defaults: { _controller: "sil21VitrineBundle:Category:show" }
+    methods:  GET
+
+category_new:
+    path:     /new
+    defaults: { _controller: "sil21VitrineBundle:Category:new" }
+    methods:  [GET, POST]
+
+category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil21VitrineBundle:Category:edit" }
+    methods:  [GET, POST]
+
+category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "sil21VitrineBundle:Category:delete" }
+    methods:  DELETE
