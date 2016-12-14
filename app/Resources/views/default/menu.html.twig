@@ -14,6 +14,20 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 			<ul class="nav navbar-nav navbar-right" >
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Administration
+							<span class="caret" ></span ></a >
+						<ul class="dropdown-menu" >
+							<li ><a href="{{ path('category_index') }}" >Catégorie</a ></li >
+							<li ><a href="{{ path('fos_user_profile_show') }}" >Client</a ></li >
+							<li ><a href="{{ path('commande_index') }}" >Commande</a ></li >
+							<li ><a href="{{ path('marque_index') }}" >Marque</a ></li >
+							<li ><a href="{{ path('product_index') }}" >Produit</a ></li >
+						</ul >
+					</li >
+				{% endif %}
+
 				<li class="active" ><a href="{{ path( 'product_list' ) }}" >Catalogue
 						<span class="sr-only" >(current)</span ></a ></li >
 				<li ><a href="{{ path('sil21_mention') }}" >Mentions légales </a ></li >
@@ -24,7 +38,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ app.user.firstname ~ ' ' ~ app.user.name }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
-							<li ><a href="{{ path('commande_index') }}" >Commandes</a ></li >
+							<li ><a href="{{ path('commande_listUser') }}" >Commandes</a ></li >
 							<li ><a href="{{ path('fos_user_profile_show') }}" >Profil</a ></li >
 							<li role="separator" class="divider" ></li >
 							<li ><a href="{{ path( 'fos_user_security_logout' ) }}" >Déconnexion</a ></li >
