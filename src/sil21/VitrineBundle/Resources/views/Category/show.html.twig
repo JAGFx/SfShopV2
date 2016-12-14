@@ -2,14 +2,16 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 >Category <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a ></h1 >
-	
+	<h1 >Category
+		<a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
+	</h1 >
+
 	<article class="noPaddingSide" >
-		<table >
+		<table class="stylized" >
 			<tr >
 				<th >Id</th >
 				<th >Name</th >
-			
+
 			</tr >
 			<tr >
 				<td >{{ category.id }}</td >
@@ -17,7 +19,7 @@
 			</tr >
 		</table >
 	</article >
-	
+
 	<ul >
 		<li >
 			<a href="{{ path('category_index') }}" >Back to the list</a >

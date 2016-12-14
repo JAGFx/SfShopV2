@@ -97,4 +97,10 @@ class Marque
     {
         return $this->products;
     }
+	
+	function __toString() {
+		return $this->name;
+	}
+	
+	
 }
