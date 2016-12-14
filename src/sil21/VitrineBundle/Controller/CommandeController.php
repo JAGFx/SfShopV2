@@ -12,30 +12,43 @@
 	 *
 	 */
 	class CommandeController extends Controller {
+		
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function indexAction() {
-			$securityContext = $this->container->get( 'security.authorization_checker' );
+			$em = $this->getDoctrine()->getManager();
 			
-			if ( $securityContext->isGranted( 'IS_AUTHENTICATED_REMEMBERED' ) ) {
-				/**
-				 * @var Client $user
-				 */
-				$user = $user = $this->container
-					->get( 'security.token_storage' )
-					->getToken()->getUser();
-				
-				$commandes = $user->getCommandes();
-				
-				return $this->render(
-					'sil21VitrineBundle:Commande:index.html.twig', [
-						'commandes' => $commandes,
-					]
-				);
-				
-			} else
-				$this->redirectToRoute('fos_user_security_login');
+			$commandes = $em->getRepository( 'sil21VitrineBundle:Commande' )->findAll();
+			
+			return $this->render(
+				'sil21VitrineBundle:Commande:index.html.twig',
+				[
+					'commandes' => $commandes,
+				]
+			);
+			
+		}
+		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		public function listAllUserAction() {
+			/**
+			 * @var Client $user
+			 */
+			$user = $user = $this->container
+				->get( 'security.token_storage' )
+				->getToken()->getUser();
+			
+			$commandes = $user->getCommandes();
+			
+			return $this->render(
+				'sil21VitrineBundle:Commande:index.html.twig',
+				[
+					'commandes' => $commandes,
+				]
+			);
 			
 		}
 		
@@ -44,13 +57,15 @@
 		 *
 		 */
 		public function showAction( Commande $commande ) {
+			
 			$deleteForm = $this->createDeleteForm( $commande );
 			
 			return $this->render(
-				'sil21VitrineBundle:Commande:show.html.twig', [
-				'Commande'    => $commande,
-				'delete_form' => $deleteForm->createView(),
-			]
+				'sil21VitrineBundle:Commande:show.html.twig',
+				[
+					'commande'    => $commande,
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -59,6 +74,8 @@
 		 *
 		 */
 		public function editAction( Request $request, Commande $commande ) {
+			
+			
 			$deleteForm = $this->createDeleteForm( $commande );
 			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\CommandeType', $commande );
 			$editForm->handleRequest( $request );
@@ -70,11 +87,12 @@
 			}
 			
 			return $this->render(
-				'sil21VitrineBundle:Commande:edit.html.twig', [
-				'Commande'    => $commande,
-				'edit_form'   => $editForm->createView(),
-				'delete_form' => $deleteForm->createView(),
-			]
+				'sil21VitrineBundle:Commande:edit.html.twig',
+				[
+					'Commande'    => $commande,
+					'edit_form'   => $editForm->createView(),
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -104,8 +122,10 @@
 		 */
 		private function createDeleteForm( Commande $commande ) {
 			return $this->createFormBuilder()
-				->setAction( $this->generateUrl( 'commande_delete', [ 'id' => $commande->getId() ] ) )
-				->setMethod( 'DELETE' )
-				->getForm();
+				    ->setAction(
+					    $this->generateUrl( 'commande_delete', [ 'id' => $commande->getId() ] )
+				    )
+				    ->setMethod( 'DELETE' )
+				    ->getForm();
 		}
 	}

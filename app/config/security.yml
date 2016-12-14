@@ -12,7 +12,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
@@ -28,4 +28,29 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/profile/, role: ROLE_USER }
+
+        # -- Categorie
+        - { path: ^/category/listUser, role: ROLE_USER }
+        - { path: ^/category/\d+/articles, role: ROLE_USER }
+        - { path: ^/category/, role: ROLE_ADMIN }
+
+        # -- Commande
+        - { path: ^/Commande/\d+/|show, role: ROLE_USER }
+        - { path: ^/Commande/listUser, role: ROLE_USER }
+        - { path: ^/Commande/, role: ROLE_ADMIN }
+
+        # -- Marque
+        - { path: ^/marque/listUser, role: ROLE_USER }
+        - { path: ^/marque/\d+/articles, role: ROLE_USER }
+        - { path: ^/marque/, role: ROLE_ADMIN }
+
+        # -- Panier
+        - { path: ^/cart/validate, role: ROLE_USER }
+
+        # -- Produit
+        - { path: ^/product/listUser, role: ROLE_USER }
+        - { path: ^/product/, role: ROLE_ADMIN }
+
         - { path: ^/admin/, role: ROLE_ADMIN }
