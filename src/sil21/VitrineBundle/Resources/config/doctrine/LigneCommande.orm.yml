@@ -10,8 +10,6 @@ sil21\VitrineBundle\Entity\LigneCommande:
     fields:
         qte:
             type: integer
-        prix:
-            type: float
             
     manyToOne:
         product:

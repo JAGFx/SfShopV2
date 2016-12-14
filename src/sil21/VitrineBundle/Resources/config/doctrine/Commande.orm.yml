@@ -1,6 +1,6 @@
 sil21\VitrineBundle\Entity\Commande:
     type: entity
-    table: commande
+    table: Commande
     id:
         id:
             type: integer
@@ -10,7 +10,7 @@ sil21\VitrineBundle\Entity\Commande:
             type: datetime
                
         etat:
-            type: boolean
+            type: integer
 
     manyToOne:
         client:
@@ -23,5 +23,5 @@ sil21\VitrineBundle\Entity\Commande:
     oneToMany:
             lignecommandes:
                  targetEntity: LigneCommande
-                 mappedBy: commande
+                 mappedBy: Commande
                  cascade: [ "persist", "remove" ]
