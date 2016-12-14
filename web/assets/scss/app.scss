@@ -5,13 +5,11 @@
 @import "cart";
 @import "alertMessage";
 
-
 body {
 	background:  $grey;
 	color:       $dark !important;
 	padding-top: $heigthMenu * 2 - 10px;
 }
-
 
 .flexbox {
 	display:   flex;
@@ -22,21 +20,47 @@ body {
 	}
 }
 
-
 article, form:not(.cartQte) {
 	background:    #FFF;
 	border:        1px solid darken($grey, 5%);
 	border-width:  1px 1px 4px 1px;
 	margin-bottom: 10px;
 	padding:       20px 10px;
+	
+	&.noPaddingSide{
+		padding-left:  0;
+		padding-right: 0;
+	}
 }
 
-
 form:not(.cartQte) { padding-left: 20px; padding-right: 20px; }
-
 
 .btn.btn-primary {
 	background:      $mainColor;
 	border-color:    darken($mainColor, 5%);
 	text-decoration: none;
+}
+
+table.stylized {
+	width: 100%;
+	
+	tr {
+		border-top: 1px solid darken($grey, 10%);
+		
+		th {
+			text-transform: uppercase;
+			font-size:      1.1em;
+			letter-spacing: .2em;
+			padding:        5px 10px 25px 10px;
+			text-align:     center;
+			color:          darken($grey, 30%);
+		}
+		
+		td {
+			padding:    10px;
+			text-align: center;
+		}
+		
+		&:first-child { border: none; }
+	}
 }

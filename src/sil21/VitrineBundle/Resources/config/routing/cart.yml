@@ -10,6 +10,11 @@
 sil21_cartContent:
      path:     /
      defaults: { _controller: sil21VitrineBundle:Panier:cartContent}
+     
+sil21_validateCart:
+     path:       /validate
+     defaults: { _controller: sil21VitrineBundle:Panier:validateCart}
+     methods:  GET
 
 # -- Ajout d'Article
 sil21_addArticle:

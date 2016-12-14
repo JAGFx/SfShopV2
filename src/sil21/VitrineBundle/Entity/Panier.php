@@ -22,7 +22,7 @@
 		/**
 		 * @var array
 		 */
-		private $products = [];
+		private $cartItems = [];
 		
 		
 		/**
@@ -33,14 +33,14 @@
 		 */
 		public function addArticle( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
 			
-			if ( key_exists( $product->getId(), $this->products )
-			     && $this->products[ $product->getId() ][ 'qte' ] < $product->getStock()
+			if ( key_exists( $product->getId(), $this->cartItems )
+			     && $this->cartItems[ $product->getId() ][ 'qte' ] < $product->getStock()
 			) {
-				$this->products[ $product->getId() ][ 'qte' ] += $qte;
-				$this->products[ $product->getId() ][ 'product' ] = $product;
+				$this->cartItems[ $product->getId() ][ 'qte' ] += $qte;
+				$this->cartItems[ $product->getId() ][ 'product' ] = $product;
 				
-			} elseif ( !key_exists( $product->getId(), $this->products ) && $qte <= $product->getStock() ) {
-				$this->products[ $product->getId() ] = [
+			} elseif ( !key_exists( $product->getId(), $this->cartItems ) && $qte <= $product->getStock() ) {
+				$this->cartItems[ $product->getId() ] = [
 					'id'      => (int) $product->getId(),
 					'product' => $product,
 					'qte'     => (int) $qte
@@ -61,11 +61,11 @@
 		 */
 		public function changeQuantity( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
 			if ( $qte <= $product->getStock() ) {
-				if ( key_exists( $product->getId(), $this->products ) ) {
-					$this->products[ $product->getId() ][ 'qte' ] = $qte;
+				if ( key_exists( $product->getId(), $this->cartItems ) ) {
+					$this->cartItems[ $product->getId() ][ 'qte' ] = $qte;
 					
 				} else {
-					$this->products[ $product->getId() ] = [
+					$this->cartItems[ $product->getId() ] = [
 						'id'      => (int) $product->getId(),
 						'product' => $product,
 						'qte'     => (int) $qte
@@ -73,7 +73,7 @@
 				}
 			}
 			
-			return $this->products[ $product->getId() ][ 'qte' ] ;
+			return $this->cartItems[ $product->getId() ][ 'qte' ] ;
 		}
 		
 		/**
@@ -82,11 +82,11 @@
 		 * @param string $productID
 		 */
 		public function removeOneArticle( $productID, $qte ) {
-			if ( key_exists( $productID, $this->products ) && $this->products[ $productID ][ 'qte' ] > 1 ) {
-				$this->products[ $productID ][ 'qte' ] -= $qte;
+			if ( key_exists( $productID, $this->cartItems ) && $this->cartItems[ $productID ][ 'qte' ] > 1 ) {
+				$this->cartItems[ $productID ][ 'qte' ] -= $qte;
 				
 			} else {
-				unset( $this->products[ $productID ] );
+				unset( $this->cartItems[ $productID ] );
 			}
 		}
 		
@@ -96,8 +96,8 @@
 		 * @param string $productID
 		 */
 		public function removeArticles( $productID ) {
-			if ( key_exists( $productID, $this->products ) ) {
-				unset( $this->products[ $productID ] );
+			if ( key_exists( $productID, $this->cartItems ) ) {
+				unset( $this->cartItems[ $productID ] );
 			}
 		}
 		
@@ -105,7 +105,7 @@
 		 *
 		 */
 		public function clearPanier() {
-			unset( $this->products );
+			unset( $this->cartItems );
 		}
 		
 		/**
@@ -113,8 +113,8 @@
 		 *
 		 * @return array
 		 */
-		public function getProducts() {
-			return $this->products;
+		public function getCartItems() {
+			return $this->cartItems;
 		}
 		
 		/**
@@ -123,7 +123,7 @@
 		public function getNbProduct() {
 			$nb = 0;
 			
-			foreach ( $this->products as $product ) {
+			foreach ( $this->cartItems as $product ) {
 				$nb += $product[ 'qte' ];
 			}
 			
@@ -133,7 +133,7 @@
 		public function getTotalPanier() {
 			$total = 0;
 			
-			foreach ( $this->getProducts() as $item ) {
+			foreach ( $this->getCartItems() as $item ) {
 				$total += $item[ 'product' ]->getPrice() * $item[ 'qte' ];
 			}
 			

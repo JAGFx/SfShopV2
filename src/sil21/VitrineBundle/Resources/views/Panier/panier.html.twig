@@ -4,7 +4,7 @@
 
 {% block content %}
 	<h1 class="text-center" >Panier</h1 >
-	{% if panier.products|length > 0 %}
+	{% if panier.cartItems|length > 0 %}
 		<p class="text-center" >
 			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
 		</p >
@@ -12,9 +12,9 @@
 
 	{% include ":default:flashMessage.html.twig" %}
 
-	<article class="panier" >
-		<table >
-			{% if panier.products|length > 0 %}
+	<article class="panier noPaddingSide" >
+		<table class="stylized">
+			{% if panier.cartItems|length > 0 %}
 				<tr >
 					<th ></th >
 					<th >Désignation</th >
@@ -24,7 +24,7 @@
 					<th ></th >
 				</tr >
 
-				{% for item in panier.products %}
+				{% for item in panier.cartItems %}
 					<tr class="cartProduct" >
 						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}" class="img-responsive" >
 						</td >
@@ -67,7 +67,7 @@
 					<td colspan="4" ></td >
 					<td style="min-width: 150px;" >
 						{% if is_granted('ROLE_USER') %}
-							<a href="" class="btn btn-primary" >PASSER COMMANDE</a >
+							<a href="{{ path('sil21_validateCart') }}" class="btn btn-primary" >PASSER COMMANDE</a >
 						{% else %}
 							Ce connecter avant de valider le panier<br /><br />
 							<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary" >Connexion</a >

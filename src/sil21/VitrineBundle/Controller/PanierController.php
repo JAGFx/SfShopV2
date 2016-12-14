@@ -11,9 +11,12 @@
 	
 	namespace sil21\VitrineBundle\Controller;
 	
+	use sil21\VitrineBundle\Entity\Commande;
+	use sil21\VitrineBundle\Entity\LigneCommande;
 	use sil21\VitrineBundle\Entity\Panier;
 	use sil21\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\BrowserKit\Response;
 	use Symfony\Component\HttpFoundation\JsonResponse;
 	use Symfony\Component\HttpFoundation\Session\Session;
 	
@@ -58,10 +61,10 @@
 			if ( !$added ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-							 'type'    => 'warning',
-							 'title'   => "Modification impossible",
-							 'message' => 'Le stock de l\'article est insuffisant'
-						 ]
+						'type'    => 'warning',
+						'title'   => "Modification impossible",
+						'message' => 'Le stock de l\'article est insuffisant'
+					]
 				);
 			}
 			
@@ -78,21 +81,21 @@
 		 */
 		public function changeQutantityAction( Product $product, $qte ) {
 			$panier = $this->getSessionPanier();
-			$finalQteProduct  = $panier->changeQuantity( $product, $qte );
+			$finalQteProduct = $panier->changeQuantity( $product, $qte );
 			
 			if ( $finalQteProduct == $qte ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-							 'type'    => 'warning',
-							 'title'   => "Modification impossible",
-							 'message' => 'Le stock de l\'article est insuffisant'
-						 ]
+						'type'    => 'warning',
+						'title'   => "Modification impossible",
+						'message' => 'Le stock de l\'article est insuffisant'
+					]
 				);
 			}
 			
 			$this->setSessionPanier( $panier );
 			
-			return new JsonResponse( ['lastQte' => $finalQteProduct] );
+			return new JsonResponse( [ 'lastQte' => $finalQteProduct ] );
 		}
 		
 		/**
@@ -124,6 +127,60 @@
 			$this->setSessionPanier( $panier );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
+		}
+		
+		/**
+		 * @return \Symfony\Component\HttpFoundation\Response
+		 */
+		public function validateCartAction() {
+			$securityContext = $this->container->get( 'security.authorization_checker' );
+			
+			if ( $securityContext->isGranted( 'IS_AUTHENTICATED_REMEMBERED' ) ) {
+				$em = $this->getDoctrine()->getManager();
+				
+				$user = $user = $this->container
+					->get( 'security.token_storage' )
+					->getToken()->getUser();
+				
+				$commande = new Commande( $user );
+				$em->persist( $commande );
+				$em->flush();
+				
+				$panier = $this->getSessionPanier();
+				foreach ( $panier->getCartItems() as $item ) {
+					
+					// Récupération du produit et retrait stock
+					$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
+						$item[ 'product' ]->getId()
+					);
+					$product->setStock( $product->getStock() - $item[ 'qte' ] );
+					
+					// Création d'une ligne de Commande
+					$ligneCommande = new LigneCommande( $product, $commande, $item[ 'qte' ] );
+					$commande->addLignecommande( $ligneCommande );
+					
+					$em->persist( $product );
+				}
+				
+				$em->persist( $commande );
+				$em->flush();
+				
+				$this->setSessionPanier( new Panier() );
+				$this->get( 'session' )->getFlashBag()->add(
+					'message', [
+						'type'    => 'success',
+						'title'   => "Commande effectué avec succès",
+						'message' => 'Accèdez à votre Commande depuis votre espace'
+					]
+				);
+				
+				return $this->render( 'sil21VitrineBundle:Panier:successValidation.html.twig',
+					[
+						'idCommande' => $commande->getId()
+					]);
+				
+			} else
+				$this->redirectToRoute('fos_user_security_login');
 		}
 		
 		/**
