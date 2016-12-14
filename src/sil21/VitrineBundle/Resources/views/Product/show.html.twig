@@ -1,0 +1,50 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center" >Product
+		<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
+	</h1 >
+
+	<article class="noPaddingSide" >
+		<table class="stylized" >
+			<tr >
+				<th >Image</th >
+				<td class="text-center" ><img src="{{ asset('uploads/products/' ~ product.image ) }}" width="300" />
+				</td >
+			</tr >
+			<tr >
+				<th >Id</th >
+				<td >{{ product.id }}</td >
+			</tr >
+			<tr >
+				<th >Name</th >
+				<td >{{ product.name }}</td >
+			</tr >
+
+			<tr >
+				<th >Price</th >
+				<td >{{ product.price }}</td >
+			</tr >
+			<tr >
+				<th >Stock</th >
+				<td >{{ product.stock }}</td >
+			</tr >
+			<tr >
+				<th >Description</th >
+				<td >{{ product.description }}</td >
+			</tr >
+		</table >
+	</article >
+
+	<ul >
+		<li >
+			<a href="{{ path('product_index') }}" >Back to the list</a >
+		</li >
+		<li >
+			{{ form_start(delete_form) }}
+			<input type="submit" value="Delete" >
+			{{ form_end(delete_form) }}
+		</li >
+	</ul >
+{% endblock %}

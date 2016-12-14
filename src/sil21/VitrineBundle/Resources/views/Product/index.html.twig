@@ -1,0 +1,38 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center" >Products
+		<a href="{{ path('product_new') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" ></span ></a >
+	</h1 >
+
+	<article class="noPaddingSide" >
+		<table class="stylized" >
+			<tr >
+				<th >Id</th >
+				<th >Name</th >
+				<th >Image</th >
+				<th >Price</th >
+				<th >Stock</th >
+				<th >Description</th >
+				<th >Actions</th >
+			</tr >
+			{% for product in products %}
+				<tr >
+					<td ><a href="{{ path('product_show', { 'id': product.id }) }}" >{{ product.id }}</a ></td >
+					<td >{{ product.name }}</td >
+					<td >
+						<img src="{{ asset('uploads/products/' ~ product.image ) }}" class="img-responsive" width="200" />
+					</td >
+					<td >{{ product.price }}</td >
+					<td >{{ product.stock }}</td >
+					<td >{{ product.description }}</td >
+					<td >
+						<a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >Voir</a >
+						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+					</td >
+				</tr >
+			{% endfor %}
+		</table >
+	</article >
+{% endblock %}
