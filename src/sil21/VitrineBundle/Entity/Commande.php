@@ -8,8 +8,10 @@
 	 * Commande
 	 */
 	class Commande {
-		const CMD_NOT_VALIDATE = 0;
-		const CMD_VALIDATE     = 1;
+		const CMD_STATE_CHECKOUT  = 0;
+		const CMD_STATE_VALIDATE  = 1;
+		const CMD_STATE_PAYED     = 2;
+		const CMD_STATE_DELIVERED = 3;
 		
 		/**
 		 * @var integer
@@ -24,7 +26,7 @@
 		/**
 		 * @var integer
 		 */
-		private $etat = self::CMD_NOT_VALIDATE;
+		private $etat = self::CMD_STATE_CHECKOUT;
 		
 		/**
 		 * @var \Doctrine\Common\Collections\Collection
@@ -92,10 +94,14 @@
 		/**
 		 * Get etat
 		 *
-		 * @return integer
+		 * @param bool $returnString
+		 *
+		 * @return int|string
 		 */
-		public function getEtat() {
-			return $this->etat;
+		public function getEtat( $returnString = false ) {
+			return ( $returnString )
+				? Commande::getStatesConstants()[ $this->etat ]
+				: $this->etat;
 		}
 		
 		/**
@@ -149,5 +155,53 @@
 		 */
 		public function getClient() {
 			return $this->client;
+		}
+		
+		/**
+		 * Get total commande
+		 *
+		 * @return float
+		 */
+		public function getTotal(){
+			$total = 0.0;
+			
+			foreach ( $this->getLignecommandes() as $lignecommande ) {
+				/**
+				 * @var LigneCommande $lignecommande
+				 */
+				$total += (float) $lignecommande->getPrice() * $lignecommande->getQte();
+			}
+			
+			return $total;
+		}
+		
+		public function getCommandeItems(){
+			$items = [];
+			
+			foreach ( $this->getLignecommandes() as $lignecommande ) {
+				/**
+				 * @var LigneCommande $lignecommande
+				 */
+				
+				$items[] = [
+					'qte' => $lignecommande->getQte(),
+					'product' => $lignecommande->getProduct(),
+					'price' => $lignecommande->getPrice()
+				];
+			}
+			
+			return $items;
+		}
+		
+		/**
+		 * @return array
+		 */
+		public static function getStatesConstants() {
+			return [
+				self::CMD_STATE_CHECKOUT  => 'Enregistré',
+				self::CMD_STATE_VALIDATE  => 'Validé',
+				self::CMD_STATE_PAYED     => 'Payement reçus',
+				self::CMD_STATE_DELIVERED => 'Livré'
+			];
 		}
 	}
