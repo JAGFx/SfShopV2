@@ -22,8 +22,8 @@
 			
 			return $this->render(
 				'sil21VitrineBundle:Product:index.html.twig', [
-										    'products' => $products,
-									    ]
+					'products' => $products,
+				]
 			);
 		}
 		
@@ -33,10 +33,8 @@
 			return $this->render(
 				'sil21VitrineBundle:Catalogue:listProducts.html.twig',
 				[
-					'filter' => [
-						'name'     => 'Produits',
-						'products' => $products
-					]
+					'name'     => 'Produits',
+					'products' => $products
 				]
 			);
 		}
@@ -47,7 +45,7 @@
 		 */
 		public function newAction( Request $request ) {
 			$product = new Product();
-			$form    = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
+			$form = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
@@ -60,9 +58,9 @@
 			
 			return $this->render(
 				'sil21VitrineBundle:Product:new.html.twig', [
-										  'product' => $product,
-										  'form'    => $form->createView(),
-									  ]
+					'product' => $product,
+					'form'    => $form->createView(),
+				]
 			);
 		}
 		
@@ -75,10 +73,9 @@
 			
 			return $this->render(
 				'sil21VitrineBundle:Product:show.html.twig', [
-										   'product'     => $product,
-										   'delete_form' => $deleteForm->createView(
-										   ),
-									   ]
+					'product'     => $product,
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -88,7 +85,7 @@
 		 */
 		public function editAction( Request $request, Product $product ) {
 			$deleteForm = $this->createDeleteForm( $product );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
+			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -99,12 +96,10 @@
 			
 			return $this->render(
 				'sil21VitrineBundle:Product:edit.html.twig', [
-										   'product'     => $product,
-										   'edit_form'   => $editForm->createView(
-										   ),
-										   'delete_form' => $deleteForm->createView(
-										   ),
-									   ]
+					'product'     => $product,
+					'edit_form'   => $editForm->createView(),
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -134,8 +129,8 @@
 		 */
 		private function createDeleteForm( Product $product ) {
 			return $this->createFormBuilder()
-				    ->setAction( $this->generateUrl( 'product_delete', [ 'id' => $product->getId() ] ) )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction( $this->generateUrl( 'product_delete', [ 'id' => $product->getId() ] ) )
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}

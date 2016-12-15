@@ -89,7 +89,7 @@
 			return $this->render(
 				'sil21VitrineBundle:Commande:edit.html.twig',
 				[
-					'Commande'    => $commande,
+					'commande'    => $commande,
 					'edit_form'   => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),
 				]

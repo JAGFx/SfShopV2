@@ -107,7 +107,7 @@
 			
 			return $this->render(
 				'sil21VitrineBundle:Marque:edit.html.twig', [
-					'Marque'      => $marque,
+					'marque'      => $marque,
 					'edit_form'   => $editForm->createView(),
 					'delete_form' => $deleteForm->createView(),
 				]
