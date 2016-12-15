@@ -2,7 +2,8 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 >Category
+	<h1 class="text-center">Catégorie
+		<small>{{ category.name }}</small>
 		<a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
 	</h1 >
 

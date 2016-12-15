@@ -2,7 +2,9 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 >Marque <a href="{{ path('marque_edit', { 'id': marque.id }) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a ></h1 >
+	<h1 class="text-center">Marque <small>{{ marque.name }}</small>
+		<a href="{{ path('marque_edit', { 'id': marque.id }) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a >
+	</h1 >
 	
 	<article class="noPaddingSide">
 		<table class="stylized" >

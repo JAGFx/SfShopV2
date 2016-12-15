@@ -2,7 +2,7 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 >Catégorie</h1 >
+	<h1 class="text-center">Catégorie <small>{{ category.name }}</small></h1 >
 	
 	{{ form_start(edit_form) }}
 	{{ form_widget(edit_form) }}
