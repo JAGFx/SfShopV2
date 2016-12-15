@@ -3,7 +3,7 @@
 {% set showLeftMenu = 'no' %}
 {% block content %}
 	<h1 class="text-center" >Commandes</h1 >
-
+	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			{% if commandes|length > 0 %}
@@ -11,17 +11,25 @@
 					<th >Id</th >
 					<th >Date</th >
 					<th >Etat</th >
+					<th >Total €</th >
 					<th >Actions</th >
 				</tr >
 				{% for commande in commandes %}
 					<tr >
-						<td ><a href="{{ path('commande_show', { 'id': commande.id }) }}" >{{ commande.id }}</a ></td >
-						<td >{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td >
-						<td >{{ commande.etat }}</td >
 						<td >
-							<a href="{{ path('commande_show', { 'id': commande.id }) }}" >show</a >
-							<a href="{{ path('commande_edit', { 'id': commande.id }) }}" >edit</a >
+							<a href="{{ path('commande_show', { 'id': commande.id }) }}" >{{ commande.id }}</a >
 						</td >
+						<td >{% if commande.date %}{{ commande.date|date('d/m/Y') }}{% endif %}</td >
+						<td >{{ commande.getEtat(true) }}</td >
+						<td >{{ commande.total|number_format(2, ',', ' ') }} €</td >
+						
+						<td >
+							<a href="{{ path('commande_show', { 'id': commande.id }) }}" class="btn btn-primary btn-xs">Voir</a >
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-primary btn-xs">Modifier</a >
+							{% endif %}
+						</td >
+					
 					</tr >
 				{% endfor %}
 			{% else %}

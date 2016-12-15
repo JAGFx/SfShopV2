@@ -23,5 +23,5 @@ sil21\VitrineBundle\Entity\Commande:
     oneToMany:
             lignecommandes:
                  targetEntity: LigneCommande
-                 mappedBy: Commande
+                 mappedBy: commande
                  cascade: [ "persist", "remove" ]
