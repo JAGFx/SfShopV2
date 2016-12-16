@@ -12,14 +12,21 @@ sil21\VitrineBundle\Entity\Client:
         name:
             type: string
             length: '255'
+            nullable: false
+
         firstname:
             type: string
             length: '255'
+            nullable: false
+
         address:
             type: text
+            nullable: false
+
         tel:
             type: string
             length: '10'
+
         dateBirthday:
             type: datetime
             

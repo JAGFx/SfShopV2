@@ -10,6 +10,8 @@ sil21\VitrineBundle\Entity\Category:
         name:
            type: string
            length: 100
+           nullable: false
+
     oneToMany:
         products:
              targetEntity: Product

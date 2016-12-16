@@ -3,10 +3,12 @@
 {% set showLeftMenu = 'no' %}
 {% block content %}
 	<h1 class="text-center" >Commande
-		<small> N°{{ commande.id }}</small>
-		<a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
+		<small > N°{{ commande.id }}</small >
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
+		{% endif %}
 	</h1 >
-	
+
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
@@ -19,8 +21,8 @@
 			</tr >
 		</table >
 	</article >
-	
-	<h3 class="text-center">Produits</h3>
+
+	<h3 class="text-center" >Produits</h3 >
 	<article class="noPaddingSide panier" >
 		<table class="stylized" >
 			<tr >
@@ -30,8 +32,10 @@
 				<th >Prix</th >
 			</tr >
 			{% for commandeItem in commande.commandeItems %}
-				<tr class="cartProduct"  >
-					<td ><img src="{{ asset("uploads/products/" ~ commandeItem.product.image) }}" class="img-responsive" ></td >
+				<tr class="cartProduct" >
+					<td >
+						<img src="{{ asset("uploads/products/" ~ commandeItem.product.image) }}" class="img-responsive" >
+					</td >
 					<td class="infoProduct" >
 						<h3 >{{ commandeItem.product.name }}</h3 >
 					</td >
@@ -44,12 +48,12 @@
 				<td class="price" >
 					<small >TOTAL:</small >
 					<br />
-					{{ commande.total|number_format(2, ',', ' ')  }} €
+					{{ commande.total|number_format(2, ',', ' ') }} €
 				</td >
 			</tr >
 		</table >
 	</article >
-	
+
 	<ul >
 		<li >
 			<a href="{{ path('commande_index') }}" >Back to the list</a >

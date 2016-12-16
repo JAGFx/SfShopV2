@@ -13,6 +13,7 @@ sil21\VitrineBundle\Entity\Marque:
             type: string
             length: '100'
             column: Name
+            nullable: false
             
     oneToMany:
         products:

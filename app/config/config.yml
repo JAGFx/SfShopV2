@@ -88,3 +88,4 @@ fos_user:
     registration:
         form:
             type: sil21_user_registration
+

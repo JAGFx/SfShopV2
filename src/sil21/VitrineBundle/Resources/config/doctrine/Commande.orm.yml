@@ -8,9 +8,11 @@ sil21\VitrineBundle\Entity\Commande:
     fields:
         date:
             type: datetime
+            nullable: false
                
         etat:
             type: integer
+            nullable: false
 
     manyToOne:
         client:
