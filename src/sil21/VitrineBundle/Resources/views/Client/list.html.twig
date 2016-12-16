@@ -1,0 +1,31 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center" >Utilisateurs</h1 >
+
+	<article class="noPaddingSide" >
+		<table class="stylized" >
+			<tr >
+				<th >ID</th >
+				<th >Rôles</th >
+				<th >Nom</th >
+				<th >Prénom</th >
+				<th >Email</th >
+				<th >Actions</th >
+			</tr >
+			{% for client in listClients %}
+				<tr >
+					<td >{{ client.id }}</td >
+					<td >{{ client.roles|json_encode }}</td >
+					<td >{{ client.name }}</td >
+					<td >{{ client.firstname }}</td >
+					<td >{{ client.email }}</td >
+					<td >
+						<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xs" >Modifier</a >
+					</td >
+				</tr >
+			{% endfor %}
+		</table >
+	</article >
+{% endblock %}

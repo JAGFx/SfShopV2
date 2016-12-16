@@ -29,12 +29,14 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/profile/, role: ROLE_USER }
-
         # -- Categorie
         - { path: ^/category/listUser, role: ROLE_USER }
         - { path: ^/category/\d+/articles, role: ROLE_USER }
         - { path: ^/category/, role: ROLE_ADMIN }
+
+        # -- Client
+        - { path: ^/client/, role: ROLE_ADMIN }
+        - { path: ^/profile/, role: ROLE_USER }
 
         # -- Commande
         - { path: ^/Commande/\d+/show, role: ROLE_USER }

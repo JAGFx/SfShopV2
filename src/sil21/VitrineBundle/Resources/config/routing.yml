@@ -15,9 +15,15 @@ sil21_marques:
     resource: "@sil21VitrineBundle/Resources/config/routing/Marque.yml"
     prefix: /marque
 
+# -- Commande
 sil21_vitrine_commande:
         resource: "@sil21VitrineBundle/Resources/config/routing/Commande.yml"
         prefix:   /Commande
+
+# -- Client
+sil21_client:
+    resource: "@sil21VitrineBundle/Resources/config/routing/client.yml"
+    prefix:   /client
 
 # -- Panier
 sil21_cart:
@@ -36,4 +42,6 @@ sil21_vitrine_homepage:
 sil21_mention:
     path: /mentions
     defaults: { _controller: sil21VitrineBundle:Default:mentions }
+    
+
 
