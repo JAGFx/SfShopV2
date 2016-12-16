@@ -192,6 +192,6 @@
 		 * @return string
 		 */
 		public function __toString() {
-			return $this->firstname . ' ' . $this->name;
+			return $this->firstname . ' ' . $this->name . ' <' . $this->email . '>';
 		}
 	}

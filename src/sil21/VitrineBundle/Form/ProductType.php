@@ -11,9 +11,14 @@
 		 * {@inheritdoc}
 		 */
 		public function buildForm( FormBuilderInterface $builder, array $options ) {
-			$builder->add( 'name' )->add( 'image' )->add( 'price' )->add( 'stock' )->add(
-				'description'
-			)->add( 'category' )->add( 'marque' );
+			$builder
+				->add( 'name' )
+				->add( 'image' )
+				->add( 'price', 'money', [ 'scale' => 2 ] )
+				->add( 'stock' )
+				->add( 'description' )
+				->add( 'category' )
+				->add( 'marque' );
 		}
 		
 		/**
