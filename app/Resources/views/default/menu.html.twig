@@ -31,7 +31,9 @@
 				<li class="active" ><a href="{{ path( 'product_list' ) }}" >Catalogue
 						<span class="sr-only" >(current)</span ></a ></li >
 				<li ><a href="{{ path('sil21_mention') }}" >Mentions légales </a ></li >
-				<li ><a href="{{ path('sil21_cartContent') }}" >Panier</a ></li >
+				<li ><a href="{{ path('sil21_cartContent') }}" >Panier
+						<span class="badge" >{{ cart_session.getSessionPanier().getTotalPanier()|number_format(2, ',', ' ') }} €</span ></a >
+				</li >
 
 				{% if is_granted('ROLE_USER') %}
 					<li class="dropdown" >

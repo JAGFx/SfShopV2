@@ -15,6 +15,7 @@
 	use sil21\VitrineBundle\Entity\LigneCommande;
 	use sil21\VitrineBundle\Entity\Panier;
 	use sil21\VitrineBundle\Entity\Product;
+	use sil21\VitrineBundle\Service\CartService;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\BrowserKit\Response;
 	use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +32,10 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function cartContentAction() {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
+			
+			$panier = $session->getSessionPanier();
 			
 			return $this->render(
 				'sil21VitrineBundle:Panier:panier.html.twig', [ 'panier' => $panier ]
@@ -42,7 +46,10 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function emptyCartAction() {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
+			
+			$panier = $session->getSessionPanier();
 			$panier->clearPanier();
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
@@ -55,20 +62,24 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function addArticleAction( Product $product, $qte ) {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
+			
+			/** @var  Panier $panier * */
+			$panier = $session->getSessionPanier();
 			
 			$added = $panier->addArticle( $product, $qte );
 			if ( !$added ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-						'type'    => 'warning',
-						'title'   => "Modification impossible",
-						'message' => 'Le stock de l\'article est insuffisant'
-					]
+							 'type'    => 'warning',
+							 'title'   => "Modification impossible",
+							 'message' => 'Le stock de l\'article est insuffisant'
+						 ]
 				);
 			}
 			
-			$this->setSessionPanier( $panier );
+			$session->setSessionPanier( $panier );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -80,20 +91,23 @@
 		 * @return JsonResponse
 		 */
 		public function changeQutantityAction( Product $product, $qte ) {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
+			
+			$panier          = $session->getSessionPanier();
 			$finalQteProduct = $panier->changeQuantity( $product, $qte );
 			
 			if ( $finalQteProduct == $qte ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-						'type'    => 'warning',
-						'title'   => "Modification impossible",
-						'message' => 'Le stock de l\'article est insuffisant'
-					]
+							 'type'    => 'warning',
+							 'title'   => "Modification impossible",
+							 'message' => 'Le stock de l\'article est insuffisant'
+						 ]
 				);
 			}
 			
-			$this->setSessionPanier( $panier );
+			$session->setSessionPanier( $panier );
 			
 			return new JsonResponse( [ 'lastQte' => $finalQteProduct ] );
 		}
@@ -105,11 +119,13 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function removeQteProductAction( $articleId, $qte ) {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
 			
+			$panier = $session->getSessionPanier();
 			$panier->removeOneArticle( $articleId, $qte );
 			
-			$this->setSessionPanier( $panier );
+			$session->setSessionPanier( $panier );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -120,11 +136,13 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function removeProductAction( $articleId ) {
-			$panier = $this->getSessionPanier();
+			/** @var CartService $session * */
+			$session = $this->container->get( 'sil21.cart.session' );
 			
+			$panier = $session->getSessionPanier();
 			$panier->removeArticles( $articleId );
 			
-			$this->setSessionPanier( $panier );
+			$session->setSessionPanier( $panier );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -146,7 +164,10 @@
 				$em->persist( $commande );
 				$em->flush();
 				
-				$panier = $this->getSessionPanier();
+				/** @var CartService $session * */
+				$session = $this->container->get( 'sil21.cart.session' );
+				
+				$panier = $session->getSessionPanier();
 				foreach ( $panier->getCartItems() as $item ) {
 					
 					// Récupération du produit et retrait stock
@@ -165,38 +186,40 @@
 				$em->persist( $commande );
 				$em->flush();
 				
-				$this->setSessionPanier( new Panier() );
+				$session->setSessionPanier( new Panier() );
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-						'type'    => 'success',
-						'title'   => "Commande effectué avec succès",
-						'message' => 'Accèdez à votre Commande depuis votre espace'
+							 'type'    => 'success',
+							 'title'   => "Commande effectué avec succès",
+							 'message' => 'Accèdez à votre Commande depuis votre espace'
+						 ]
+				);
+				
+				return $this->render(
+					'sil21VitrineBundle:Panier:successValidation.html.twig',
+					[
+						'idCommande' => $commande->getId()
 					]
 				);
 				
-				return $this->render( 'sil21VitrineBundle:Panier:successValidation.html.twig',
-					[
-						'idCommande' => $commande->getId()
-					]);
-				
 			} else
-				$this->redirectToRoute('fos_user_security_login');
+				$this->redirectToRoute( 'fos_user_security_login' );
 		}
 		
 		/**
 		 * @return Panier
 		 */
-		private function getSessionPanier() {
+		/*private function getSessionPanier() {
 			$session = $this->getRequest()->getSession();
 			
 			return $session->get( 'panier', new Panier() );
-		}
+		}*/
 		
 		/**
 		 * @param $panier
 		 */
-		private function setSessionPanier( $panier ) {
+		/*private function setSessionPanier( $panier ) {
 			$session = $this->getRequest()->getSession();
 			$session->set( 'panier', $panier );
-		}
+		}*/
 	}

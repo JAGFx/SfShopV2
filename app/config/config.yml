@@ -37,6 +37,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    globals:
+        cart_session: "@sil21.cart.session"
 
 # Doctrine Configuration
 doctrine:

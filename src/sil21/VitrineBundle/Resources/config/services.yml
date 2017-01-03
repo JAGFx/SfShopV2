@@ -1,9 +1,13 @@
 services:
     sil21.form.registration:
-            class: sil21\VitrineBundle\Form\ClientType
-            arguments: [%fos_user.model.user.class%]
-            tags:
-                - { name: form.type, alias: sil21_user_registration }
+        class: sil21\VitrineBundle\Form\ClientType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: sil21_user_registration }
+
+    sil21.cart.session:
+        class: sil21\VitrineBundle\Service\CartService
+        arguments: ["@session"]
 
 #    sil21_vitrine.example:
 #        class: sil21\VitrineBundle\Example
