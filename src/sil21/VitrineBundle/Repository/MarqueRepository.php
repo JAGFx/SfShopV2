@@ -17,4 +17,28 @@
 				    ->createQuery( 'SELECT p FROM sil21VitrineBundle:Marque p ORDER BY p.name' )
 				    ->getResult();
 		}
+		
+		public function findAllBetterSales() {
+			$stmt = $this->getEntityManager()->getConnection()->prepare(
+				'SELECT p.marque_id
+				FROM (
+					SELECT l.product_id AS id, SUM(l.qte) AS cnt
+					FROM lignecommande l
+					GROUP BY l.product_id
+					ORDER BY cnt DESC ) popu
+				NATURAL JOIN product p
+				LIMIT 5'
+			);
+			$stmt->execute();
+			$marqueIDs = $stmt->fetchAll();
+			$marques   = [];
+			foreach ( $marqueIDs as $id ) {
+				$marques[] = $this->getEntityManager()
+						  ->getRepository( 'sil21VitrineBundle:Marque' )
+						  ->findOneBy( [ 'id' => $id ] );
+			}
+			
+			return $marques;
+			
+		}
 	}

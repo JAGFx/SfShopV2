@@ -1,6 +1,13 @@
 {% extends "::layout.html.twig" %}
 
 {% block content %}
-	<h1 class="text-centers">SFShop</h1>
-	{{ dump(listProductPop) }}
+	<h1 >Produits populaires</h1 >
+	{% for product in listProductPop %}
+		{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
+	{% endfor %}
+
+	<h1 >Marques populaires</h1 >
+	{% for marque in  listMarquePop %}
+		<a href="{{ path('marque_articleByMarque', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
+	{% endfor %}
 {% endblock %}

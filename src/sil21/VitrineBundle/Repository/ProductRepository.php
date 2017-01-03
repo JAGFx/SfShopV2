@@ -21,18 +21,25 @@
 		}
 		
 		public function findAllBetterSales() {
-			return $this->createQueryBuilder( 'p' )
-				    ->select( 'IDENTITY(l.product)' )
-				    ->addSelect( 'SUM(l.qte) AS cnt' )
-				    ->from( 'sil21VitrineBundle:LigneCommande', 'l' )
-				    ->groupBy( 'l.product'  )
-				    ->orderBy( 'cnt' )
-				    ->getQuery()
-				    ->setMaxResults( 5 )
-				    ->getResult();
+			$stmt = $this->getEntityManager()->getConnection()->prepare(
+				'SELECT p.id
+				FROM (
+					SELECT l.product_id AS id, SUM(l.qte) AS cnt
+					FROM lignecommande l
+					GROUP BY l.product_id
+					ORDER BY cnt DESC ) popu
+				NATURAL JOIN product p
+				LIMIT 5'
+			);
+			$stmt->execute();
+			$productIDs = $stmt->fetchAll();
+			$products   = [];
+			foreach ( $productIDs as $id ) {
+				$products[] = $this->getEntityManager()
+						   ->getRepository( 'sil21VitrineBundle:Product' )
+						   ->findOneBy( [ 'id' => $id ] );
+			}
 			
-			/*return $this->_em->createQuery( 'SELECT p, SUM(l.qte) AS cnt FROM sil21VitrineBundle:LigneCommande l JOIN l.product p GROUP BY l.product ORDER BY cnt DESC')
-				->setMaxResults(5)
-				->getResult();*/
+			return $products;
 		}
 	}
