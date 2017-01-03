@@ -1,0 +1,9 @@
+commande_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil21AdminBundle:Commande:edit" }
+    methods:  [GET, POST]
+
+commande_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "sil21AdminBundle:Commande:delete" }
+    methods:  DELETE

@@ -1,0 +1,4 @@
+services:
+#    sil21_admin.example:
+#        class: sil21\AdminBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

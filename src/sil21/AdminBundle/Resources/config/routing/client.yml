@@ -1,0 +1,4 @@
+client_index:
+    path:       /
+    defaults: { _controller: "sil21AdminBundle:Client:index"}
+    methods:  GET

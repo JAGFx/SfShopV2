@@ -1,3 +1,7 @@
+sil21_admin:
+    resource: "@sil21AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 sil21_vitrine:
     resource: "@sil21VitrineBundle/Resources/config/routing.yml"
     prefix:   /

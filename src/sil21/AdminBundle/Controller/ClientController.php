@@ -1,6 +1,6 @@
 <?php
 	
-	namespace sil21\VitrineBundle\Controller;
+	namespace sil21\AdminBundle\Controller;
 	
 	use FOS\UserBundle\Controller\ProfileController as BaseController;
 	
@@ -10,7 +10,7 @@
 			$listClients = $userManager->findUsers();
 			
 			return $this->container->get( 'templating' )->renderResponse(
-				'sil21VitrineBundle:Client:list.html.twig',
+				'sil21AdminBundle:Client:list.html.twig',
 				[ 'listClients' => $listClients ]
 			);
 		}

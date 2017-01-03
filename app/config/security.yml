@@ -30,29 +30,29 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # -- Categorie
-        - { path: ^/category/listUser, role: ROLE_USER }
-        - { path: ^/category/\d+/articles, role: ROLE_USER }
-        - { path: ^/category/, role: ROLE_ADMIN }
+        #- { path: ^/category/listUser, role: ROLE_USER }
+        #- { path: ^/category/\d+/articles, role: ROLE_USER }
+        #- { path: ^/category/, role: ROLE_ADMIN }
 
         # -- Client
-        - { path: ^/client/, role: ROLE_ADMIN }
-        - { path: ^/profile/, role: ROLE_USER }
+        #- { path: ^/client/, role: ROLE_ADMIN }
+        #- { path: ^/profile/, role: ROLE_USER }
 
         # -- Commande
-        - { path: ^/Commande/\d+/show, role: ROLE_USER }
-        - { path: ^/Commande/listUser, role: ROLE_USER }
-        - { path: ^/Commande/, role: ROLE_ADMIN }
+        #- { path: ^/Commande/\d+/show, role: ROLE_USER }
+        #- { path: ^/Commande/listUser, role: ROLE_USER }
+        #- { path: ^/Commande/, role: ROLE_ADMIN }
 
         # -- Marque
-        - { path: ^/marque/listUser, role: ROLE_USER }
-        - { path: ^/marque/\d+/articles, role: ROLE_USER }
-        - { path: ^/marque/, role: ROLE_ADMIN }
+        #- { path: ^/marque/listUser, role: ROLE_USER }
+        #- { path: ^/marque/\d+/articles, role: ROLE_USER }
+        #- { path: ^/marque/, role: ROLE_ADMIN }
 
         # -- Panier
-        - { path: ^/cart/validate, role: ROLE_USER }
+        #- { path: ^/cart/validate, role: ROLE_USER }
 
         # -- Produit
-        - { path: ^/product/listUser, role: ROLE_USER }
-        - { path: ^/product/, role: ROLE_ADMIN }
+        #- { path: ^/product/listUser, role: ROLE_USER }
+        #- { path: ^/product/, role: ROLE_ADMIN }
 
         - { path: ^/admin/, role: ROLE_ADMIN }

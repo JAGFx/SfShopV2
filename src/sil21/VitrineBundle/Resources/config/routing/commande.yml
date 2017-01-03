@@ -1,8 +1,3 @@
-commande_index:
-    path:     /
-    defaults: { _controller: "sil21VitrineBundle:Commande:index" }
-    methods:  GET
-
 commande_listUser:
     path:     /listUser
     defaults: { _controller: "sil21VitrineBundle:Commande:listAllUser" }
@@ -12,13 +7,3 @@ commande_show:
     path:     /{id}/show
     defaults: { _controller: "sil21VitrineBundle:Commande:show" }
     methods:  GET
-
-commande_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "sil21VitrineBundle:Commande:edit" }
-    methods:  [GET, POST]
-
-commande_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "sil21VitrineBundle:Commande:delete" }
-    methods:  DELETE

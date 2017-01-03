@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new sil21\VitrineBundle\sil21VitrineBundle(),
 		new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 		new FOS\UserBundle\FOSUserBundle(),
+		new sil21\AdminBundle\sil21AdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

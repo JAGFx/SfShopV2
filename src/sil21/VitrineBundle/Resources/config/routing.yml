@@ -18,12 +18,7 @@ sil21_marques:
 # -- Commande
 sil21_vitrine_commande:
         resource: "@sil21VitrineBundle/Resources/config/routing/Commande.yml"
-        prefix:   /Commande
-
-# -- Client
-sil21_client:
-    resource: "@sil21VitrineBundle/Resources/config/routing/client.yml"
-    prefix:   /client
+        prefix:   /commande
 
 # -- Panier
 sil21_cart:

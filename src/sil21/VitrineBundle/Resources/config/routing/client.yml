@@ -1,4 +1,0 @@
-client_index:
-    path:       /
-    defaults: { _controller: "sil21VitrineBundle:Client:index"}
-    methods:  GET

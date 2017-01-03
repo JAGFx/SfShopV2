@@ -55,20 +55,15 @@
 	</article >
 
 	<ul >
-		{% if is_granted('ROLE_ADMIN') %}
-			<li >
-				<a href="{{ path('commande_index') }}" >Back to the list</a >
-			</li >
-			<li >
+		<li >
+			<a href="{{ path('commande_index') }}" >Back to the list</a >
+		</li >
+		<li >
+			{% if delete_form | length > 0 %}
 				{{ form_start(delete_form) }}
 				<input type="submit" value="Delete" >
 				{{ form_end(delete_form) }}
-			</li >
-
-		{% else %}
-			<li >
-				<a href="{{ path('commande_listUser') }}" >Back to the list</a >
-			</li >
-		{% endif %}
+			{% endif %}
+		</li >
 	</ul >
 {% endblock %}

@@ -16,23 +16,6 @@
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
-		public function indexAction() {
-			$em = $this->getDoctrine()->getManager();
-			
-			$commandes = $em->getRepository( 'sil21VitrineBundle:Commande' )->findAll();
-			
-			return $this->render(
-				'sil21VitrineBundle:Commande:index.html.twig',
-				[
-					'commandes' => $commandes,
-				]
-			);
-			
-		}
-		
-		/**
-		 * @return \Symfony\Component\HttpFoundation\Response
-		 */
 		public function listAllUserAction() {
 			/**
 			 * @var Client $user
@@ -58,59 +41,17 @@
 		 */
 		public function showAction( Commande $commande ) {
 			
-			$deleteForm = $this->createDeleteForm( $commande );
+			$deleteForm = ( $this->get( 'security.authorization_checker' )->isGranted( 'ROLE_ADMIN' ) )
+				? $this->createDeleteForm( $commande )->createView()
+				: null;
 			
 			return $this->render(
 				'sil21VitrineBundle:Commande:show.html.twig',
 				[
 					'commande'    => $commande,
-					'delete_form' => $deleteForm->createView(),
+					'delete_form' => $deleteForm,
 				]
 			);
-		}
-		
-		/**
-		 * Displays a form to edit an existing Commande entity.
-		 *
-		 */
-		public function editAction( Request $request, Commande $commande ) {
-			
-			
-			$deleteForm = $this->createDeleteForm( $commande );
-			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\CommandeType', $commande );
-			$editForm->handleRequest( $request );
-			
-			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
-				$this->getDoctrine()->getManager()->flush();
-				
-				return $this->redirectToRoute( 'commande_edit', [ 'id' => $commande->getId() ] );
-			}
-			
-			return $this->render(
-				'sil21VitrineBundle:Commande:edit.html.twig',
-				[
-					'commande'    => $commande,
-					'edit_form'   => $editForm->createView(),
-					'delete_form' => $deleteForm->createView(),
-				]
-			);
-		}
-		
-		/**
-		 * Deletes a Commande entity.
-		 *
-		 */
-		public function deleteAction( Request $request, Commande $commande ) {
-			$form = $this->createDeleteForm( $commande );
-			$form->handleRequest( $request );
-			
-			if ( $form->isSubmitted() && $form->isValid() ) {
-				$em = $this->getDoctrine()->getManager();
-				$em->remove( $commande );
-				$em->flush( $commande );
-			}
-			
-			return $this->redirectToRoute( 'commande_index' );
 		}
 		
 		/**
