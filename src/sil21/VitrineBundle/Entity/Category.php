@@ -24,11 +24,15 @@
 		private $products;
 		
 		/**
-		 * Constructor
+		 * Category constructor.
+		 *
+		 * @param string $name
 		 */
-		public function __construct() {
+		public function __construct( $name = null ) {
+			$this->name     = $name;
 			$this->products = new \Doctrine\Common\Collections\ArrayCollection();
 		}
+		
 		
 		/**
 		 * Get id
