@@ -3,9 +3,9 @@
 {% set showLeftMenu = 'no' %}
 {% block content %}
 	<h1 class="text-center" >Commande
-		<small > N°{{ commande.id }}</small >
+		<small > N°{{ order.id }}</small >
 		{% if is_granted('ROLE_ADMIN') %}
-			<a href="{{ path('commande_edit', { 'id': commande.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
+			<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
 		{% endif %}
 	</h1 >
 
@@ -13,11 +13,11 @@
 		<table class="stylized" >
 			<tr >
 				<th >Etat</th >
-				<td >{{ commande.etat(true) }}</td >
+				<td >{{ order.etat(true) }}</td >
 			</tr >
 			<tr >
 				<th >Date</th >
-				<td >{% if commande.date %}{{ commande.date|date('d/m/Y') }}{% endif %}</td >
+				<td >{% if order.date %}{{ order.date|date('d/m/Y') }}{% endif %}</td >
 			</tr >
 		</table >
 	</article >
@@ -31,16 +31,16 @@
 				<th >Quantité</th >
 				<th >Prix</th >
 			</tr >
-			{% for commandeItem in commande.commandeItems %}
+			{% for orderItem in order.orderItems %}
 				<tr class="cartProduct" >
 					<td >
-						<img src="{{ asset("uploads/products/" ~ commandeItem.product.image) }}" class="img-responsive" >
+						<img src="{{ asset("uploads/products/" ~ orderItem.product.image) }}" class="img-responsive" >
 					</td >
 					<td class="infoProduct" >
-						<h3 >{{ commandeItem.product.name }}</h3 >
+						<h3 >{{ orderItem.product.name }}</h3 >
 					</td >
-					<td >{{ commandeItem.qte }}</td >
-					<td class="price" >{{ (commandeItem.qte * commandeItem.price)|number_format(2, ',', ' ') }} €</td >
+					<td >{{ orderItem.qte }}</td >
+					<td class="price" >{{ (orderItem.qte * orderItem.price)|number_format(2, ',', ' ') }} €</td >
 				</tr >
 			{% endfor %}
 			<tr class="mainColorAcent" >
@@ -48,27 +48,22 @@
 				<td class="price" >
 					<small >TOTAL:</small >
 					<br />
-					{{ commande.total|number_format(2, ',', ' ') }} €
+					{{ order.total|number_format(2, ',', ' ') }} €
 				</td >
 			</tr >
 		</table >
 	</article >
 
 	<ul >
-		{% if is_granted('ROLE_ADMIN') %}
-			<li >
-				<a href="{{ path('commande_index') }}" >Back to the list</a >
-			</li >
-			<li >
+		<li >
+			<a href="{{ path('order_listUser') }}" >Back to the list</a >
+		</li >
+		<li >
+			{% if delete_form | length > 0 %}
 				{{ form_start(delete_form) }}
 				<input type="submit" value="Delete" >
 				{{ form_end(delete_form) }}
-			</li >
-
-		{% else %}
-			<li >
-				<a href="{{ path('commande_listUser') }}" >Back to the list</a >
-			</li >
-		{% endif %}
+			{% endif %}
+		</li >
 	</ul >
 {% endblock %}

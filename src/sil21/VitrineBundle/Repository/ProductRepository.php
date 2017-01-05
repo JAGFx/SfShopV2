@@ -25,10 +25,10 @@
 				'SELECT p.id
 				FROM (
 					SELECT l.product_id AS id, SUM(l.qte) AS cnt
-					FROM lignecommande l
+					FROM sil21_lignecommande l
 					GROUP BY l.product_id
 					ORDER BY cnt DESC ) popu
-				NATURAL JOIN product p
+				NATURAL JOIN sil21_product p
 				LIMIT 5'
 			);
 			$stmt->execute();
@@ -37,7 +37,7 @@
 			foreach ( $productIDs as $id ) {
 				$products[] = $this->getEntityManager()
 						   ->getRepository( 'sil21VitrineBundle:Product' )
-						   ->findOneBy( [ 'id' => $id ] );
+						   ->find( $id );
 			}
 			
 			return $products;

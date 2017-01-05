@@ -1,7 +1,7 @@
 sil21\VitrineBundle\Entity\Marque:
     repositoryClass: sil21\VitrineBundle\Repository\MarqueRepository
     type: entity
-    table: marque
+    table: sil21_marque
     id:
         id:
             type: integer

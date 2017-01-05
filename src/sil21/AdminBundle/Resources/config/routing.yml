@@ -15,10 +15,10 @@ sil21_admin_marques:
     resource: "@sil21AdminBundle/Resources/config/routing/Marque.yml"
     prefix: /marque
 
-# -- Commande
-sil21_admin_commande:
-        resource: "@sil21AdminBundle/Resources/config/routing/Commande.yml"
-        prefix:   /commande
+# -- Order
+sil21_admin_orders:
+        resource: "@sil21AdminBundle/Resources/config/routing/Order.yml"
+        prefix:   /order
 
 # -- Client
 sil21_client:

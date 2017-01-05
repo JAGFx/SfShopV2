@@ -37,14 +37,14 @@
 		/**
 		 * @var \Doctrine\Common\Collections\Collection
 		 */
-		private $commandes;
+		private $orders;
 		
 		/**
 		 * Constructor
 		 */
 		public function __construct() {
 			parent::__construct();
-			$this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->orders = new \Doctrine\Common\Collections\ArrayCollection();
 		}
 		
 		/**
@@ -138,12 +138,12 @@
 		/**
 		 * Add commandes
 		 *
-		 * @param \sil21\VitrineBundle\Entity\Commande $commandes
+		 * @param \sil21\VitrineBundle\Entity\Order $orders
 		 *
 		 * @return Client
 		 */
-		public function addCommande( \sil21\VitrineBundle\Entity\Commande $commandes ) {
-			$this->commandes[] = $commandes;
+		public function addOrder( \sil21\VitrineBundle\Entity\Order $orders ) {
+			$this->orders[] = $orders;
 			
 			return $this;
 		}
@@ -151,10 +151,10 @@
 		/**
 		 * Remove commandes
 		 *
-		 * @param \sil21\VitrineBundle\Entity\Commande $commandes
+		 * @param \sil21\VitrineBundle\Entity\Order $orders
 		 */
-		public function removeCommande( \sil21\VitrineBundle\Entity\Commande $commandes ) {
-			$this->commandes->removeElement( $commandes );
+		public function removeOrder( \sil21\VitrineBundle\Entity\Order $orders ) {
+			$this->orders->removeElement( $orders );
 		}
 		
 		/**
@@ -162,8 +162,8 @@
 		 *
 		 * @return \Doctrine\Common\Collections\Collection
 		 */
-		public function getCommandes() {
-			return $this->commandes;
+		public function getOrders() {
+			return $this->orders;
 		}
 		
 		/**

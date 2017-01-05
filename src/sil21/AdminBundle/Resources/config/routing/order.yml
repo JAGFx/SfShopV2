@@ -1,0 +1,9 @@
+order_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "sil21AdminBundle:Order:edit" }
+    methods:  [GET, POST]
+
+order_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "sil21AdminBundle:Order:delete" }
+    methods:  DELETE

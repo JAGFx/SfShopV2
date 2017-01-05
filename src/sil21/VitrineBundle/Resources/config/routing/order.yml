@@ -1,0 +1,9 @@
+order_listUser:
+    path:     /listUser
+    defaults: { _controller: "sil21VitrineBundle:Order:listAllUser" }
+    methods:  GET
+
+order_show:
+    path:     /{id}/show
+    defaults: { _controller: "sil21VitrineBundle:Order:show" }
+    methods:  GET

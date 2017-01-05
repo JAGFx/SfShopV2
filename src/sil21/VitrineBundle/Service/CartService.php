@@ -9,8 +9,7 @@
 	
 	namespace sil21\VitrineBundle\Service;
 	
-	
-	use sil21\VitrineBundle\Entity\Panier;
+	use sil21\VitrineBundle\Entity\Cart;
 	use Symfony\Component\HttpFoundation\Session\Session as Session;
 	
 	class CartService {
@@ -21,16 +20,16 @@
 		}
 		
 		/**
-		 * @return Panier
+		 * @return Cart
 		 */
-		public function getSessionPanier() {
-			return $this->session->get( 'panier', new Panier() );
+		public function getCartSession() {
+			return $this->session->get( 'cart', new Cart() );
 		}
 		
 		/**
-		 * @param $panier
+		 * @param $cart
 		 */
-		public function setSessionPanier( $panier ) {
-			$this->session->set( 'panier', $panier );
+		public function setCartSession( $cart ) {
+			$this->session->set( 'cart', $cart );
 		}
 	}

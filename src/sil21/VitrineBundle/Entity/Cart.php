@@ -1,23 +1,23 @@
 <?php
 	
 	/*
-	 * Fichier : Panier.php
+	 * Fichier : Cart.php
 	 * Auteur: SMITH Emmanuel
 	 *
-	 * Entitée Panier
+	 * Entitée Cart
 	 */
 	
 	namespace sil21\VitrineBundle\Entity;
 	
 	/**
-	 * Panier
+	 * Cart
 	 */
 	/**
-	 * Class Panier
+	 * Class Cart
 	 *
 	 * @package sil21\VitrineBundle\Entity
 	 */
-	class Panier {
+	class Cart {
 		
 		/**
 		 * @var array
@@ -104,7 +104,7 @@
 		/**
 		 *
 		 */
-		public function clearPanier() {
+		public function clearCart() {
 			unset( $this->cartItems );
 		}
 		
@@ -130,7 +130,7 @@
 			return $nb;
 		}
 		
-		public function getTotalPanier() {
+		public function getTotalCart() {
 			$total = 0;
 			
 			foreach ( $this->getCartItems() as $item ) {

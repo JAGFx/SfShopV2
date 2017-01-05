@@ -1,6 +1,6 @@
 sil21\VitrineBundle\Entity\LigneCommande:
     type: entity
-    table: lignecommande
+    table: sil21_lignecommande
     id:
         commande:
             associationKey: trues
@@ -24,11 +24,10 @@ sil21\VitrineBundle\Entity\LigneCommande:
                  referencedColumnName: id
                  nullable: false
                  
-        commande:
-             targetEntity: Commande
+        order:
+             targetEntity: Order
              inversedBy: lignecommandes
              joinColumn:
-                 name: commande_id
+                 name: order_id
                  referencedColumnName: id
                  nullable: false
-

@@ -1,7 +1,7 @@
 sil21\VitrineBundle\Entity\Category:
     repositoryClass: sil21\VitrineBundle\Repository\CategoryRepository
     type: entity
-    table: category
+    table: sil21_category
     id:
         id:
             type: integer

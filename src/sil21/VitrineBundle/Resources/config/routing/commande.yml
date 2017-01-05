@@ -1,9 +1,0 @@
-commande_listUser:
-    path:     /listUser
-    defaults: { _controller: "sil21VitrineBundle:Commande:listAllUser" }
-    methods:  GET
-
-commande_show:
-    path:     /{id}/show
-    defaults: { _controller: "sil21VitrineBundle:Commande:show" }
-    methods:  GET

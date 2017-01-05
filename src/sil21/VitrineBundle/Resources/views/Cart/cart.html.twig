@@ -4,7 +4,7 @@
 
 {% block content %}
 	<h1 class="text-center" >Panier</h1 >
-	{% if panier.cartItems|length > 0 %}
+	{% if cart.cartItems|length > 0 %}
 		<p class="text-center" >
 			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
 		</p >
@@ -14,7 +14,7 @@
 
 	<article class="panier noPaddingSide" >
 		<table class="stylized">
-			{% if panier.cartItems|length > 0 %}
+			{% if cart.cartItems|length > 0 %}
 				<tr >
 					<th ></th >
 					<th >Désignation</th >
@@ -24,7 +24,7 @@
 					<th ></th >
 				</tr >
 
-				{% for item in panier.cartItems %}
+				{% for item in cart.cartItems %}
 					<tr class="cartProduct" >
 						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}" class="img-responsive" >
 						</td >
@@ -59,7 +59,7 @@
 					<td class="price" >
 						<small >TOTAL:</small >
 						<br />
-						{{ panier.getTotalPanier()|number_format(2, ',', ' ') }} €
+						{{ cart.getTotalCart()|number_format(2, ',', ' ') }} €
 					</td >
 					<td ></td >
 				</tr >

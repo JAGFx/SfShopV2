@@ -3,15 +3,14 @@
 	namespace sil21\VitrineBundle\Controller;
 	
 	use sil21\VitrineBundle\Entity\Client;
-	use sil21\VitrineBundle\Entity\Commande;
+	use sil21\VitrineBundle\Entity\Order;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-	use Symfony\Component\HttpFoundation\Request;
 	
 	/**
-	 * Commande controller.
+	 * Order controller.
 	 *
 	 */
-	class CommandeController extends Controller {
+	class OrderController extends Controller {
 		
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
@@ -24,47 +23,47 @@
 				->get( 'security.token_storage' )
 				->getToken()->getUser();
 			
-			$commandes = $user->getCommandes();
+			$orders = $user->getOrders();
 			
 			return $this->render(
-				'sil21VitrineBundle:Commande:index.html.twig',
+				'sil21VitrineBundle:Order:index.html.twig',
 				[
-					'commandes' => $commandes,
+					'orders' => $orders,
 				]
 			);
 			
 		}
 		
 		/**
-		 * Finds and displays a Commande entity.
+		 * Finds and displays a Order entity.
 		 *
 		 */
-		public function showAction( Commande $commande ) {
+		public function showAction( Order $order ) {
 			
 			$deleteForm = ( $this->get( 'security.authorization_checker' )->isGranted( 'ROLE_ADMIN' ) )
-				? $this->createDeleteForm( $commande )->createView()
+				? $this->createDeleteForm( $order )->createView()
 				: null;
 			
 			return $this->render(
-				'sil21VitrineBundle:Commande:show.html.twig',
+				'sil21VitrineBundle:Order:show.html.twig',
 				[
-					'commande'    => $commande,
+					'order'       => $order,
 					'delete_form' => $deleteForm,
 				]
 			);
 		}
 		
 		/**
-		 * Creates a form to delete a Commande entity.
+		 * Creates a form to delete a Order entity.
 		 *
-		 * @param Commande $commande The Commande entity
+		 * @param Order $order The Order entity
 		 *
 		 * @return \Symfony\Component\Form\Form The form
 		 */
-		private function createDeleteForm( Commande $commande ) {
+		private function createDeleteForm( Order $order ) {
 			return $this->createFormBuilder()
 				    ->setAction(
-					    $this->generateUrl( 'commande_delete', [ 'id' => $commande->getId() ] )
+					    $this->generateUrl( 'order_delete', [ 'id' => $order->getId() ] )
 				    )
 				    ->setMethod( 'DELETE' )
 				    ->getForm();

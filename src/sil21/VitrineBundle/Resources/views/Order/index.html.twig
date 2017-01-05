@@ -1,0 +1,43 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center" >Commandes</h1 >
+	
+	<article class="noPaddingSide" >
+		<table class="stylized" >
+			{% if orders|length > 0 %}
+				<tr >
+					<th >Id</th >
+					<th >Date</th >
+					<th >Etat</th >
+					<th >Proprietaire</th >
+					<th >Total €</th >
+					<th >Actions</th >
+				</tr >
+				{% for order in orders %}
+					<tr >
+						<td >
+							<a href="{{ path('order_show', { 'id': order.id }) }}" >{{ order.id }}</a >
+						</td >
+						<td >{% if order.date %}{{ order.date|date('d/m/Y') }}{% endif %}</td >
+						<td >{{ order.getEtat(true) }}</td >
+						<td >{{ order.client }}</td >
+						<td >{{ order.total|number_format(2, ',', ' ') }} €</td >
+						<td >
+							<a href="{{ path('order_show', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >Voir</a >
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+							{% endif %}
+						</td >
+					
+					</tr >
+				{% endfor %}
+			{% else %}
+				<tr >
+					<td colspan="6 text-center" >Aucunes commandes effectué</td >
+				</tr >
+			{% endif %}
+		</table >
+	</article >
+{% endblock %}

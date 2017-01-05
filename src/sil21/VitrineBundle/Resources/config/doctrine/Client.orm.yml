@@ -31,8 +31,8 @@ sil21\VitrineBundle\Entity\Client:
             type: datetime
             
     oneToMany:
-        commandes:
-             targetEntity: Commande
+        orders:
+             targetEntity: Order
              mappedBy: client
              cascade: ["persist", "remove"]
 

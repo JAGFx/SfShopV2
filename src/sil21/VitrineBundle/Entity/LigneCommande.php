@@ -24,21 +24,21 @@
 		private $product;
 		
 		/**
-		 * @var \sil21\VitrineBundle\Entity\Commande
+		 * @var \sil21\VitrineBundle\Entity\Order
 		 */
-		private $commande;
+		private $order;
 		
 		/**
 		 * LigneCommande constructor.
 		 *
-		 * @param Product  $product
-		 * @param Commande $commande
-		 * @param integer  $qte
+		 * @param Product $product
+		 * @param Order   $order
+		 * @param integer $qte
 		 */
-		public function __construct( Product $product, Commande $commande, $qte = 1 ) {
+		public function __construct( Product $product, Order $order, $qte = 1 ) {
 			$this->qte      = $qte;
 			$this->product  = $product;
-			$this->commande = $commande;
+			$this->order = $order;
 			$this->price    = $product->getPrice() * $qte;
 		}
 		
@@ -112,25 +112,25 @@
 		}
 		
 		/**
-		 * Set Commande
+		 * Set Order
 		 *
-		 * @param \sil21\VitrineBundle\Entity\Commande $commande
+		 * @param \sil21\VitrineBundle\Entity\Order $order
 		 *
 		 * @return LigneCommande
 		 */
-		public function setCommande( \sil21\VitrineBundle\Entity\Commande $commande ) {
-			$this->commande = $commande;
+		public function setOrder( \sil21\VitrineBundle\Entity\Order $order ) {
+			$this->order = $order;
 			
 			return $this;
 		}
 		
 		/**
-		 * Get Commande
+		 * Get Order
 		 *
-		 * @return \sil21\VitrineBundle\Entity\Commande
+		 * @return \sil21\VitrineBundle\Entity\Order
 		 */
-		public function getCommande() {
-			return $this->commande;
+		public function getOrder() {
+			return $this->order;
 		}
 		
 		

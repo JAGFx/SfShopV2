@@ -2,7 +2,9 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Commande <small>N°{{ commande.id }}</small></h1 >
+	<h1 class="text-center" >Commande
+		<small >N°{{ order.id }}</small >
+	</h1 >
 	
 	{{ form_start(edit_form) }}
 	{{ form_widget(edit_form) }}
@@ -12,7 +14,7 @@
 	
 	<ul >
 		<li >
-			<a href="{{ path('commande_index') }}" >Back to the list</a >
+			<a href="{{ path('order_listUser') }}" >Back to the list</a >
 		</li >
 		<li >
 			{{ form_start(delete_form) }}

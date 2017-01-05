@@ -21,7 +21,7 @@
 						<ul class="dropdown-menu" >
 							<li ><a href="{{ path('category_index') }}" >Catégorie</a ></li >
 							<li ><a href="{{ path('client_index') }}" >Client</a ></li >
-							<li ><a href="{{ path('commande_listUser') }}" >Commande</a ></li >
+							<li ><a href="{{ path('order_listUser') }}" >Commande</a ></li >
 							<li ><a href="{{ path('marque_index') }}" >Marque</a ></li >
 							<li ><a href="{{ path('product_index') }}" >Produit</a ></li >
 						</ul >
@@ -32,7 +32,7 @@
 						<span class="sr-only" >(current)</span ></a ></li >
 				<li ><a href="{{ path('sil21_mention') }}" >Mentions légales </a ></li >
 				<li ><a href="{{ path('sil21_cartContent') }}" >Panier
-						<span class="badge" >{{ cart_session.getSessionPanier().getTotalPanier()|number_format(2, ',', ' ') }} €</span ></a >
+						<span class="badge" >{{ cart_session.getCartSession().getTotalCart()|number_format(2, ',', ' ') }} €</span ></a >
 				</li >
 
 				{% if is_granted('ROLE_USER') %}
@@ -40,7 +40,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ app.user.firstname ~ ' ' ~ app.user.name }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
-							<li ><a href="{{ path('commande_listUser') }}" >Commandes</a ></li >
+							<li ><a href="{{ path('order_listUser') }}" >Commandes</a ></li >
 							<li ><a href="{{ path('fos_user_profile_show') }}" >Profil</a ></li >
 							<li role="separator" class="divider" ></li >
 							<li ><a href="{{ path( 'fos_user_security_logout' ) }}" >Déconnexion</a ></li >

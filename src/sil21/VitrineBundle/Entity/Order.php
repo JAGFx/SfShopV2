@@ -5,9 +5,9 @@
 	use Doctrine\ORM\Mapping as ORM;
 	
 	/**
-	 * Commande
+	 * Order
 	 */
-	class Commande {
+	class Order {
 		const CMD_STATE_CHECKOUT  = 0;
 		const CMD_STATE_VALIDATE  = 1;
 		const CMD_STATE_PAYED     = 2;
@@ -61,7 +61,7 @@
 		 *
 		 * @param \DateTime $date
 		 *
-		 * @return Commande
+		 * @return Order
 		 */
 		public function setDate( $date ) {
 			$this->date = $date;
@@ -83,7 +83,7 @@
 		 *
 		 * @param integer $etat
 		 *
-		 * @return Commande
+		 * @return Order
 		 */
 		public function setEtat( $etat ) {
 			$this->etat = $etat;
@@ -100,7 +100,7 @@
 		 */
 		public function getEtat( $returnString = false ) {
 			return ( $returnString )
-				? Commande::getStatesConstants()[ $this->etat ]
+				? Order::getStatesConstants()[ $this->etat ]
 				: $this->etat;
 		}
 		
@@ -109,7 +109,7 @@
 		 *
 		 * @param \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes
 		 *
-		 * @return Commande
+		 * @return Order
 		 */
 		public function addLignecommande( \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes ) {
 			$this->lignecommandes[] = $lignecommandes;
@@ -140,7 +140,7 @@
 		 *
 		 * @param \sil21\VitrineBundle\Entity\Client $client
 		 *
-		 * @return Commande
+		 * @return Order
 		 */
 		public function setClient( \sil21\VitrineBundle\Entity\Client $client = null ) {
 			$this->client = $client;
@@ -175,7 +175,7 @@
 			return $total;
 		}
 		
-		public function getCommandeItems(){
+		public function getOrderItems() {
 			$items = [];
 			
 			foreach ( $this->getLignecommandes() as $lignecommande ) {

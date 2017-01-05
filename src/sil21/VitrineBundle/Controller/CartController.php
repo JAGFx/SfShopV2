@@ -1,19 +1,19 @@
 <?php
 	/*
-	 * Fichier : PanierController.php
+	 * Fichier : CartController.php
 	 * Auteur: SMITH Emmanuel
 	 * Création: 03/03/2016
 	 * Modification: 03/04/2016
 	 *
-	 * Controôleur pour la gestion du Panier
+	 * Controôleur pour la gestion du Cart
 	 */
 	
 	
 	namespace sil21\VitrineBundle\Controller;
 	
-	use sil21\VitrineBundle\Entity\Commande;
+	use sil21\VitrineBundle\Entity\Order;
 	use sil21\VitrineBundle\Entity\LigneCommande;
-	use sil21\VitrineBundle\Entity\Panier;
+	use sil21\VitrineBundle\Entity\Cart;
 	use sil21\VitrineBundle\Entity\Product;
 	use sil21\VitrineBundle\Service\CartService;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,11 +22,11 @@
 	use Symfony\Component\HttpFoundation\Session\Session;
 	
 	/**
-	 * Class PanierController
+	 * Class CartController
 	 *
 	 * @package sil21\VitrineBundle\Controller
 	 */
-	class PanierController extends Controller {
+	class CartController extends Controller {
 		
 		/**
 		 * @return \Symfony\Component\HttpFoundation\Response
@@ -35,10 +35,10 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			$panier = $session->getSessionPanier();
+			$cart = $session->getCartSession();
 			
 			return $this->render(
-				'sil21VitrineBundle:Panier:panier.html.twig', [ 'panier' => $panier ]
+				'sil21VitrineBundle:Cart:cart.html.twig', [ 'cart' => $cart ]
 			);
 		}
 		
@@ -49,8 +49,8 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			$panier = $session->getSessionPanier();
-			$panier->clearPanier();
+			$cart = $session->getCartSession();
+			$cart->clearCart();
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -65,10 +65,11 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			/** @var  Panier $panier * */
-			$panier = $session->getSessionPanier();
+			/** @var  Cart() $cart
+			 ** */
+			$cart = $session->getCartSession();
 			
-			$added = $panier->addArticle( $product, $qte );
+			$added = $cart->addArticle( $product, $qte );
 			if ( !$added ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
@@ -79,7 +80,7 @@
 				);
 			}
 			
-			$session->setSessionPanier( $panier );
+			$session->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -94,8 +95,8 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			$panier          = $session->getSessionPanier();
-			$finalQteProduct = $panier->changeQuantity( $product, $qte );
+			$cart            = $session->getCartSession();
+			$finalQteProduct = $cart->changeQuantity( $product, $qte );
 			
 			if ( $finalQteProduct == $qte ) {
 				$this->get( 'session' )->getFlashBag()->add(
@@ -107,7 +108,7 @@
 				);
 			}
 			
-			$session->setSessionPanier( $panier );
+			$session->setCartSession( $cart );
 			
 			return new JsonResponse( [ 'lastQte' => $finalQteProduct ] );
 		}
@@ -122,10 +123,10 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			$panier = $session->getSessionPanier();
-			$panier->removeOneArticle( $articleId, $qte );
+			$cart = $session->getCartSession();
+			$cart->removeOneArticle( $articleId, $qte );
 			
-			$session->setSessionPanier( $panier );
+			$session->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -139,10 +140,10 @@
 			/** @var CartService $session * */
 			$session = $this->container->get( 'sil21.cart.session' );
 			
-			$panier = $session->getSessionPanier();
-			$panier->removeArticles( $articleId );
+			$cart = $session->getCartSession();
+			$cart->removeArticles( $articleId );
 			
-			$session->setSessionPanier( $panier );
+			$session->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -160,15 +161,15 @@
 					->get( 'security.token_storage' )
 					->getToken()->getUser();
 				
-				$commande = new Commande( $user );
-				$em->persist( $commande );
+				$order = new Order( $user );
+				$em->persist( $order );
 				$em->flush();
 				
 				/** @var CartService $session * */
 				$session = $this->container->get( 'sil21.cart.session' );
 				
-				$panier = $session->getSessionPanier();
-				foreach ( $panier->getCartItems() as $item ) {
+				$cart = $session->getCartSession();
+				foreach ( $cart->getCartItems() as $item ) {
 					
 					// Récupération du produit et retrait stock
 					$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
@@ -176,50 +177,33 @@
 					);
 					$product->setStock( $product->getStock() - $item[ 'qte' ] );
 					
-					// Création d'une ligne de Commande
-					$ligneCommande = new LigneCommande( $product, $commande, $item[ 'qte' ] );
-					$commande->addLignecommande( $ligneCommande );
+					// Création d'une ligne de Order
+					$ligneCommande = new LigneCommande( $product, $order, $item[ 'qte' ] );
+					$order->addLignecommande( $ligneCommande );
 					
 					$em->persist( $product );
 				}
 				
-				$em->persist( $commande );
+				$em->persist( $order );
 				$em->flush();
 				
-				$session->setSessionPanier( new Panier() );
+				$session->setCartSession( new Cart() );
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
 							 'type'    => 'success',
-							 'title'   => "Commande effectué avec succès",
-							 'message' => 'Accèdez à votre Commande depuis votre espace'
+							 'title'   => "Order effectué avec succès",
+							 'message' => 'Accèdez à votre Order depuis votre espace'
 						 ]
 				);
 				
 				return $this->render(
-					'sil21VitrineBundle:Panier:successValidation.html.twig',
+					'sil21VitrineBundle:Cart:successValidation.html.twig',
 					[
-						'idCommande' => $commande->getId()
+						'idCommande' => $order->getId()
 					]
 				);
 				
 			} else
 				$this->redirectToRoute( 'fos_user_security_login' );
 		}
-		
-		/**
-		 * @return Panier
-		 */
-		/*private function getSessionPanier() {
-			$session = $this->getRequest()->getSession();
-			
-			return $session->get( 'panier', new Panier() );
-		}*/
-		
-		/**
-		 * @param $panier
-		 */
-		/*private function setSessionPanier( $panier ) {
-			$session = $this->getRequest()->getSession();
-			$session->set( 'panier', $panier );
-		}*/
 	}

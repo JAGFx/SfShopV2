@@ -1,6 +1,6 @@
-sil21\VitrineBundle\Entity\Commande:
+sil21\VitrineBundle\Entity\Order:
     type: entity
-    table: Commande
+    table: sil21_order
     id:
         id:
             type: integer
@@ -17,7 +17,7 @@ sil21\VitrineBundle\Entity\Commande:
     manyToOne:
         client:
             targetEntity: Client
-            inversedBy: commandes
+            inversedBy: orders
             joinColumn:
                 name: client_id
                 referencedColumnName: id
@@ -25,5 +25,5 @@ sil21\VitrineBundle\Entity\Commande:
     oneToMany:
             lignecommandes:
                  targetEntity: LigneCommande
-                 mappedBy: commande
+                 mappedBy: order
                  cascade: [ "persist", "remove" ]

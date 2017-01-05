@@ -15,10 +15,10 @@ sil21_marques:
     resource: "@sil21VitrineBundle/Resources/config/routing/Marque.yml"
     prefix: /marque
 
-# -- Commande
-sil21_vitrine_commande:
-        resource: "@sil21VitrineBundle/Resources/config/routing/Commande.yml"
-        prefix:   /commande
+# -- Order
+sil21_vitrine_orders:
+        resource: "@sil21VitrineBundle/Resources/config/routing/Order.yml"
+        prefix:   /order
 
 # -- Panier
 sil21_cart:

@@ -1,5 +1,5 @@
 # ------------------------------- #
-# ---------- Panier----------- #
+# ---------- Cart----------- #
 # ------------------------------- #
 
 
@@ -9,17 +9,17 @@
 # -- Liste contenu
 sil21_cartContent:
      path:     /
-     defaults: { _controller: sil21VitrineBundle:Panier:cartContent}
+     defaults: { _controller: sil21VitrineBundle:Cart:cartContent}
      
 sil21_validateCart:
      path:       /validate
-     defaults: { _controller: sil21VitrineBundle:Panier:validateCart}
+     defaults: { _controller: sil21VitrineBundle:Cart:validateCart}
      methods:  GET
 
 # -- Ajout d'Article
 sil21_addArticle:
      path:     /addArticle/{id}/{qte}
-     defaults: { _controller: sil21VitrineBundle:Panier:addArticle, qte: 1}
+     defaults: { _controller: sil21VitrineBundle:Cart:addArticle, qte: 1}
      requirements:
           id: \d+
           qte: \d+
@@ -27,7 +27,7 @@ sil21_addArticle:
   # -- Definir qté Article
 sil21_changeQuantityProduct:
     path:     /changeQuantityProduct/{id}/{qte}
-    defaults: { _controller: sil21VitrineBundle:Panier:changeQutantity, qte: 1}
+    defaults: { _controller: sil21VitrineBundle:Cart:changeQutantity, qte: 1}
     methods:  [ GET, POST ]
     options:
             expose: true
@@ -38,7 +38,7 @@ sil21_changeQuantityProduct:
 # -- Retirer une quantité d'un Article
 sil21_removeQteProduct:
      path:     /removeOneProduct/{articleId}/{qte}
-     defaults: { _controller: sil21VitrineBundle:Panier:removeQteProduct, articleId: 0, qte: 1}
+     defaults: { _controller: sil21VitrineBundle:Cart:removeQteProduct, articleId: 0, qte: 1}
      requirements:
           articleId: \d+
           qte: \d+
@@ -46,11 +46,11 @@ sil21_removeQteProduct:
 # -- Retirer l'Article
 sil21_removeProduct:
      path:     /removeProduct/{articleId}
-     defaults: { _controller: sil21VitrineBundle:Panier:removeProduct, articleId: 0}
+     defaults: { _controller: sil21VitrineBundle:Cart:removeProduct, articleId: 0}
      requirements:
           articleId: \d+
 
 # -- Vider
 sil21_emptyCart:
      path:     /empty
-     defaults: { _controller: sil21VitrineBundle:Panier:emptyCart}
+     defaults: { _controller: sil21VitrineBundle:Cart:emptyCart}

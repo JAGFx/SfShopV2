@@ -38,17 +38,17 @@ security:
         #- { path: ^/client/, role: ROLE_ADMIN }
         #- { path: ^/profile/, role: ROLE_USER }
 
-        # -- Commande
-        #- { path: ^/Commande/\d+/show, role: ROLE_USER }
-        #- { path: ^/Commande/listUser, role: ROLE_USER }
-        #- { path: ^/Commande/, role: ROLE_ADMIN }
+        # -- Order
+        #- { path: ^/Order/\d+/show, role: ROLE_USER }
+        #- { path: ^/Order/listUser, role: ROLE_USER }
+        #- { path: ^/Order/, role: ROLE_ADMIN }
 
         # -- Marque
         #- { path: ^/marque/listUser, role: ROLE_USER }
         #- { path: ^/marque/\d+/articles, role: ROLE_USER }
         #- { path: ^/marque/, role: ROLE_ADMIN }
 
-        # -- Panier
+        # -- Cart
         #- { path: ^/cart/validate, role: ROLE_USER }
 
         # -- Produit
