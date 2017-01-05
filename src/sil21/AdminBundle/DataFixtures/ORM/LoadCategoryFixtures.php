@@ -10,10 +10,19 @@
 	namespace sil21\AdminBundle\DataFixtures\ORM;
 	
 	use Doctrine\Common\DataFixtures\FixtureInterface;
+	use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 	use Doctrine\Common\Persistence\ObjectManager;
 	use sil21\VitrineBundle\Entity\Category;
 	
-	class LoadCategory implements FixtureInterface {
+	class LoadCategory implements FixtureInterface, OrderedFixtureInterface {
+		/**
+		 * @return int
+		 */
+		public function getOrder() {
+			return 1;
+		}
+		
+		
 		public function load( ObjectManager $manager ) {
 			$catBDD = [
 				[ 'id' => '1', 'name' => 'Informatique' ],

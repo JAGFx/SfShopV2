@@ -36,7 +36,7 @@
 		 * @return integer
 		 */
 		public function getOrder() {
-			return 2;
+			return 4;
 		}
 		
 		public function load( ObjectManager $manager ) {

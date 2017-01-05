@@ -10,10 +10,16 @@
 	namespace sil21\AdminBundle\DataFixtures\ORM;
 	
 	use Doctrine\Common\DataFixtures\FixtureInterface;
+	use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 	use Doctrine\Common\Persistence\ObjectManager;
 	use sil21\VitrineBundle\Entity\Marque;
 	
-	class LoadMarque implements FixtureInterface {
+	class LoadMarque implements FixtureInterface, OrderedFixtureInterface {
+		public function getOrder() {
+			return 2;
+		}
+		
+		
 		public function load( ObjectManager $manager ) {
 			$marques = [
 				[ 'id' => '1', 'Name' => 'Apple' ],

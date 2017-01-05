@@ -10,10 +10,16 @@
 	namespace sil21\AdminBundle\DataFixtures\ORM;
 	
 	use Doctrine\Common\DataFixtures\FixtureInterface;
+	use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 	use Doctrine\Common\Persistence\ObjectManager;
 	use sil21\VitrineBundle\Entity\Product;
 	
-	class LoadProduct implements FixtureInterface {
+	class LoadProduct implements FixtureInterface, OrderedFixtureInterface {
+		public function getOrder() {
+			return 3;
+		}
+		
+		
 		public function load( ObjectManager $manager ) {
 			$products = [
 				[
