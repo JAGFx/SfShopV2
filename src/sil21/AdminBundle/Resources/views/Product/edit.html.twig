@@ -10,6 +10,12 @@
 	<button type="reset" class="btn btn-default" >Annuler</button >
 	{{ form_end(edit_form) }}
 
+	{% if product.image is not empty %}
+		{{ form_start(delete_image_form) }}
+		<button type="submit" title="Supprimer l'image" class="btn btn-primary" >Supprimer l'image</button >
+		{{ form_end(delete_image_form) }}
+	{% endif %}
+
 	<ul >
 		<li >
 			<a href="{{ path('product_index') }}" >Back to the list</a >

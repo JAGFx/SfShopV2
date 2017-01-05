@@ -3,11 +3,14 @@
 	namespace sil21\VitrineBundle\Entity;
 	
 	use Doctrine\ORM\Mapping as ORM;
+	use Symfony\Component\HttpFoundation\File\File;
 	
 	/**
 	 * Product
 	 */
 	class Product {
+		const PATH_IMAGE = '../../uploads/products/';
+		
 		/**
 		 * @var integer
 		 */
@@ -47,6 +50,11 @@
 		 * @var \sil21\VitrineBundle\Entity\Brand
 		 */
 		private $brand;
+		
+		/**
+		 * @var File|null
+		 */
+		private $file;
 		
 		
 		/**
@@ -217,5 +225,19 @@
 		 */
 		public function getBrand() {
 			return $this->brand;
+		}
+		
+		/**
+		 * @return null|\Symfony\Component\HttpFoundation\File\File
+		 */
+		public function getFile() {
+			return $this->file;
+		}
+		
+		/**
+		 * @param null|\Symfony\Component\HttpFoundation\File\File $file
+		 */
+		public function setFile( $file ) {
+			$this->file = $file;
 		}
 	}

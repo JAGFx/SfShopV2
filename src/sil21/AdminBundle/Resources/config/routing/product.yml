@@ -22,3 +22,9 @@ product_delete:
     path:     /{id}/delete
     defaults: { _controller: "sil21AdminBundle:Product:delete" }
     methods:  DELETE
+
+# -- Suppression de l'image
+product_delete_image:
+    path:     /{id}/deleteImage
+    defaults: { _controller: "s4smitheVitrineBundle:Product:deleteImage" }
+    methods:  DELETE

@@ -4,6 +4,7 @@
 	
 	use sil21\VitrineBundle\Entity\Product;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+	use Symfony\Component\Filesystem\Filesystem;
 	use Symfony\Component\HttpFoundation\Request;
 	
 	/**
@@ -11,6 +12,8 @@
 	 *
 	 */
 	class ProductController extends Controller {
+		const PATH_UPLOAD = '/../web/uploads/products';
+		
 		/**
 		 * Lists all product entities.
 		 *
@@ -37,6 +40,9 @@
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
+				// Upload de l'image
+				$this->uploadImage( $product );
+				
 				$em = $this->getDoctrine()->getManager();
 				$em->persist( $product );
 				$em->flush( $product );
@@ -73,24 +79,28 @@
 		 *
 		 */
 		public function editAction( Request $request, Product $product ) {
-			$deleteForm = $this->createDeleteForm( $product );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
+			$deleteForm      = $this->createDeleteForm( $product );
+			$deleteImageForm = $this->createDeleteImageForm( $product );
+			$editForm        = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
+				// Upload de l'image
+				$this->uploadImage( $product );
+				
 				$this->getDoctrine()->getManager()->flush();
 				
 				return $this->redirectToRoute( 'product_edit', [ 'id' => $product->getId() ] );
 			}
 			
 			return $this->render(
-				'sil21AdminBundle:Product:edit.html.twig', [
-										 'product'     => $product,
-										 'edit_form'   => $editForm->createView(
-										 ),
-										 'delete_form' => $deleteForm->createView(
-										 ),
-									 ]
+				'sil21AdminBundle:Product:edit.html.twig',
+				[
+					'product'           => $product,
+					'edit_form'         => $editForm->createView(),
+					'delete_form'       => $deleteForm->createView(),
+					'delete_image_form' => $deleteImageForm->createView()
+				]
 			);
 		}
 		
@@ -103,9 +113,12 @@
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
+				// Suppression image
+				$this->deleteImage( $product );
+				
 				$em = $this->getDoctrine()->getManager();
 				$em->remove( $product );
-				$em->flush( $product );
+				$em->flush();
 			}
 			
 			return $this->redirectToRoute( 'product_index' );
@@ -123,5 +136,74 @@
 				    ->setAction( $this->generateUrl( 'product_delete', [ 'id' => $product->getId() ] ) )
 				    ->setMethod( 'DELETE' )
 				    ->getForm();
+		}
+		
+		/**
+		 * @param Request $request
+		 * @param Product $product
+		 *
+		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+		 */
+		public function deleteImageAction( Request $request, Product $product ) {
+			$form = $this->createDeleteImageForm( $product );
+			$form->handleRequest( $request );
+			if ( $form->isSubmitted() && $form->isValid() ) {
+				if ( !empty( $product->getImage() ) ) {
+					// Suppression image
+					$this->deleteImage( $product );
+					// MAJ DB
+					$em = $this->getDoctrine()->getManager();
+					$product->setImage();
+					$em->flush();
+					$message = [
+						'type'    => 'success',
+						'title'   => "Image supprimé",
+						'message' => 'L\'image à bien été supprimié'
+					];
+					$this->get( 'session' )->getFlashBag()->add( 'message', $message );
+				}
+			}
+			
+			return $this->redirectToRoute( 'product_edit', [ 'id' => $product->getId() ] );
+		}
+		
+		/**
+		 * @param Product $product
+		 *
+		 * @return \Symfony\Component\Form\Form
+		 */
+		private function createDeleteImageForm( Product $product ) {
+			return $this->createFormBuilder()
+				    ->setAction(
+					    $this->generateUrl( 'product_delete_image', [ 'id' => $product->getId() ] )
+				    )
+				    ->setMethod( 'DELETE' )
+				    ->getForm();
+		}
+		
+		/**
+		 * @param Product $product
+		 */
+		private function uploadImage( Product $product ) {
+			$file = $product->getFile();
+			if ( !empty( $file ) ) {
+				$fileName = $product->getId() . '.' . $file->guessExtension();
+				$imageDir = $this->container->getParameter(
+						'kernel.root_dir'
+					) . ProductController::PATH_UPLOAD;
+				$file->move( $imageDir, $fileName );
+				$product->setImage( $fileName );
+			}
+		}
+		
+		/**
+		 * @param Product $product
+		 */
+		private function deleteImage( Product $product ) {
+			$fs    = new Filesystem();
+			$image = $this->container->getParameter(
+					'kernel.root_dir'
+				) . ProductController::PATH_UPLOAD . '/' . $product->getImage();
+			$fs->remove( [ $image ] );
 		}
 	}
