@@ -1,8 +1,0 @@
-{% block listCategories %}
-	<h3 >Marques</h3 >
-	<ul >
-		{% for marque in marques%}
-			<li ><a href="{{ path("marque_articleByMarque" ,  { 'id': marque.id } ) }}" >{{ marque.name }}</a ></li >
-		{% endfor %}
-	</ul >
-{% endblock %}

@@ -1,7 +1,7 @@
-sil21\VitrineBundle\Entity\Marque:
-    repositoryClass: sil21\VitrineBundle\Repository\MarqueRepository
+sil21\VitrineBundle\Entity\Brand:
+    repositoryClass: sil21\VitrineBundle\Repository\BrandRepository
     type: entity
-    table: sil21_marque
+    table: sil21_brand
     id:
         id:
             type: integer
@@ -18,7 +18,7 @@ sil21\VitrineBundle\Entity\Marque:
     oneToMany:
         products:
              targetEntity: Product
-             mappedBy: marque
+             mappedBy: brand
              cascade: [ "persist", "remove" ]
 
     lifecycleCallbacks: {  }

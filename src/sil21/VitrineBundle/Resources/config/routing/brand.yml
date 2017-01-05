@@ -1,0 +1,6 @@
+brand_articleByBrand:
+    path:       /{id}/articles
+    defaults: { _controller: "sil21VitrineBundle:Brand:articlesByBrand" , id: 0  }
+    methods:  GET
+    requirements:
+        id:  \d+

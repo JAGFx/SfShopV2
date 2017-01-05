@@ -5,9 +5,9 @@
 	use Doctrine\ORM\Mapping as ORM;
 	
 	/**
-	 * Marque
+	 * Brand
 	 */
-	class Marque {
+	class Brand {
 		/**
 		 * @var integer
 		 */
@@ -24,7 +24,7 @@
 		private $products;
 		
 		/**
-		 * Marque constructor.
+		 * Brand constructor.
 		 *
 		 * @param string $name
 		 */
@@ -48,7 +48,7 @@
 		 *
 		 * @param string $name
 		 *
-		 * @return Marque
+		 * @return Brand
 		 */
 		public function setName( $name ) {
 			$this->name = $name;
@@ -70,7 +70,7 @@
 		 *
 		 * @param \sil21\VitrineBundle\Entity\Product $products
 		 *
-		 * @return Marque
+		 * @return Brand
 		 */
 		public function addProduct( \sil21\VitrineBundle\Entity\Product $products ) {
 			$this->products[] = $products;
@@ -99,6 +99,4 @@
 		function __toString() {
 			return $this->name;
 		}
-		
-		
 	}

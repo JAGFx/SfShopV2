@@ -226,7 +226,7 @@
 			
 			
 			foreach ( $products as $productBDD ) {
-				$marque = $manager->getRepository( 'sil21VitrineBundle:Marque' )->find(
+				$marque = $manager->getRepository( 'sil21VitrineBundle:Brand' )->find(
 					$productBDD[ 'marque_id' ]
 				);
 				
@@ -237,7 +237,7 @@
 				$product = new Product();
 				$product
 					->setCategory( $category )
-					->setMarque( $marque )
+					->setBrand( $marque )
 					->setName( $productBDD[ 'name' ] )
 					->setImage( $productBDD[ 'image' ] )
 					->setPrice( $productBDD[ 'price' ] )

@@ -44,9 +44,9 @@
 		private $category;
 		
 		/**
-		 * @var \sil21\VitrineBundle\Entity\Marque
+		 * @var \sil21\VitrineBundle\Entity\Brand
 		 */
-		private $marque;
+		private $brand;
 		
 		
 		/**
@@ -198,24 +198,24 @@
 		}
 		
 		/**
-		 * Set Marque
+		 * Set Brand
 		 *
-		 * @param \sil21\VitrineBundle\Entity\Marque $marque
+		 * @param \sil21\VitrineBundle\Entity\Brand $brand
 		 *
 		 * @return Product
 		 */
-		public function setMarque( \sil21\VitrineBundle\Entity\Marque $marque = null ) {
-			$this->marque = $marque;
+		public function setBrand( \sil21\VitrineBundle\Entity\Brand $brand = null ) {
+			$this->brand = $brand;
 			
 			return $this;
 		}
 		
 		/**
-		 * Get Marque
+		 * Get Brand
 		 *
-		 * @return \sil21\VitrineBundle\Entity\Marque
+		 * @return \sil21\VitrineBundle\Entity\Brand
 		 */
-		public function getMarque() {
-			return $this->marque;
+		public function getBrand() {
+			return $this->brand;
 		}
 	}

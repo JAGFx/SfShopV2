@@ -41,9 +41,9 @@ sil21\VitrineBundle\Entity\Product:
                  name: category_id
                  referencedColumnName: id
                  
-        marque:
-             targetEntity: Marque
+        brand:
+             targetEntity: Brand
              inversedBy: products
              joinColumn:
-                 name: marque_id
+                 name: brand_id
                  referencedColumnName: id

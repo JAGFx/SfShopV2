@@ -10,10 +10,10 @@ sil21_admin_products:
     resource: "@sil21AdminBundle/Resources/config/routing/product.yml"
     prefix: /product
 
-# -- Produit
-sil21_admin_marques:
-    resource: "@sil21AdminBundle/Resources/config/routing/Marque.yml"
-    prefix: /marque
+# -- Marque
+sil21_admin_brands:
+    resource: "@sil21AdminBundle/Resources/config/routing/Brand.yml"
+    prefix: /brand
 
 # -- Order
 sil21_admin_orders:

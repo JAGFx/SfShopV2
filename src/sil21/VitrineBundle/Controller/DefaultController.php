@@ -11,7 +11,7 @@
 				->findAllBetterSales();
 			
 			$listMarquePop = $this->getDoctrine()->getManager()
-					      ->getRepository( 'sil21VitrineBundle:Marque' )
+					      ->getRepository( 'sil21VitrineBundle:Brand' )
 					      ->findAllBetterSales();
 			
 			return $this->render(

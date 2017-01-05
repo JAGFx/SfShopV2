@@ -2,7 +2,9 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Marque <small>{{ marque.name }}</small></h1 >
+	<h1 class="text-center" >Marque
+		<small >{{ brand.name }}</small >
+	</h1 >
 	
 	{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 	{{ form_start(edit_form) }}
@@ -13,7 +15,7 @@
 	
 	<ul >
 		<li >
-			<a href="{{ path('marque_index') }}" >Back to the list</a >
+			<a href="{{ path('brand_index') }}" >Back to the list</a >
 		</li >
 		<li >
 			{{ form_start(delete_form) }}

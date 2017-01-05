@@ -1,0 +1,30 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center" >Marques
+		<a href="{{ path('brand_new') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" ></span ></a >
+	</h1 >
+	
+	<article  class="noPaddingSide">
+		<table class="stylized" >
+			<tr >
+				<th >Id</th >
+				<th >Name</th >
+				<th >Actions</th >
+			</tr >
+			{% for brand in brands %}
+				<tr >
+					<td >
+						<a href="{{ path('brand_show', { 'id': brand.id }) }}" >{{ brand.id }}</a >
+					</td >
+					<td >{{ brand.name }}</td >
+					<td >
+						<a href="{{ path('brand_show', { 'id': brand.id }) }} " class="btn btn-primary btn-xs" >Voir</a >
+						<a href="{{ path('brand_edit', { 'id': brand.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+					</td >
+				</tr >
+			{% endfor %}
+		</table >
+	</article >
+{% endblock %}

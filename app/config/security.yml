@@ -43,7 +43,7 @@ security:
         #- { path: ^/Order/listUser, role: ROLE_USER }
         #- { path: ^/Order/, role: ROLE_ADMIN }
 
-        # -- Marque
+        # -- Brand
         #- { path: ^/marque/listUser, role: ROLE_USER }
         #- { path: ^/marque/\d+/articles, role: ROLE_USER }
         #- { path: ^/marque/, role: ROLE_ADMIN }

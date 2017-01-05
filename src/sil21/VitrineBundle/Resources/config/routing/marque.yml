@@ -1,6 +1,0 @@
-marque_articleByMarque:
-    path:       /{id}/articles
-    defaults: { _controller: "sil21VitrineBundle:Marque:articlesByMarque" , id: 0  }
-    methods:  GET
-    requirements:
-        id:  \d+

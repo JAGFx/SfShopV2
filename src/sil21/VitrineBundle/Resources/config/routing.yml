@@ -11,9 +11,9 @@ sil21_products:
     prefix: /product
 
 # -- Produit
-sil21_marques:
-    resource: "@sil21VitrineBundle/Resources/config/routing/Marque.yml"
-    prefix: /marque
+sil21_brands:
+    resource: "@sil21VitrineBundle/Resources/config/routing/Brand.yml"
+    prefix: /brand
 
 # -- Order
 sil21_vitrine_orders:
