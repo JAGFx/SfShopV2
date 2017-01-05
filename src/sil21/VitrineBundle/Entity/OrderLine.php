@@ -7,14 +7,14 @@
 	/**
 	 * LigneCommande
 	 */
-	class LigneCommande {
+	class OrderLine {
 		/**
 		 * @var integer
 		 */
 		private $qte;
 		
 		/**
-		 * @var integer
+		 * @var float
 		 */
 		private $price;
 		
@@ -48,7 +48,7 @@
 		 *
 		 * @param integer $qte
 		 *
-		 * @return LigneCommande
+		 * @return OrderLine
 		 */
 		public function setQte( $qte ) {
 			$this->qte = $qte;
@@ -69,9 +69,9 @@
 		/**
 		 * Set price
 		 *
-		 * @param integer $price
+		 * @param float $price
 		 *
-		 * @return LigneCommande
+		 * @return OrderLine
 		 */
 		public function setPrice( $price ) {
 			$this->price = $price;
@@ -82,7 +82,7 @@
 		/**
 		 * Get price
 		 *
-		 * @return integer
+		 * @return float
 		 */
 		public function getPrice() {
 			return $this->price;
@@ -94,7 +94,7 @@
 		 *
 		 * @param \sil21\VitrineBundle\Entity\Product $product
 		 *
-		 * @return LigneCommande
+		 * @return OrderLine
 		 */
 		public function setProduct( \sil21\VitrineBundle\Entity\Product $product ) {
 			$this->product = $product;
@@ -116,7 +116,7 @@
 		 *
 		 * @param \sil21\VitrineBundle\Entity\Order $order
 		 *
-		 * @return LigneCommande
+		 * @return OrderLine
 		 */
 		public function setOrder( \sil21\VitrineBundle\Entity\Order $order ) {
 			$this->order = $order;

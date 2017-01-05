@@ -23,7 +23,7 @@
 				'SELECT p.brand_id
 				FROM (
 					SELECT l.product_id AS id, SUM(l.qte) AS cnt
-					FROM sil21_lignecommande l
+					FROM sil21_order_line l
 					GROUP BY l.product_id
 					ORDER BY cnt DESC ) popu
 				NATURAL JOIN sil21_product p

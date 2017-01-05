@@ -2,7 +2,9 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1>Commande validé <small>n° {{ idCommande }}</small></h1>
+	<h1 >Commande validé
+		<small >n° {{ idOrder }}</small >
+	</h1 >
 	
 	{% include ":default:flashMessage.html.twig" %}
 {% endblock %}

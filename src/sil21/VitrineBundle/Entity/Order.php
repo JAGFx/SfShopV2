@@ -31,7 +31,7 @@
 		/**
 		 * @var \Doctrine\Common\Collections\Collection
 		 */
-		private $lignecommandes;
+		private $orderlines;
 		
 		/**
 		 * @var \sil21\VitrineBundle\Entity\Client
@@ -44,7 +44,7 @@
 		public function __construct( Client $client ) {
 			$this->setClient( $client );
 			$this->date = new \DateTime();
-			$this->lignecommandes = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->orderlines = new \Doctrine\Common\Collections\ArrayCollection();
 		}
 		
 		/**
@@ -107,12 +107,12 @@
 		/**
 		 * Add lignecommandes
 		 *
-		 * @param \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes
+		 * @param \sil21\VitrineBundle\Entity\OrderLine $orderLines
 		 *
 		 * @return Order
 		 */
-		public function addLignecommande( \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes ) {
-			$this->lignecommandes[] = $lignecommandes;
+		public function addOrderLines( \sil21\VitrineBundle\Entity\OrderLine $orderLines ) {
+			$this->orderlines[] = $orderLines;
 			
 			return $this;
 		}
@@ -120,19 +120,19 @@
 		/**
 		 * Remove lignecommandes
 		 *
-		 * @param \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes
+		 * @param \sil21\VitrineBundle\Entity\OrderLine $orderLines
 		 */
-		public function removeLignecommande( \sil21\VitrineBundle\Entity\LigneCommande $lignecommandes ) {
-			$this->lignecommandes->removeElement( $lignecommandes );
+		public function removeOrderLines( \sil21\VitrineBundle\Entity\OrderLine $orderLines ) {
+			$this->orderlines->removeElement( $orderLines );
 		}
 		
 		/**
-		 * Get lignecommandes
+		 * Get OrderLines
 		 *
 		 * @return \Doctrine\Common\Collections\Collection
 		 */
-		public function getLignecommandes() {
-			return $this->lignecommandes;
+		public function getOrderLines() {
+			return $this->orderlines;
 		}
 		
 		/**
@@ -165,11 +165,11 @@
 		public function getTotal(){
 			$total = 0.0;
 			
-			foreach ( $this->getLignecommandes() as $lignecommande ) {
+			foreach ( $this->getOrderLines() as $orderLine ) {
 				/**
-				 * @var LigneCommande $lignecommande
+				 * @var OrderLine $orderLine
 				 */
-				$total += (float) $lignecommande->getPrice() * $lignecommande->getQte();
+				$total += (float) $orderLine->getPrice() * $orderLine->getQte();
 			}
 			
 			return $total;
@@ -178,15 +178,15 @@
 		public function getOrderItems() {
 			$items = [];
 			
-			foreach ( $this->getLignecommandes() as $lignecommande ) {
+			foreach ( $this->getOrderLines() as $orderLine ) {
 				/**
-				 * @var LigneCommande $lignecommande
+				 * @var OrderLine $orderLine
 				 */
 				
 				$items[] = [
-					'qte' => $lignecommande->getQte(),
-					'product' => $lignecommande->getProduct(),
-					'price' => $lignecommande->getPrice()
+					'qte'     => $orderLine->getQte(),
+					'product' => $orderLine->getProduct(),
+					'price'   => $orderLine->getPrice()
 				];
 			}
 			

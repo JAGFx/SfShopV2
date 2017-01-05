@@ -23,7 +23,7 @@ sil21\VitrineBundle\Entity\Order:
                 referencedColumnName: id
 
     oneToMany:
-            lignecommandes:
-                 targetEntity: LigneCommande
+            orderlines:
+                 targetEntity: OrderLine
                  mappedBy: order
                  cascade: [ "persist", "remove" ]

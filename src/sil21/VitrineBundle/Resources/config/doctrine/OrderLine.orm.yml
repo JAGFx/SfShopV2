@@ -1,9 +1,9 @@
-sil21\VitrineBundle\Entity\LigneCommande:
+sil21\VitrineBundle\Entity\OrderLine:
     type: entity
-    table: sil21_lignecommande
+    table: sil21_order_line
     id:
-        commande:
-            associationKey: trues
+        order:
+            associationKey: true
         product:
             associationKey: true
           
@@ -14,6 +14,7 @@ sil21\VitrineBundle\Entity\LigneCommande:
 
         price:
             type: decimal
+            scale: 2
             nullable: false
             
     manyToOne:
@@ -26,7 +27,7 @@ sil21\VitrineBundle\Entity\LigneCommande:
                  
         order:
              targetEntity: Order
-             inversedBy: lignecommandes
+             inversedBy: orderlines
              joinColumn:
                  name: order_id
                  referencedColumnName: id

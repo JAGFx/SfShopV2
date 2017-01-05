@@ -12,14 +12,12 @@
 	namespace sil21\VitrineBundle\Controller;
 	
 	use sil21\VitrineBundle\Entity\Order;
-	use sil21\VitrineBundle\Entity\LigneCommande;
+	use sil21\VitrineBundle\Entity\OrderLine;
 	use sil21\VitrineBundle\Entity\Cart;
 	use sil21\VitrineBundle\Entity\Product;
 	use sil21\VitrineBundle\Service\CartService;
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-	use Symfony\Component\BrowserKit\Response;
 	use Symfony\Component\HttpFoundation\JsonResponse;
-	use Symfony\Component\HttpFoundation\Session\Session;
 	
 	/**
 	 * Class CartController
@@ -178,8 +176,8 @@
 					$product->setStock( $product->getStock() - $item[ 'qte' ] );
 					
 					// Création d'une ligne de Order
-					$ligneCommande = new LigneCommande( $product, $order, $item[ 'qte' ] );
-					$order->addLignecommande( $ligneCommande );
+					$orderLine = new OrderLine( $product, $order, $item[ 'qte' ] );
+					$order->addOrderLines( $orderLine );
 					
 					$em->persist( $product );
 				}
@@ -199,7 +197,7 @@
 				return $this->render(
 					'sil21VitrineBundle:Cart:successValidation.html.twig',
 					[
-						'idCommande' => $order->getId()
+						'idOrder' => $order->getId()
 					]
 				);
 				
