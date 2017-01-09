@@ -23,3 +23,8 @@ Chargement des données
 ````
 php app/console doctrine:fixtures:load --append 
 ````
+
+Copie des fichers de style (CSS, JS, Images, etc...)
+````
+php app/console assetic:dump --force
+````
