@@ -1,0 +1,45 @@
+{% extends '::layout.html.twig' %}
+
+{% set showLeftMenu = 'no' %}
+{% block content %}
+	<h1 class="text-center">Profil
+		<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a>
+	</h1>
+	
+	<article class="noPaddingSide" >
+		<table class="stylized" >
+			<tr >
+				<th >Dernière connexion</th >
+				<td >{{ user.lastLogin | date('d/m/Y à H:i:s') }}</td >
+			</tr >
+			<tr >
+				<th >Nom</th >
+				<td >{{ user.name }}</td >
+			</tr >
+			<tr >
+				<th >Prénom</th >
+				<td >{{ user.firstname }}</td >
+			</tr >
+			<tr >
+				<th >Tel</th >
+				<td >{{ user.tel }}</td >
+			</tr >
+			<tr >
+				<th >{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}</th >
+				<td >{{ user.email }}</td >
+			</tr >
+			<tr >
+				<th >Date de naissance</th >
+				<td >{{ user.dateBirthday | date('d/m/Y') }}</td >
+			</tr >
+			<tr >
+				<th >Adresse</th >
+				<td >{{ user.address }}</td >
+			</tr >
+		</table >
+	</article>
+	
+	<div class="text-center">
+		<a href="{{ path('order_listUser') }}" class="btn btn-primary btn-lg">Commandes</a >
+	</div>
+{% endblock %}

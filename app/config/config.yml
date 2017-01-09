@@ -91,3 +91,6 @@ fos_user:
         form:
             type: sil21_user_registration
 
+    profile:
+            form:
+                type: sil21_user_registration
