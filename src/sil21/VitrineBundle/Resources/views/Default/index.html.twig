@@ -8,6 +8,8 @@
 
 	<h1 >Marques populaires</h1 >
 	{% for marque in  listMarquePop %}
-		<a href="{{ path('marque_articleByMarque', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
+		<div class="text-center">
+			<a href="{{ path('brand_articleByBrand', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
+		</div>
 	{% endfor %}
 {% endblock %}

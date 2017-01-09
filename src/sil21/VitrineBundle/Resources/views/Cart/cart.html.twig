@@ -47,7 +47,13 @@
 								</div >
 							</form >
 						</td >
-						<td class="price" >{{ (item.qte * item.product.price)|number_format(2, ',', ' ') }} €</td >
+						<td class="price" >
+							{{ (item.qte * item.product.priceSavedAmout)|number_format(2, ',', ' ') }} €
+							{% if item.product.savedAmout != 0  %}
+								<br/>
+								<span class="label label-danger">-{{ item.product.savedAmout * 100 }}%</span>
+							{% endif %}
+						</td >
 						<td >
 							<a href="{{ path("sil21_removeProduct" , {articleId: item.product.id}) }}" >&times;</a >
 						</td >

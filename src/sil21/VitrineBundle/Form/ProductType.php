@@ -4,6 +4,7 @@
 	
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\Extension\Core\Type\FileType;
+	use Symfony\Component\Form\Extension\Core\Type\PercentType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
 	
@@ -16,6 +17,7 @@
 				->add( 'name' )
 				->add( 'file', FileType::class, [ 'label' => 'Photo', 'required' => false ] )
 				->add( 'price', 'money', [ 'scale' => 2, 'grouping' => true ] )
+				->add( 'savedAmout', PercentType::class )
 				->add( 'stock' )
 				->add( 'description' )
 				->add( 'category' )

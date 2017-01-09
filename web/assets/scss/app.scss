@@ -11,6 +11,8 @@ body {
 	padding-top: $heigthMenu * 2 - 10px;
 }
 
+.label { border-radius: 0; }
+
 .flexbox {
 	display:   flex;
 	flex-flow: row wrap;

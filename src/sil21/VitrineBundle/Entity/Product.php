@@ -27,9 +27,14 @@
 		private $image;
 		
 		/**
-		 * @var string
+		 * @var float
 		 */
 		private $price;
+		
+		/**
+		 * @var float
+		 */
+		private $savedAmout = 0.0;
 		
 		/**
 		 * @var integer
@@ -113,7 +118,7 @@
 		/**
 		 * Set price
 		 *
-		 * @param string $price
+		 * @param float $price
 		 *
 		 * @return Product
 		 */
@@ -126,11 +131,35 @@
 		/**
 		 * Get price
 		 *
-		 * @return string
+		 * @return float
 		 */
 		public function getPrice() {
 			return $this->price;
 		}
+		
+		public function getPriceSavedAmout(){
+			return ( $this->savedAmout > 0 )
+				? $this->getPrice() - ( $this->getPrice() * $this->savedAmout )
+				: $this->getPrice();
+		}
+		
+		/**
+		 * @return float
+		 */
+		public function getSavedAmout() {
+			return $this->savedAmout;
+		}
+		
+		/**
+		 * @param float $savedAmout
+		 *
+		 * @return $this
+		 */
+		public function setSavedAmout( $savedAmout ) {
+			$this->savedAmout = $savedAmout;
+			return $this;
+		}
+		
 		
 		/**
 		 * Set stock

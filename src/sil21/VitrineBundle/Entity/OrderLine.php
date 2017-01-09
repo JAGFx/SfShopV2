@@ -39,7 +39,7 @@
 			$this->qte      = $qte;
 			$this->product  = $product;
 			$this->order = $order;
-			$this->price    = $product->getPrice() * $qte;
+			$this->price    = $product->getPriceSavedAmout() * $qte;
 		}
 		
 		
