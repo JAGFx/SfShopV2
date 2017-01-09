@@ -16,8 +16,8 @@
 		 */
 		public function findAllOrderedByName() {
 			return $this->getEntityManager()
-				    ->createQuery( 'SELECT p FROM sil21VitrineBundle:Product p ORDER BY p.name ASC' )
-				    ->getResult();
+				->createQuery( 'SELECT p FROM sil21VitrineBundle:Product p ORDER BY p.name ASC' )
+				->getResult();
 		}
 		
 		public function findAllBetterSales() {
@@ -33,11 +33,11 @@
 			);
 			$stmt->execute();
 			$productIDs = $stmt->fetchAll();
-			$products   = [];
+			$products = [];
 			foreach ( $productIDs as $id ) {
 				$products[] = $this->getEntityManager()
-						   ->getRepository( 'sil21VitrineBundle:Product' )
-						   ->find( $id );
+					->getRepository( 'sil21VitrineBundle:Product' )
+					->find( $id );
 			}
 			
 			return $products;

@@ -215,7 +215,7 @@
 				[
 					'id'          => '25',
 					'category_id' => '2',
-					'marque_id'   => '12',
+					'marque_id'   => '11',
 					'name'        => 'Project Cars (PC)',
 					'image'       => '25.jpeg',
 					'price'       => '34.90',
