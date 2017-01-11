@@ -1,0 +1,30 @@
+cart:
+    entity: Panier
+    products:
+        name: Désignation
+        available: Disponibilité
+        qte: Quantité
+        price: Prix
+    actions:
+        empty: Vider
+        process_order: Passer commande
+    messages:
+        empty_cart: Pas d'article dans le panier
+        forbidden_acces: Ce connecter avant de valider le panier
+    total: Total
+
+order:
+    no_order_do: Aucunes commandes effectué
+
+profile:
+    title: Profil
+    edit_title: Modification du profil
+
+register:
+    messages:
+        success: Inscription réussi !
+
+menu:
+    catalog: Catalogue
+    admin: Administration
+    legal_notice: Mentions légales

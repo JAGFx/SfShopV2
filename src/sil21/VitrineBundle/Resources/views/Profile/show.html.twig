@@ -2,26 +2,26 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Profil
+	<h1 class="text-center">{{ 'profile.title'|trans({}, 'VitrineBundle') }}
 		<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a>
 	</h1>
 	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
-				<th >Dernière connexion</th >
+				<th >{{ 'client.last_login'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.lastLogin | date('d/m/Y à H:i:s') }}</td >
 			</tr >
 			<tr >
-				<th >Nom</th >
+				<th >{{ 'client.name'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.name }}</td >
 			</tr >
 			<tr >
-				<th >Prénom</th >
+				<th >{{ 'client.firstname'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.firstname }}</td >
 			</tr >
 			<tr >
-				<th >Tel</th >
+				<th >{{ 'client.tel'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.tel }}</td >
 			</tr >
 			<tr >
@@ -29,17 +29,17 @@
 				<td >{{ user.email }}</td >
 			</tr >
 			<tr >
-				<th >Date de naissance</th >
+				<th >{{ 'client.birthday'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.dateBirthday | date('d/m/Y') }}</td >
 			</tr >
 			<tr >
-				<th >Adresse</th >
+				<th >{{ 'client.address'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ user.address }}</td >
 			</tr >
 		</table >
 	</article>
 	
 	<div class="text-center">
-		<a href="{{ path('order_listUser') }}" class="btn btn-primary btn-lg">Commandes</a >
+		<a href="{{ path('order_listUser') }}" class="btn btn-primary btn-lg">{{ 'order.entity'|transchoice(2, {}, 'AdminBundle') }}</a >
 	</div>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Commande
+	<h1 class="text-center" >{{ 'order.entity'|transchoice(1, {}, 'AdminBundle') }}
 		<small > N°{{ order.id }}</small >
 		{% if is_granted('ROLE_ADMIN') %}
 			<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
@@ -12,24 +12,24 @@
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
-				<th >Etat</th >
+				<th >{{ 'order.etat'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ order.etat(true) }}</td >
 			</tr >
 			<tr >
-				<th >Date</th >
+				<th >{{ 'order.date'|trans({}, 'AdminBundle') }}</th >
 				<td >{% if order.date %}{{ order.date|date('d/m/Y') }}{% endif %}</td >
 			</tr >
 		</table >
 	</article >
 
-	<h3 class="text-center" >Produits</h3 >
+	<h3 class="text-center" >{{ 'product.entity'|transchoice(order.orderItems|length, {}, 'AdminBundle') }}</h3 >
 	<article class="noPaddingSide panier" >
 		<table class="stylized" >
 			<tr >
 				<th ></th >
-				<th >Nom</th >
-				<th >Quantité</th >
-				<th >Prix</th >
+				<th >{{ 'product.name'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'product.qte'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'product.price'|trans({}, 'AdminBundle') }}</th >
 			</tr >
 			{% for orderItem in order.orderItems %}
 				<tr class="cartProduct" >
@@ -46,7 +46,7 @@
 			<tr class="mainColorAcent" >
 				<td colspan="3" ></td >
 				<td class="price" >
-					<small >TOTAL:</small >
+					<small >{{ 'order.total'|trans({}, 'AdminBundle') | upper }}:</small >
 					<br />
 					{{ order.total|number_format(2, ',', ' ') }} €
 				</td >
@@ -61,7 +61,7 @@
 			</li >
 			<li >
 				{{ form_start(delete_form) }}
-				<input type="submit" value="Delete" >
+				<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
 				{{ form_end(delete_form) }}
 			</li >
 

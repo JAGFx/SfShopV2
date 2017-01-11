@@ -16,17 +16,24 @@
 			$builder
 				->add(
 					'date', null, [
-						'label'    => 'Date d\'enregistrment',
-						'disabled' => true,
+						'label'              => 'order.date',
+						'disabled'           => true,
+						'translation_domain' => 'AdminBundle'
 					]
 				)
 				->add(
 					'etat', ChoiceType::class, [
-						      'label'   => 'Etat',
-						      'choices' => Order::getStatesConstants()
+						'label'              => 'order.etat',
+						'choices'            => Order::getStatesConstants(),
+						'translation_domain' => 'AdminBundle'
 					]
 				)
-				->add( 'client', null, [ 'disabled' => true ] );
+				->add( 'client', null, [
+					'label'              => 'order.client',
+					'disabled'           => true,
+					'translation_domain' => 'AdminBundle'
+				]
+				);
 		}
 		
 		/**

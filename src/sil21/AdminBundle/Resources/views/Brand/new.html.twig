@@ -2,13 +2,13 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Marque</h1 >
+	<h1 class="text-center">{{ 'brand.entity'|transchoice(1, {}, 'AdminBundle') }}</h1 >
 	
 	{% form_theme form 'bootstrap_3_layout.html.twig' %}
 	{{ form_start(form) }}
 	{{ form_widget(form) }}
-	<button type="submit" class="btn btn-primary">Créer</button >
-	<button type="reset" class="btn btn-default">Annuler</button >
+	<button type="submit" class="btn btn-primary">{{ 'form.create'|trans({}, 'AdminBundle') }}</button >
+	<button type="reset" class="btn btn-default">{{ 'form.cancel'|trans({}, 'AdminBundle') }}</button >
 	{{ form_end(form) }}
 	
 	<ul >

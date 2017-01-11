@@ -1,5 +1,5 @@
 {% block listCategories %}
-	<h3 >Marques</h3 >
+	<h3 >{{ 'brand.entity'|transchoice(2, {}, 'AdminBundle') }}</h3 >
 	<ul >
 		{% for brand in brands %}
 			<li ><a href="{{ path("brand_articleByBrand" ,  { 'id': brand.id } ) }}" >{{ brand.name }}</a ></li >

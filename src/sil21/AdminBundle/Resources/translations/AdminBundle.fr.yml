@@ -1,0 +1,55 @@
+registration:
+    register_title: Inscripton
+    login_title: Connexion
+    logout_title: Déconnexion
+
+form:
+    see: Voir
+    create: Créer
+    edit: Modifier
+    update: Mise à jour
+    delete: Supprimer
+    cancel: Annuler
+    action: Actions
+
+brand:
+    entity: Marque|]1,+Inf]Marques
+    name: Nom
+
+
+category:
+    entity: Catégorie|]1,+Inf]Catégories
+    name: Nom
+
+client:
+    entity: Client|]1,+Inf]Clients
+    name: Nom
+    roles: Rôles
+    email: Adresse e-mail
+    firstname: Prénom
+    address: Adresse
+    tel: Numéro de téléphone
+    birthday: Date d'anniversaire
+    last_login: Dernière connexion
+
+order:
+    entity: Commande|]1,+Inf]Commandes
+    date: Date d'enregistrement
+    client: Client
+    etat: Etat
+    total: Total €
+    owner: Propriétaire
+
+product:
+    entity: Produit|]1,+Inf]Produits
+    name: Nom
+    file: Visuel
+    price: Prix
+    qte: Quantitié
+    saved_amout: Réduction
+    stock: Stock disponible
+    description: Déscriptif
+    category: Catégorie
+    brand: Marque
+
+    delete_file: Supprimer l'image

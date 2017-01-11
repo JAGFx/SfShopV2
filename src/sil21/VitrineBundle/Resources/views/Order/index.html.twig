@@ -2,18 +2,18 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Commandes</h1 >
+	<h1 class="text-center" >{{ 'order.entity'|transchoice( 1, {}, 'AdminBundle') }}</h1 >
 	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			{% if orders|length > 0 %}
 				<tr >
 					<th >Id</th >
-					<th >Date</th >
-					<th >Etat</th >
-					<th >Proprietaire</th >
-					<th >Total €</th >
-					<th >Actions</th >
+					<th >{{ 'order.date'|trans({}, 'AdminBundle') }}</th >
+					<th >{{ 'order.etat'|trans({}, 'AdminBundle') }}</th >
+					<th >{{ 'order.owner'|trans({}, 'AdminBundle') }}</th >
+					<th >{{ 'order.total'|trans({}, 'AdminBundle') }}</th >
+					<th >{{ 'form.action'|trans({}, 'AdminBundle') }}</th >
 				</tr >
 				{% for order in orders %}
 					<tr >
@@ -25,9 +25,9 @@
 						<td >{{ order.client }}</td >
 						<td >{{ order.total|number_format(2, ',', ' ') }} €</td >
 						<td >
-							<a href="{{ path('order_show', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >Voir</a >
+							<a href="{{ path('order_show', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.see'|trans({}, 'AdminBundle') }}</a >
 							{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+								<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
 							{% endif %}
 						</td >
 					
@@ -35,7 +35,7 @@
 				{% endfor %}
 			{% else %}
 				<tr >
-					<td colspan="6 text-center" >Aucunes commandes effectué</td >
+					<td colspan="6 text-center" >{{ 'order.no_order_do'|trans({}, 'VitrineBundle') }}</td >
 				</tr >
 			{% endif %}
 		</table >

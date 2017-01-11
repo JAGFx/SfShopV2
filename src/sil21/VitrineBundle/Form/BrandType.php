@@ -11,7 +11,9 @@
 		 * {@inheritdoc}
 		 */
 		public function buildForm( FormBuilderInterface $builder, array $options ) {
-			$builder->add( 'name' );
+			$builder->add(
+				'name', null, [ 'label' => 'brand.name', 'translation_domain' => 'AdminBundle' ]
+			);
 		}
 		
 		/**

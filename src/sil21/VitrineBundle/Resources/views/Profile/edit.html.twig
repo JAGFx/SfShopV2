@@ -2,14 +2,14 @@
 {% set showLeftMenu = 'no' %}
 
 {% block content %}
-	<h1 class="text-center" >Modification de profil</h1 >
+	<h1 class="text-center" >{{ 'profile.edit_title'|trans({}, 'VitrineBundle') }}</h1 >
 	
 	{% form_theme form 'bootstrap_3_layout.html.twig' %}
 	<form class="fos_user_profile_edit" action="{{ path('fos_user_profile_edit') }}" method="POST">
 		{{ form_widget(form) }}
 		<div class="text-right">
 			<button type="submit" class="btn btn-primary">{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</button >
-			<button type="reset" class="btn btn-default">Annuler</button >
+			<button type="reset" class="btn btn-default">{{ 'form.cancel'|trans({}, 'AdminBundle') }}</button >
 		</div>
 	</form>
 {% endblock %}

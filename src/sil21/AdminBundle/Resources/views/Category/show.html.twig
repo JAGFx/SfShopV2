@@ -2,7 +2,7 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Catégorie
+	<h1 class="text-center">{{ 'category.entity'|transchoice(1, {}, 'AdminBundle') }}
 		<small>{{ category.name }}</small>
 		<a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
 	</h1 >
@@ -11,7 +11,7 @@
 		<table class="stylized" >
 			<tr >
 				<th >Id</th >
-				<th >Name</th >
+				<th >{{ 'category.name'|trans({}, 'AdminBundle') }}</th >
 
 			</tr >
 			<tr >
@@ -27,7 +27,7 @@
 		</li >
 		<li >
 			{{ form_start(delete_form) }}
-			<input type="submit" value="Delete" >
+			<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
 			{{ form_end(delete_form) }}
 		</li >
 	</ul >

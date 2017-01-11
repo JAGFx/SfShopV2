@@ -2,16 +2,17 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Produit
-		<small>{{ product.name }}</small>
+	<h1 class="text-center" >{{ 'product.entity'|transchoice(1, {}, 'AdminBundle') }}
+		<small >{{ product.name }}</small >
 		<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
 	</h1 >
-
+	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
-				<th >Image</th >
-				<td class="text-center" ><img src="{{ asset('uploads/products/' ~ product.image ) }}" width="300" />
+				<th >{{ 'product.file'|trans({}, 'AdminBundle') }}</th >
+				<td class="text-center" >
+					<img src="{{ asset('uploads/products/' ~ product.image ) }}" width="300" />
 				</td >
 			</tr >
 			<tr >
@@ -19,39 +20,45 @@
 				<td >{{ product.id }}</td >
 			</tr >
 			<tr >
-				<th >Name</th >
+				<th >{{ 'product.name'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.name }}</td >
 			</tr >
 			<tr >
-				<th >Catégorie</th >
+				<th >{{ 'product.category'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.category }}</td >
 			</tr >
 			<tr >
-				<th >Marque</th >
+				<th >{{ 'product.brand'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.brand }}</td >
 			</tr >
 			<tr >
-				<th >Price</th >
+				<th >{{ 'product.price'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.price }}</td >
 			</tr >
+			{% if product.savedAmout > 0%}
+				<tr >
+					<th >{{ 'product.saved_amout'|trans({}, 'AdminBundle') }}</th >
+					<td >{#TODO saved amoutr#}</td >
+				</tr >
+			{% endif %}
 			<tr >
-				<th >Stock</th >
+				<th >{{ 'product.stock'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.stock }}</td >
 			</tr >
 			<tr >
-				<th >Description</th >
+				<th >{{ 'product.description'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.description }}</td >
 			</tr >
 		</table >
 	</article >
-
+	
 	<ul >
 		<li >
 			<a href="{{ path('product_index') }}" >Back to the list</a >
 		</li >
 		<li >
 			{{ form_start(delete_form) }}
-			<input type="submit" value="Delete" >
+			<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
 			{{ form_end(delete_form) }}
 		</li >
 	</ul >

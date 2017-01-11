@@ -16,22 +16,22 @@
 			<ul class="nav navbar-nav navbar-right" >
 				{% if is_granted('ROLE_ADMIN') %}
 					<li class="dropdown" >
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Administration
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ 'menu.admin'|trans({}, 'VitrineBundle') }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
-							<li ><a href="{{ path('category_index') }}" >Catégorie</a ></li >
-							<li ><a href="{{ path('client_index') }}" >Client</a ></li >
-							<li ><a href="{{ path('order_listUser') }}" >Commande</a ></li >
-							<li ><a href="{{ path('brand_index') }}" >Marque</a ></li >
-							<li ><a href="{{ path('product_index') }}" >Produit</a ></li >
+							<li ><a href="{{ path('category_index') }}" >{{ 'category.entity'|transchoice(1, {}, 'AdminBundle') }}</a ></li >
+							<li ><a href="{{ path('client_index') }}" >{{ 'client.entity'|transchoice(1, {}, 'AdminBundle') }}</a ></li >
+							<li ><a href="{{ path('order_listUser') }}" >{{ 'order.entity'|transchoice(1, {}, 'AdminBundle') }}</a ></li >
+							<li ><a href="{{ path('brand_index') }}" >{{ 'brand.entity'|transchoice(1, {}, 'AdminBundle') }}</a ></li >
+							<li ><a href="{{ path('product_index') }}" >{{ 'product.entity'|transchoice(1, {}, 'AdminBundle') }}</a ></li >
 						</ul >
 					</li >
 				{% endif %}
 
-				<li class="active" ><a href="{{ path( 'product_list' ) }}" >Catalogue
+				<li class="active" ><a href="{{ path( 'product_list' ) }}" >{{ 'menu.catalog'|trans({}, 'VitrineBundle') }}
 						<span class="sr-only" >(current)</span ></a ></li >
-				<li ><a href="{{ path('sil21_mention') }}" >Mentions légales </a ></li >
-				<li ><a href="{{ path('sil21_cartContent') }}" >Panier
+				<li ><a href="{{ path('sil21_mention') }}" >{{ 'menu.legal_notice'|trans({}, 'VitrineBundle') }}</a ></li >
+				<li ><a href="{{ path('sil21_cartContent') }}" >{{ 'cart.entity'|trans({}, 'VitrineBundle') }}
 						<span class="badge" >{{ cart_session.getCartSession().getTotalCart()|number_format(2, ',', ' ') }} €</span ></a >
 				</li >
 
@@ -40,16 +40,16 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ app.user.firstname ~ ' ' ~ app.user.name }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
-							<li ><a href="{{ path('order_listUser') }}" >Commandes</a ></li >
-							<li ><a href="{{ path('fos_user_profile_show') }}" >Profil</a ></li >
+							<li ><a href="{{ path('order_listUser') }}" >{{ 'order.entity'|transchoice(2, {}, 'AdminBundle') }}</a ></li >
+							<li ><a href="{{ path('fos_user_profile_show') }}" >{{ 'profile.title'|trans({}, 'VitrineBundle') }}</a ></li >
 							<li role="separator" class="divider" ></li >
-							<li ><a href="{{ path( 'fos_user_security_logout' ) }}" >Déconnexion</a ></li >
+							<li ><a href="{{ path( 'fos_user_security_logout' ) }}" >{{ 'registration.logout_title'|trans({}, 'AdminBundle') }}</a ></li >
 						</ul >
 					</li >
 
 				{% else %}
-					<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" >Connexion</a >
-					<a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary navbar-btn" >Inscription</a >
+					<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" >{{ 'registration.login_title'|trans({}, 'AdminBundle') }}</a >
+					<a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary navbar-btn" >{{ 'registration.register_title'|trans({}, 'AdminBundle') }}</a >
 
 				{% endif %}
 			</ul >

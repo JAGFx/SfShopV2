@@ -2,11 +2,12 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Category</h1 >
+	<h1 class="text-center">{{ 'category.entity'|transchoice(1, {}, 'AdminBundle') }}</h1 >
 	
 	{{ form_start(form) }}
 	{{ form_widget(form) }}
-	<input type="submit" value="Create" />
+	<button type="submit" class="btn btn-primary" >{{ 'form.create'|trans({}, 'AdminBundle') }}</button >
+	<button type="reset" class="btn btn-default">{{ 'form.cancel'|trans({}, 'AdminBundle') }}</button >
 	{{ form_end(form) }}
 	
 	<ul >

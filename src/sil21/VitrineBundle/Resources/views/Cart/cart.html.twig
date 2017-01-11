@@ -3,7 +3,7 @@
 {% set showLeftMenu = 'no' %}
 
 {% block content %}
-	<h1 class="text-center" >Panier</h1 >
+	<h1 class="text-center" >{{ 'cart.entity'|trans({}, 'VitrineBundle') }}</h1 >
 	{% if cart.cartItems|length > 0 %}
 		<p class="text-center" >
 			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
@@ -17,10 +17,10 @@
 			{% if cart.cartItems|length > 0 %}
 				<tr >
 					<th ></th >
-					<th >Désignation</th >
-					<th >Disponibilité</th >
-					<th >Quantité</th >
-					<th >Prix</th >
+					<th >{{ 'cart.products.name'|trans({}, 'VitrineBundle') }}</th >
+					<th >{{ 'cart.products.available'|trans({}, 'VitrineBundle') }}</th >
+					<th >{{ 'cart.products.qte'|trans({}, 'VitrineBundle') }}</th >
+					<th >{{ 'cart.products.price'|trans({}, 'VitrineBundle') }}</th >
 					<th ></th >
 				</tr >
 
@@ -63,7 +63,7 @@
 				<tr class="mainColorAcent" >
 					<td colspan="4" ></td >
 					<td class="price" >
-						<small >TOTAL:</small >
+						<small >{{ 'cart.total'|trans({}, 'VitrineBundle') | upper }}:</small >
 						<br />
 						{{ cart.getTotalCart()|number_format(2, ',', ' ') }} €
 					</td >
@@ -73,17 +73,17 @@
 					<td colspan="4" ></td >
 					<td style="min-width: 150px;" >
 						{% if is_granted('ROLE_USER') %}
-							<a href="{{ path('sil21_validateCart') }}" class="btn btn-primary" >PASSER COMMANDE</a >
+							<a href="{{ path('sil21_validateCart') }}" class="btn btn-primary" >{{ 'cart.actions.process_order'|trans({}, 'VitrineBundle') | upper }}</a >
 						{% else %}
-							Ce connecter avant de valider le panier<br />
-							<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary" >Connexion</a >
+							{{ 'cart.messages.forbidden_acces'|trans({}, 'VitrineBundle') }}<br />
+							<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary" >{{ 'registration.login_title'|trans({}, 'AdminBundle') }}</a >
 						{% endif %}
 					</td >
 					<td ></td >
 				</tr >
 			{% else %}
 				<tr >
-					<td colspan="6 text-center" > Pas d'article dans le panier</td >
+					<td colspan="6 text-center" > {{ 'cart.messages.empty_cart'|trans({}, 'VitrineBundle') }}</td >
 				</tr >
 			{% endif %}
 		</table >

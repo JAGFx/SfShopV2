@@ -1,5 +1,5 @@
 {% block listCategories %}
-	<h3 >Catégories</h3 >
+	<h3 >{{ 'category.entity'|transchoice(categories|length, {}, 'AdminBundle') }}</h3 >
 	<ul >
 		{% for category in categories %}
 			<li ><a href="{{ path("category_articlesByCategory" ,  { 'id': category.id } ) }}" >{{ category.name }}</a ></li >

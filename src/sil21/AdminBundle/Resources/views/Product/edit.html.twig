@@ -2,17 +2,17 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center">Produit <small>{{ product.name }}</small></h1 >
+	<h1 class="text-center">{{ 'product.entity'|transchoice(1, {}, 'AdminBundle') }} <small>{{ product.name }}</small></h1 >
 
 	{{ form_start(edit_form) }}
 	{{ form_widget(edit_form) }}
-	<button type="submit" class="btn btn-primary" >Modifier</button >
-	<button type="reset" class="btn btn-default" >Annuler</button >
+	<button type="submit" class="btn btn-primary" >{{ 'form.edit'|trans({}, 'AdminBundle') }}</button >
+	<button type="reset" class="btn btn-default" >{{ 'form.cancel'|trans({}, 'AdminBundle') }}</button >
 	{{ form_end(edit_form) }}
 
 	{% if product.image is not empty %}
 		{{ form_start(delete_image_form) }}
-		<button type="submit" title="Supprimer l'image" class="btn btn-primary" >Supprimer l'image</button >
+		<button type="submit" title="Supprimer l'image" class="btn btn-primary" >{{ 'product.delete_file'|trans({}, 'AdminBundle') }}</button >
 		{{ form_end(delete_image_form) }}
 	{% endif %}
 
@@ -22,7 +22,7 @@
 		</li >
 		<li >
 			{{ form_start(delete_form) }}
-			<input type="submit" value="Delete" >
+			<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
 			{{ form_end(delete_form) }}
 		</li >
 	</ul >

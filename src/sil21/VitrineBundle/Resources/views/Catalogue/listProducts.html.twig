@@ -1,7 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {% block content %}
-	<h1>{{ name }} <small>{{ products|length }} produit(s)</small></h1>
+	<h1>{{ name }} <small>{{ products|length }} {{ 'product.entity'|transchoice(products|length, {}, 'AdminBundle') }}</small></h1>
 	{% for product in products %}
 		{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
 	{% endfor %}

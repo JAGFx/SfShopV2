@@ -2,7 +2,7 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Marques
+	<h1 class="text-center" >{{ 'brand.entity'|transchoice( 2, {}, 'AdminBundle') }}
 		<a href="{{ path('brand_new') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" ></span ></a >
 	</h1 >
 	
@@ -10,8 +10,8 @@
 		<table class="stylized" >
 			<tr >
 				<th >Id</th >
-				<th >Name</th >
-				<th >Actions</th >
+				<th >{{ 'brand.name'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'form.action'|trans({}, 'AdminBundle') }}</th >
 			</tr >
 			{% for brand in brands %}
 				<tr >
@@ -20,8 +20,8 @@
 					</td >
 					<td >{{ brand.name }}</td >
 					<td >
-						<a href="{{ path('brand_show', { 'id': brand.id }) }} " class="btn btn-primary btn-xs" >Voir</a >
-						<a href="{{ path('brand_edit', { 'id': brand.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+						<a href="{{ path('brand_show', { 'id': brand.id }) }} " class="btn btn-primary btn-xs" >{{ 'form.see'|trans({}, 'AdminBundle') }}</a >
+						<a href="{{ path('brand_edit', { 'id': brand.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
 					</td >
 				</tr >
 			{% endfor %}

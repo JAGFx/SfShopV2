@@ -4,6 +4,7 @@
 	
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\Extension\Core\Type\FileType;
+	use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 	use Symfony\Component\Form\Extension\Core\Type\PercentType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,14 +15,46 @@
 		 */
 		public function buildForm( FormBuilderInterface $builder, array $options ) {
 			$builder
-				->add( 'name' )
-				->add( 'file', FileType::class, [ 'label' => 'Photo', 'required' => false ] )
-				->add( 'price', 'money', [ 'scale' => 2, 'grouping' => true ] )
-				->add( 'savedAmout', PercentType::class )
-				->add( 'stock' )
-				->add( 'description' )
-				->add( 'category' )
-				->add( 'brand' );
+				->add(
+					'name', null,
+					[ 'label' => 'product.name', 'translation_domain' => 'AdminBundle' ]
+				)
+				->add(
+					'file', FileType::class, [
+						'required'           => false,
+						'label'              => 'product.file',
+						'translation_domain' => 'AdminBundle'
+					]
+				)
+				->add(
+					'price', MoneyType::class,
+					[
+						'scale'              => 2,
+						'grouping'           => true,
+						'label'              => 'product.price',
+						'translation_domain' => 'AdminBundle'
+					]
+				)
+				->add(
+					'savedAmout', PercentType::class,
+					[ 'label' => 'product.saved_amout', 'translation_domain' => 'AdminBundle' ]
+				)
+				->add(
+					'stock', null,
+					[ 'label' => 'product.stock', 'translation_domain' => 'AdminBundle' ]
+				)
+				->add(
+					'description', null,
+					[ 'label' => 'product.description', 'translation_domain' => 'AdminBundle' ]
+				)
+				->add(
+					'category', null,
+					[ 'label' => 'product.category', 'translation_domain' => 'AdminBundle' ]
+				)
+				->add(
+					'brand', null,
+					[ 'label' => 'product.brand', 'translation_domain' => 'AdminBundle' ]
+				);
 		}
 		
 		/**

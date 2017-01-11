@@ -2,17 +2,17 @@
 
 {% set showLeftMenu = 'no' %}
 {% block content %}
-	<h1 class="text-center" >Utilisateurs</h1 >
+	<h1 class="text-center" >{{ 'client.entity'|transchoice(2, {}, 'AdminBundle') }}</h1 >
 
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
 				<th >ID</th >
-				<th >Rôles</th >
-				<th >Nom</th >
-				<th >Prénom</th >
-				<th >Email</th >
-				<th >Actions</th >
+				<th >{{ 'client.roles'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'client.name'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'client.firstname'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'client.email'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'form.action'|trans({}, 'AdminBundle') }}</th >
 			</tr >
 			{% for client in listClients %}
 				<tr >
@@ -22,7 +22,7 @@
 					<td >{{ client.firstname }}</td >
 					<td >{{ client.email }}</td >
 					<td >
-						<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xs" >Modifier</a >
+						<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xs" >{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
 					</td >
 				</tr >
 			{% endfor %}

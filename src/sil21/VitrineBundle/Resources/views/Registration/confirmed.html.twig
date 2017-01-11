@@ -2,7 +2,7 @@
 {% set showLeftMenu = 'no' %}
 
 {% block content %}
-	<h1 class="text-center" >Inscription réussi !</h1 >
+	<h1 class="text-center" >{{ 'register.messages.success'|trans({}, 'VitrineBundle') }}</h1 >
 
 	<p >{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p >
 	{% if app.session is not empty %}
