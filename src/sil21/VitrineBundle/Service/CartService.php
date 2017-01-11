@@ -13,6 +13,8 @@
 	use Symfony\Component\HttpFoundation\Session\Session as Session;
 	
 	class CartService {
+		const NAME_IN_SESSION = 'cart';
+		
 		private $session;
 		
 		public function __construct( Session $session ) {
@@ -23,13 +25,13 @@
 		 * @return Cart
 		 */
 		public function getCartSession() {
-			return $this->session->get( 'cart', new Cart() );
+			return $this->session->get( self::NAME_IN_SESSION, new Cart() );
 		}
 		
 		/**
 		 * @param $cart
 		 */
 		public function setCartSession( $cart ) {
-			$this->session->set( 'cart', $cart );
+			$this->session->set( self::NAME_IN_SESSION, $cart );
 		}
 	}

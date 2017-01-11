@@ -30,10 +30,10 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function cartContentAction() {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			
 			return $this->render(
 				'sil21VitrineBundle:Cart:cart.html.twig', [ 'cart' => $cart ]
@@ -44,10 +44,10 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function emptyCartAction() {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			$cart->clearCart();
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
@@ -60,25 +60,25 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function addArticleAction( Product $product, $qte ) {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
 			/** @var  Cart() $cart
 			 ** */
-			$cart = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			
 			$added = $cart->addArticle( $product, $qte );
 			if ( !$added ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-							 'type'    => 'warning',
-							 'title'   => "Modification impossible",
-							 'message' => 'Le stock de l\'article est insuffisant'
-						 ]
+						'type'    => 'warning',
+						'title'   => "Modification impossible",
+						'message' => 'Le stock de l\'article est insuffisant'
+					]
 				);
 			}
 			
-			$session->setCartSession( $cart );
+			$cartSession->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -90,23 +90,23 @@
 		 * @return JsonResponse
 		 */
 		public function changeQutantityAction( Product $product, $qte ) {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart            = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			$finalQteProduct = $cart->changeQuantity( $product, $qte );
 			
 			if ( $finalQteProduct == $qte ) {
 				$this->get( 'session' )->getFlashBag()->add(
 					'message', [
-							 'type'    => 'warning',
-							 'title'   => "Modification impossible",
-							 'message' => 'Le stock de l\'article est insuffisant'
-						 ]
+						'type'    => 'warning',
+						'title'   => "Modification impossible",
+						'message' => 'Le stock de l\'article est insuffisant'
+					]
 				);
 			}
 			
-			$session->setCartSession( $cart );
+			$cartSession->setCartSession( $cart );
 			
 			return new JsonResponse( [ 'lastQte' => $finalQteProduct ] );
 		}
@@ -118,13 +118,13 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function removeQteProductAction( $articleId, $qte ) {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			$cart->removeOneArticle( $articleId, $qte );
 			
-			$session->setCartSession( $cart );
+			$cartSession->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -135,13 +135,13 @@
 		 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 		 */
 		public function removeProductAction( $articleId ) {
-			/** @var CartService $session * */
-			$session = $this->container->get( 'sil21.cart.session' );
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart = $session->getCartSession();
+			$cart = $cartSession->getCartSession();
 			$cart->removeArticles( $articleId );
 			
-			$session->setCartSession( $cart );
+			$cartSession->setCartSession( $cart );
 			
 			return $this->redirectToRoute( 'sil21_cartContent' );
 		}
@@ -150,58 +150,52 @@
 		 * @return \Symfony\Component\HttpFoundation\Response
 		 */
 		public function validateCartAction() {
-			$securityContext = $this->container->get( 'security.authorization_checker' );
+			$em = $this->getDoctrine()->getManager();
 			
-			if ( $securityContext->isGranted( 'IS_AUTHENTICATED_REMEMBERED' ) ) {
-				$em = $this->getDoctrine()->getManager();
+			$user = $user = $this->container
+				->get( 'security.token_storage' )
+				->getToken()->getUser();
+			
+			$order = new Order( $user );
+			$em->persist( $order );
+			$em->flush();
+			
+			/** @var CartService $cartSession * */
+			$cartSession = $this->container->get( 'sil21.cart.session' );
+			
+			$cart = $cartSession->getCartSession();
+			foreach ( $cart->getCartItems() as $item ) {
 				
-				$user = $user = $this->container
-					->get( 'security.token_storage' )
-					->getToken()->getUser();
-				
-				$order = new Order( $user );
-				$em->persist( $order );
-				$em->flush();
-				
-				/** @var CartService $session * */
-				$session = $this->container->get( 'sil21.cart.session' );
-				
-				$cart = $session->getCartSession();
-				foreach ( $cart->getCartItems() as $item ) {
-					
-					// Récupération du produit et retrait stock
-					$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
-						$item[ 'product' ]->getId()
-					);
-					$product->setStock( $product->getStock() - $item[ 'qte' ] );
-					
-					// Création d'une ligne de Order
-					$orderLine = new OrderLine( $product, $order, $item[ 'qte' ] );
-					$order->addOrderLines( $orderLine );
-					
-					$em->persist( $product );
-				}
-				
-				$em->persist( $order );
-				$em->flush();
-				
-				$session->setCartSession( new Cart() );
-				$this->get( 'session' )->getFlashBag()->add(
-					'message', [
-							 'type'    => 'success',
-							 'title'   => "Order effectué avec succès",
-							 'message' => 'Accèdez à votre Order depuis votre espace'
-						 ]
+				// Récupération du produit et retrait stock
+				$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
+					$item[ 'product' ]->getId()
 				);
+				$product->setStock( $product->getStock() - $item[ 'qte' ] );
 				
-				return $this->render(
-					'sil21VitrineBundle:Cart:successValidation.html.twig',
-					[
-						'idOrder' => $order->getId()
-					]
-				);
+				// Création d'une ligne de Order
+				$orderLine = new OrderLine( $product, $order, $item[ 'qte' ] );
+				$order->addOrderLines( $orderLine );
 				
-			} else
-				$this->redirectToRoute( 'fos_user_security_login' );
+				$em->persist( $product );
+			}
+			
+			$em->persist( $order );
+			$em->flush();
+			
+			$cartSession->setCartSession( new Cart() );
+			$this->get( 'session' )->getFlashBag()->add(
+				'message', [
+					'type'    => 'success',
+					'title'   => "Order effectué avec succès",
+					'message' => 'Accèdez à votre Order depuis votre espace'
+				]
+			);
+			
+			return $this->render(
+				'sil21VitrineBundle:Cart:successValidation.html.twig',
+				[
+					'idOrder' => $order->getId()
+				]
+			);
 		}
 	}

@@ -49,7 +49,7 @@ security:
         #- { path: ^/marque/, role: ROLE_ADMIN }
 
         # -- Cart
-        #- { path: ^/cart/validate, role: ROLE_USER }
+        - { path: ^/cart/validate, role: ROLE_USER }
 
         # -- Produit
         #- { path: ^/product/listUser, role: ROLE_USER }
