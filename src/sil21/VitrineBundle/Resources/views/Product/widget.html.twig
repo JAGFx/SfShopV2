@@ -10,9 +10,9 @@
 	</div >
 	<div class="rightArticle flexbox col-md-3" >
 		<div class="flex-item price" >
-			{{ product.priceSavedAmout|number_format(2, ',', ' ') }} €
-			{% if product.savedAmout != 0  %}
-				<span class="label label-danger">-{{ product.savedAmout * 100 }}%</span>
+			{{ product.priceSavedAmount|number_format(2, ',', ' ') }} €
+			{% if product.savedAmount != 0  %}
+				<span class="label label-danger">-{{ product.savedAmount * 100 }}%</span>
 			{% endif %}
 		</div >
 		<div class="flex-item stockProduct {% if product.onStock %}available{% else %}unavailable{% endif %}" >

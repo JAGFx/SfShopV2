@@ -134,7 +134,7 @@
 			$total = 0;
 			
 			foreach ( $this->getCartItems() as $item ) {
-				$total += $item[ 'product' ]->getPriceSavedAmout() * $item[ 'qte' ];
+				$total += $item[ 'product' ]->getPriceSavedAmount() * $item[ 'qte' ];
 			}
 			
 			return $total;

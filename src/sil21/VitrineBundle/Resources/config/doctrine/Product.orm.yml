@@ -23,7 +23,7 @@ sil21\VitrineBundle\Entity\Product:
            scale: 2
            nullable: false
 
-       savedAmout:
+       savedAmount:
             type: decimal
             scale: 2
             options:

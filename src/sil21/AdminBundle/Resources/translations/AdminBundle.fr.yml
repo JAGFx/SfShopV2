@@ -46,7 +46,7 @@ product:
     file: Visuel
     price: Prix
     qte: Quantitié
-    saved_amout: Réduction
+    saved_amount: Réduction
     stock: Stock disponible
     description: Déscriptif
     category: Catégorie

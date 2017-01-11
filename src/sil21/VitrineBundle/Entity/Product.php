@@ -34,7 +34,7 @@
 		/**
 		 * @var float
 		 */
-		private $savedAmout = 0.0;
+		private $savedAmount = 0.0;
 		
 		/**
 		 * @var integer
@@ -137,26 +137,26 @@
 			return $this->price;
 		}
 		
-		public function getPriceSavedAmout(){
-			return ( $this->savedAmout > 0 )
-				? $this->getPrice() - ( $this->getPrice() * $this->savedAmout )
+		public function getPriceSavedAmount(){
+			return ( $this->savedAmount > 0 )
+				? $this->getPrice() - ( $this->getPrice() * $this->savedAmount )
 				: $this->getPrice();
 		}
 		
 		/**
 		 * @return float
 		 */
-		public function getSavedAmout() {
-			return $this->savedAmout;
+		public function getSavedAmount() {
+			return $this->savedAmount;
 		}
 		
 		/**
-		 * @param float $savedAmout
+		 * @param float $savedAmount
 		 *
 		 * @return $this
 		 */
-		public function setSavedAmout( $savedAmout ) {
-			$this->savedAmout = $savedAmout;
+		public function setSavedAmount( $savedAmount ) {
+			$this->savedAmount = $savedAmount;
 			return $this;
 		}
 		

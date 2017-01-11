@@ -48,10 +48,10 @@
 							</form >
 						</td >
 						<td class="price" >
-							{{ (item.qte * item.product.priceSavedAmout)|number_format(2, ',', ' ') }} €
-							{% if item.product.savedAmout != 0  %}
+							{{ (item.qte * item.product.priceSavedAmount)|number_format(2, ',', ' ') }} €
+							{% if item.product.savedAmount != 0  %}
 								<br/>
-								<span class="label label-danger">-{{ item.product.savedAmout * 100 }}%</span>
+								<span class="label label-danger">-{{ item.product.savedAmount * 100 }}%</span>
 							{% endif %}
 						</td >
 						<td >

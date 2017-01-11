@@ -13,7 +13,7 @@
 				<th >{{ 'product.name'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.file'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.price'|trans({}, 'AdminBundle') }}</th >
-				<th >{{ 'product.saved_amout'|trans({}, 'AdminBundle') }}</th >
+				<th >{{ 'product.saved_amount'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.stock'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.description'|trans({}, 'AdminBundle') }}</th >
 				<th >Actions</th >
@@ -28,7 +28,7 @@
 						<img src="{{ asset('uploads/products/' ~ product.image ) }}" class="img-responsive" width="200" />
 					</td >
 					<td >{{ product.price }}</td >
-					<td >{% if product.savedAmout > 0 %}<span class="label label-danger" >-{{ product.savedAmout * 100 }} %</span >{% else %}{{ 'product.no_saved_amout'|trans({}, 'VitrineBundle') }}{% endif %}
+					<td >{% if product.savedAmount > 0 %}<span class="label label-danger" >-{{ product.savedAmount * 100 }} %</span >{% else %}{{ 'product.no_saved_amount'|trans({}, 'VitrineBundle') }}{% endif %}
 					</td >
 					<td >{{ product.stock }}</td >
 					<td >{{ product.description }}</td >

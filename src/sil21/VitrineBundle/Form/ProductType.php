@@ -36,8 +36,8 @@
 					]
 				)
 				->add(
-					'savedAmout', PercentType::class,
-					[ 'label' => 'product.saved_amout', 'translation_domain' => 'AdminBundle' ]
+					'savedAmount', PercentType::class,
+					[ 'label' => 'product.saved_amount', 'translation_domain' => 'AdminBundle' ]
 				)
 				->add(
 					'stock', null,
