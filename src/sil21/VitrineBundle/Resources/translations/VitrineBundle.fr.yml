@@ -28,3 +28,6 @@ menu:
     catalog: Catalogue
     admin: Administration
     legal_notice: Mentions légales
+
+product:
+    no_saved_amout: Pas de réduction

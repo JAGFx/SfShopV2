@@ -5,7 +5,7 @@
 	<h1 class="text-center" >{{ 'product.entity'|transchoice(2, {}, 'AdminBundle') }}
 		<a href="{{ path('product_new') }}" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" ></span ></a >
 	</h1 >
-
+	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
@@ -13,25 +13,28 @@
 				<th >{{ 'product.name'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.file'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.price'|trans({}, 'AdminBundle') }}</th >
-				<th>{{ 'product.saved_amout'|trans({}, 'AdminBundle') }}</th>
+				<th >{{ 'product.saved_amout'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.stock'|trans({}, 'AdminBundle') }}</th >
 				<th >{{ 'product.description'|trans({}, 'AdminBundle') }}</th >
 				<th >Actions</th >
 			</tr >
 			{% for product in products %}
 				<tr >
-					<td ><a href="{{ path('product_show', { 'id': product.id }) }}" >{{ product.id }}</a ></td >
+					<td >
+						<a href="{{ path('product_show', { 'id': product.id }) }}" >{{ product.id }}</a >
+					</td >
 					<td >{{ product.name }}</td >
 					<td >
 						<img src="{{ asset('uploads/products/' ~ product.image ) }}" class="img-responsive" width="200" />
 					</td >
 					<td >{{ product.price }}</td >
-					<td>{#TODO Saved amout#}</td>
+					<td >{% if product.savedAmout > 0 %}<span class="label label-danger" >-{{ product.savedAmout * 100 }} %</span >{% else %}{{ 'product.no_saved_amout'|trans({}, 'VitrineBundle') }}{% endif %}
+					</td >
 					<td >{{ product.stock }}</td >
 					<td >{{ product.description }}</td >
 					<td >
 						<a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.see'|trans({}, 'AdminBundle') }}</a >
-						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >Modifier</a >
+						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >}{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
 					</td >
 				</tr >
 			{% endfor %}
