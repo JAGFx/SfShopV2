@@ -1,0 +1,55 @@
+validation:
+    brand:
+        name:
+            notBlank: Le nom ne doit pas être vide.
+            length:
+                minMessage: Le nom doit comporter au moins 5 caractères.
+                maxMessage: Le nom ne doit pas exceder 100 caractères.
+
+    category:
+        name:
+            notBlank: Le nom ne doit pas être vide.
+            length:
+                minMessage: Le nom doit comporter au moins 5 caractères.
+                maxMessage: Le nom ne doit pas exceder 100 caractères.
+
+    client:
+        name:
+            notBlank: Le nom ne doit pas être vide.
+
+        firstname:
+            notBlank: Le prénom ne doit pas être vide.
+
+        address:
+            notBlank: L'adresse ne doit pas être vide.
+
+        tel:
+            noBlank: Le téléphone ne doit pas être vide.
+            regex: Le numero de téléphone n'est pas valide. Ex: 0123456789 ou +33123456789.
+
+        dateBirtday:
+            date: La date de naissance n'est pas valide.
+
+    product:
+        name:
+            notBlank: Le nom ne doit pas être vide.
+
+        file:
+            image:
+                mime_type_message: Le fichier n'est pas supporté
+
+        price:
+            notBlank: Le prix ne doit pas être vide.
+            range: Le nombre doit être strictement positif.
+
+        stock:
+            range: Le nombre doit être strictement positif.
+
+        description:
+            notBlank: La description ne doit pas être vide.
+
+        category:
+            notBlank: Le produit doit avoir une catégoire.
+
+        brand:
+            notBlank: Le produit doit avoir une marque.

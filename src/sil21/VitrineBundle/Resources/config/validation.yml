@@ -1,0 +1,90 @@
+sil21\VitrineBundle\Entity\Brand:
+    properties:
+        name:
+            - NotBlank:
+                message: validation.brand.name.notBlank
+            - Length:
+                min: 2
+                max: 100
+                minMessage: validation.brand.length.minMessage
+                maxMessage: validation.brand.length.max Message
+
+sil21\VitrineBundle\Entity\Category:
+    properties:
+        name:
+            - NotBlank: validation.category.name.notBlank
+            - Length:
+                min: 2
+                max: 100
+                minMessage: validation.category.length.minMessage
+                maxMessage: validation.category.length.maxMessage
+
+sil21\VitrineBundle\Entity\Client:
+    properties:
+        name:
+            - NotBlank:
+                message: validation.client.name.notBlank
+
+        firstname:
+            - NotBlank:
+                message: validation.client.firstname.notBlank
+
+        address:
+            - NotBlank:
+                message: validation.client.address.notBLank
+
+        tel:
+            - NotBlank:
+                message: validation.client.tel.notBlank
+
+            - Regex:
+                pattern: '/^\+?\d{10,12}/'
+                message: validation.client.tel.regex
+
+        dateBirthday:
+            - Date:
+                message: validation.client.dateBirthday.date
+
+            - Type: \DateTime
+
+sil21\VitrineBundle\Entity\Product:
+    properties:
+        name:
+            - NotBlank:
+                message: validation.product.name.notBlank
+
+        file:
+            - Image:
+                allowLandscape: false
+                allowPortrait: false
+                mimeTypesMessage: validation.product.file.image.mime_type_message
+                maxSize: 6000000
+
+        price:
+            - NotBlank:
+                message: validation.product.price.notBlank
+
+            - Type: scalar
+
+            - Range:
+                min: 0.0
+                minMessage: validation.product.price.range
+
+        stock:
+            - Type: int
+
+            - Range:
+                min: 0
+                minMessage: validation.product.stock.range
+
+        description:
+            - NotBlank:
+                message: validation.product.description.notBlank
+
+        category:
+            - NotBlank:
+                message: validation.product.category.notBlank
+
+        brand:
+            - NotBlank:
+                message: validation.product.brand.notBlank
