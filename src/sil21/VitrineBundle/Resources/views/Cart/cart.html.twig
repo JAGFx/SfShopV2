@@ -26,7 +26,7 @@
 
 				{% for item in cart.cartItems %}
 					<tr class="cartProduct" >
-						<td ><img src="{{ asset("uploads/products/" ~ item.product.image) }}" class="img-responsive" >
+						<td ><img src="{{ vich_uploader_asset(item.product, 'image') }}" class="img-responsive" >
 						</td >
 						<td class="infoProduct" >
 							<h3 >{{ item.product.name }}</h3 >

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new sil21\VitrineBundle\sil21VitrineBundle(),
 		new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 		new FOS\UserBundle\FOSUserBundle(),
+		new Vich\UploaderBundle\VichUploaderBundle(),
 		new sil21\AdminBundle\sil21AdminBundle(),
         );
 

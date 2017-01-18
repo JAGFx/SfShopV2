@@ -14,9 +14,10 @@ sil21\VitrineBundle\Entity\Product:
            length: 100
            nullable: false
 
-       image:
+       imageName:
             type: string
             length: 255
+            nullable: true
 
        price:
            type: decimal

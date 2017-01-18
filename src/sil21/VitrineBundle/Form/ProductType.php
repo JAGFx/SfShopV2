@@ -8,6 +8,7 @@
 	use Symfony\Component\Form\Extension\Core\Type\PercentType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\OptionsResolver\OptionsResolver;
+	use Vich\UploaderBundle\Form\Type\VichImageType;
 	
 	class ProductType extends AbstractType {
 		/**
@@ -20,10 +21,12 @@
 					[ 'label' => 'product.name', 'translation_domain' => 'AdminBundle' ]
 				)
 				->add(
-					'file', FileType::class, [
-						'required'           => false,
-						'label'              => 'product.file',
-						'translation_domain' => 'AdminBundle'
+					'image', VichImageType::class, [
+						       'required'           => false,
+						       'allow_delete'       => true,
+						       'download_link'      => false,
+						       'label'              => 'product.file',
+						       'translation_domain' => 'AdminBundle'
 					]
 				)
 				->add(

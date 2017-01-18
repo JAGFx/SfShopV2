@@ -5,13 +5,16 @@
 @import "cart";
 @import "alertMessage";
 
+
 body {
 	background:  $grey;
 	color:       $dark !important;
 	padding-top: $heigthMenu * 2 - 10px;
 }
 
+
 .label { border-radius: 0; }
+
 
 .flexbox {
 	display:   flex;
@@ -21,6 +24,13 @@ body {
 		flex: 1 auto;
 	}
 }
+
+
+.vich-image img {
+	object-fit: contain;
+	width:      100%;
+}
+
 
 article, form:not(.cartQte) {
 	background:    #FFF;
@@ -34,13 +44,16 @@ article, form:not(.cartQte) {
 	}
 }
 
+
 form:not(.cartQte) { padding-left: 20px; padding-right: 20px; }
+
 
 .btn.btn-primary {
 	background:      $mainColor;
 	border-color:    darken($mainColor, 5%);
 	text-decoration: none;
 }
+
 
 table.stylized {
 	width: 100%;

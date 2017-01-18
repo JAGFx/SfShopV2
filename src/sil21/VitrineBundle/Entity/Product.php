@@ -8,8 +8,7 @@
 	/**
 	 * Product
 	 */
-	class Product {
-		const PATH_IMAGE = '../../uploads/products/';
+	class Product implements \Serializable {
 		
 		/**
 		 * @var integer
@@ -20,11 +19,6 @@
 		 * @var string
 		 */
 		private $name;
-		
-		/**
-		 * @var string
-		 */
-		private $image;
 		
 		/**
 		 * @var float
@@ -57,9 +51,14 @@
 		private $brand;
 		
 		/**
-		 * @var File|null
+		 * @var File
 		 */
-		private $file;
+		private $image;
+		
+		/**
+		 * @var string
+		 */
+		private $imageName;
 		
 		
 		/**
@@ -69,6 +68,17 @@
 		 */
 		public function getId() {
 			return $this->id;
+		}
+		
+		/**
+		 * @param $id
+		 *
+		 * @return $this
+		 */
+		public function setId( $id ) {
+			$this->id = $id;
+			
+			return $this;
 		}
 		
 		/**
@@ -94,28 +104,6 @@
 		}
 		
 		/**
-		 * Set image
-		 *
-		 * @param string $image
-		 *
-		 * @return Product
-		 */
-		public function setImage( $image = null ) {
-			$this->image = $image;
-			
-			return $this;
-		}
-		
-		/**
-		 * Get image
-		 *
-		 * @return string
-		 */
-		public function getImage() {
-			return $this->image;
-		}
-		
-		/**
 		 * Set price
 		 *
 		 * @param float $price
@@ -137,7 +125,7 @@
 			return $this->price;
 		}
 		
-		public function getPriceSavedAmount(){
+		public function getPriceSavedAmount() {
 			return ( $this->savedAmount > 0 )
 				? $this->getPrice() - ( $this->getPrice() * $this->savedAmount )
 				: $this->getPrice();
@@ -157,6 +145,7 @@
 		 */
 		public function setSavedAmount( $savedAmount ) {
 			$this->savedAmount = $savedAmount;
+			
 			return $this;
 		}
 		
@@ -257,16 +246,76 @@
 		}
 		
 		/**
-		 * @return null|\Symfony\Component\HttpFoundation\File\File
+		 * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+		 * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+		 * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+		 * must be able to accept an instance of 'File' as the bundle will inject one here
+		 * during Doctrine hydration.
+		 *
+		 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+		 *
+		 * @return Product
 		 */
-		public function getFile() {
-			return $this->file;
+		public function setImage( File $image = null ) {
+			$this->image = $image;
+			
+			return $this;
 		}
 		
 		/**
-		 * @param null|\Symfony\Component\HttpFoundation\File\File $file
+		 * @return File|null
 		 */
-		public function setFile( $file ) {
-			$this->file = $file;
+		public function getImage() {
+			return $this->image;
 		}
+		
+		/**
+		 * Set imageName
+		 *
+		 * @param string $imageName
+		 *
+		 * @return Product
+		 */
+		public function setImageName( $imageName ) {
+			$this->imageName = $imageName;
+			
+			return $this;
+		}
+		
+		/**
+		 * Get imageName
+		 *
+		 * @return string
+		 */
+		public function getImageName() {
+			return $this->imageName;
+		}
+		
+		public function serialize() {
+			return serialize(
+				[
+					$this->id,
+					$this->name,
+					$this->imageName,
+					$this->price,
+					$this->savedAmount,
+					$this->stock,
+					$this->description
+				]
+			);
+		}
+		
+		public function unserialize( $serialized ) {
+			list(
+				$this->id,
+				$this->name,
+				$this->imageName,
+				$this->price,
+				$this->savedAmount,
+				$this->stock,
+				$this->description
+				) = unserialize( $serialized );
+		}
+		
+		
 	}

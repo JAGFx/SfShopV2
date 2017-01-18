@@ -1,0 +1,4 @@
+sil21\VitrineBundle\Entity\Product:
+    image:
+        mapping:           product_image
+        filename_property: imageName

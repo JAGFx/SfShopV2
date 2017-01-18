@@ -8,6 +8,9 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    path_image_product: /uploads/products
+    path_fixtures_pic: /bundles/sil21admin/product_image_fixtures
+    web_dir: "%kernel.root_dir%/../web"
 
 framework:
     #esi:             ~
@@ -37,6 +40,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    form_themes:
+        - 'VichUploaderBundle:Form:fields.html.twig'
     globals:
         cart_session: "@sil21.cart.session"
 
@@ -94,3 +99,15 @@ fos_user:
     profile:
             form:
                 type: sil21_user_registration
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        product_image:
+            uri_prefix:         %path_image_product%
+            upload_destination: '%kernel.root_dir%/../web/%path_image_product%'
+            delete_on_update:   true
+            delete_on_remove:   true
+            inject_on_load: true
+            namer:              vich_uploader.namer_uniqid

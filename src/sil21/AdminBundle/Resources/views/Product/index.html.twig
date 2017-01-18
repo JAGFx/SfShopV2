@@ -25,7 +25,7 @@
 					</td >
 					<td >{{ product.name }}</td >
 					<td >
-						<img src="{{ asset('uploads/products/' ~ product.image ) }}" class="img-responsive" width="200" />
+						<img src="{{ vich_uploader_asset(product, 'image') }}" class="img-responsive" width="200" />
 					</td >
 					<td >{{ product.price }}</td >
 					<td >{% if product.savedAmount > 0 %}<span class="label label-danger" >-{{ product.savedAmount * 100 }} %</span >{% else %}{{ 'product.no_saved_amount'|trans({}, 'VitrineBundle') }}{% endif %}
@@ -34,7 +34,7 @@
 					<td >{{ product.description }}</td >
 					<td >
 						<a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.see'|trans({}, 'AdminBundle') }}</a >
-						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >}{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
+						<a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-primary btn-xs" >{{ 'form.edit'|trans({}, 'AdminBundle') }}</a >
 					</td >
 				</tr >
 			{% endfor %}

@@ -19,6 +19,11 @@ Création du schéma de la base de données
 php app/console doctrine:schema:update --force
 ````
 
+Chargements des images dans /web (A executer avant tout chargement des données)
+````
+php app/console assets:install
+````
+
 Chargement des données
 ````
 php app/console doctrine:fixtures:load --append 

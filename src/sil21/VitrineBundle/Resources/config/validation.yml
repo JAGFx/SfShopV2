@@ -53,13 +53,6 @@ sil21\VitrineBundle\Entity\Product:
             - NotBlank:
                 message: validation.product.name.notBlank
 
-        file:
-            - Image:
-                allowLandscape: false
-                allowPortrait: false
-                mimeTypesMessage: validation.product.file.image.mime_type_message
-                maxSize: 6000000
-
         price:
             - NotBlank:
                 message: validation.product.price.notBlank
