@@ -33,6 +33,7 @@
 			
 			foreach ( $catBDD as $categoryBDD ) {
 				$category = new Category( $categoryBDD[ 'name' ] );
+				$category->setId( $categoryBDD[ 'id' ] );
 				$manager->persist( $category );
 			}
 			

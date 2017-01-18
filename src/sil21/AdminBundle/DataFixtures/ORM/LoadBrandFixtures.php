@@ -38,6 +38,7 @@
 			
 			foreach ( $marques as $marqueBDD ) {
 				$brand = new Brand( $marqueBDD[ 'Name' ] );
+				$brand->setId( $marqueBDD[ 'id' ] );
 				$manager->persist( $brand );
 			}
 			
