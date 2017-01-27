@@ -71,7 +71,7 @@ php app/console assetic:dump --force
 * `Général` Liste de marques
 * `Général` Filtrage des articles par marque
 * `Général` Ajout de promotion sur les acrticles
-* `Général` Validation des formulaires
-* `Général` Traduction en Français et en Anglais
+* `Symfony` Validation des formulaires
+* `Symfony` Traduction en Français et en Anglais
 * `Symfony` Séparation du backoffice dans un bundle dédié
 
