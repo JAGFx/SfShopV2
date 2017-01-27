@@ -13,15 +13,6 @@
 		 * @return array
 		 */
 		public function findAllOrderedByName() {
-			$qb = $this->createQueryBuilder( 'l' )
-			
-			$qb->select( 'l' )
-				->join( 'l.emprunts', 'e', 'WITH' )
-				->where( $qb->expr()->eq( 'e.livre', ':id' ) )
-				->setParameter( 'id', $livre_id );
-			
-			$qb->getQuery()->getResult()
-			
 			return $this->getEntityManager()
 				    ->createQuery( 'SELECT p FROM sil21VitrineBundle:Brand p ORDER BY p.name' )
 				    ->getResult();
