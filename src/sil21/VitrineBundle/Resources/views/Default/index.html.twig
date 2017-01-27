@@ -1,15 +1,19 @@
 {% extends "::layout.html.twig" %}
 
 {% block content %}
-	<h1 >{{ 'product.entity'|transchoice(listProductPop|length, {}, 'AdminBundle') }} populaires</h1 >
-	{% for product in listProductPop %}
-		{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
-	{% endfor %}
-	
-	<h1 >{{ 'brand.entity'|transchoice(listMarquePop|length, {}, 'AdminBundle') }} populaires</h1 >
-	<div class="text-center" >
-		{% for marque in  listMarquePop %}
-			<a href="{{ path('brand_articleByBrand', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
+	{% if listProductPop is not empty %}
+		<h1 >{{ 'catalog.product'|trans('AdminBundle') }}</h1 >
+		{% for product in listProductPop %}
+			{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
 		{% endfor %}
-	</div >
+	{% endif %}
+	
+	{% if listMarquePop is not empty %}
+		<h1 >{{ 'catalog.brand'|trans( 'AdminBundle') }}</h1 >
+		<div class="text-center" >
+			{% for marque in  listMarquePop %}
+				<a href="{{ path('brand_articleByBrand', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
+			{% endfor %}
+		</div >
+	{% endif %}
 {% endblock %}

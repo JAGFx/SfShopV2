@@ -22,12 +22,16 @@ profile:
 
 register:
     messages:
-        success: Inscription réussi !
+        success: Inscription réussie !
 
 menu:
     catalog: Catalogue
     admin: Administration
     legal_notice: Mentions légales
+
+catalog:
+    product: Popular products
+    brand: Popular brands
 
 product:
     no_saved_amount: Pas de réduction
