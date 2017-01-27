@@ -36,7 +36,11 @@
 			$cart = $cartSession->getCartSession();
 			
 			return $this->render(
-				'sil21VitrineBundle:Cart:cart.html.twig', [ 'cart' => $cart ]
+				'sil21VitrineBundle:Cart:cart.html.twig',
+				[
+					'cart'  => $cart,
+					'items' => $cart->getCartItems()
+				]
 			);
 		}
 		

@@ -1,23 +1,34 @@
+# --------------------------------- #
+# ----------- Brand ----------- #
+# --------------------------------- #
+
+# ---------- CRUD ----------
+
+# -- List all
 brand_index:
     path:     /
     defaults: { _controller: "sil21AdminBundle:Brand:index" }
     methods:  GET
 
+# -- Show
 brand_show:
     path:     /{id}/show
     defaults: { _controller: "sil21AdminBundle:Brand:show" }
     methods:  GET
 
+# -- Create
 brand_new:
     path:     /new
     defaults: { _controller: "sil21AdminBundle:Brand:new" }
     methods:  [GET, POST]
 
+# -- Edit
 brand_edit:
     path:     /{id}/edit
     defaults: { _controller: "sil21AdminBundle:Brand:edit" }
     methods:  [GET, POST]
 
+# -- Delete
 brand_delete:
     path:     /{id}/delete
     defaults: { _controller: "sil21AdminBundle:Brand:delete" }

@@ -22,8 +22,8 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Brand:index.html.twig', [
-										'brands' => $brands,
-									 ]
+					'brands' => $brands,
+				]
 			);
 		}
 		
@@ -33,7 +33,7 @@
 		 */
 		public function newAction( Request $request ) {
 			$brand = new Brand();
-			$form  = $this->createForm( 'sil21\VitrineBundle\Form\BrandType', $brand );
+			$form = $this->createForm( 'sil21\VitrineBundle\Form\BrandType', $brand );
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
@@ -46,9 +46,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Brand:new.html.twig', [
-									      'Brand'   => $brand,
-									       'form'   => $form->createView(),
-								       ]
+					'Brand' => $brand,
+					'form'  => $form->createView(),
+				]
 			);
 		}
 		
@@ -61,10 +61,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Brand:show.html.twig', [
-									       'brand'        => $brand,
-										'delete_form' => $deleteForm->createView(
-										),
-									]
+					'brand'       => $brand,
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -74,7 +73,7 @@
 		 */
 		public function editAction( Request $request, Brand $brand ) {
 			$deleteForm = $this->createDeleteForm( $brand );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\BrandType', $brand );
+			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\BrandType', $brand );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -85,12 +84,10 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Brand:edit.html.twig', [
-									       'brand'        => $brand,
-										'edit_form'   => $editForm->createView(
-										),
-										'delete_form' => $deleteForm->createView(
-										),
-									]
+					'brand'       => $brand,
+					'edit_form'   => $editForm->createView(),
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -120,8 +117,8 @@
 		 */
 		private function createDeleteForm( Brand $brand ) {
 			return $this->createFormBuilder()
-				    ->setAction( $this->generateUrl( 'brand_delete', [ 'id' => $brand->getId() ] ) )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction( $this->generateUrl( 'brand_delete', [ 'id' => $brand->getId() ] ) )
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}

@@ -12,6 +12,11 @@ parameters:
     path_fixtures_pic: /bundles/sil21admin/product_image_fixtures
     web_dir: "%kernel.root_dir%/../web"
 
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: true
+
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -75,6 +80,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# Assetic Configuration
 assetic:
     debug:          %kernel.debug%
     use_controller: false
@@ -83,11 +89,7 @@ assetic:
     filters:
         cssrewrite: ~
 
-sensio_framework_extra:
-    request:
-        converters: true
-        auto_convert: true
-
+# FOSUser Configuration
 fos_user:
     db_driver: orm
     firewall_name: main
@@ -100,6 +102,7 @@ fos_user:
             form:
                 type: sil21_user_registration
 
+# VichUploader Configuration
 vich_uploader:
     db_driver: orm
 

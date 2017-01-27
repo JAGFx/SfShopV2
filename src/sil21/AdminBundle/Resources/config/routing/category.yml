@@ -1,23 +1,34 @@
+# --------------------------------- #
+# --------- Category --------- #
+# --------------------------------- #
+
+# ---------- CRUD ----------
+
+# -- List all
 category_index:
     path:     /
     defaults: { _controller: "sil21AdminBundle:Category:index" }
     methods:  GET
 
+# -- Show
 category_show:
     path:     /{id}/show
     defaults: { _controller: "sil21AdminBundle:Category:show" }
     methods:  GET
 
+# -- Create
 category_new:
     path:     /new
     defaults: { _controller: "sil21AdminBundle:Category:new" }
     methods:  [GET, POST]
 
+# -- Edit
 category_edit:
     path:     /{id}/edit
     defaults: { _controller: "sil21AdminBundle:Category:edit" }
     methods:  [GET, POST]
 
+# -- Delete
 category_delete:
     path:     /{id}/delete
     defaults: { _controller: "sil21AdminBundle:Category:delete" }

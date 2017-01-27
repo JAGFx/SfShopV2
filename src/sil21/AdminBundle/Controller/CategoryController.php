@@ -14,8 +14,8 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Category:index.html.twig', [
-										   'categories' => $categories,
-									   ]
+					'categories' => $categories,
+				]
 			);
 		}
 		
@@ -48,7 +48,7 @@
 		 */
 		public function newAction( Request $request ) {
 			$category = new Category();
-			$form     = $this->createForm( 'sil21\VitrineBundle\Form\CategoryType', $category );
+			$form = $this->createForm( 'sil21\VitrineBundle\Form\CategoryType', $category );
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
@@ -61,9 +61,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Category:new.html.twig', [
-										 'category' => $category,
-										 'form'     => $form->createView(),
-									 ]
+					'category' => $category,
+					'form'     => $form->createView(),
+				]
 			);
 		}
 		
@@ -76,10 +76,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Category:show.html.twig', [
-										  'category'    => $category,
-										  'delete_form' => $deleteForm->createView(
-										  ),
-									  ]
+					'category'    => $category,
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -89,7 +88,7 @@
 		 */
 		public function editAction( Request $request, Category $category ) {
 			$deleteForm = $this->createDeleteForm( $category );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\CategoryType', $category );
+			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\CategoryType', $category );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -100,12 +99,10 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Category:edit.html.twig', [
-										  'category'    => $category,
-										  'edit_form'   => $editForm->createView(
-										  ),
-										  'delete_form' => $deleteForm->createView(
-										  ),
-									  ]
+					'category'    => $category,
+					'edit_form'   => $editForm->createView(),
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -135,10 +132,10 @@
 		 */
 		private function createDeleteForm( Category $category ) {
 			return $this->createFormBuilder()
-				    ->setAction(
-					    $this->generateUrl( 'category_delete', [ 'id' => $category->getId() ] )
-				    )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction(
+					$this->generateUrl( 'category_delete', [ 'id' => $category->getId() ] )
+				)
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}

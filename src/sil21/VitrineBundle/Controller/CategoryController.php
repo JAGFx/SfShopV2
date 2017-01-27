@@ -7,18 +7,6 @@
 	use Symfony\Component\HttpFoundation\Request;
 	
 	class CategoryController extends Controller {
-		public function indexAction() {
-			$em = $this->getDoctrine()->getManager();
-			
-			$categories = $em->getRepository( 'sil21VitrineBundle:Category' )->findAll();
-			
-			return $this->render(
-				'sil21VitrineBundle:Category:index.html.twig', [
-					'categories' => $categories,
-				]
-			);
-		}
-		
 		/**
 		 * @param \sil21\VitrineBundle\Entity\Category $category
 		 *
@@ -28,7 +16,7 @@
 			return $this->render(
 				'sil21VitrineBundle:Catalogue:listProducts.html.twig',
 				[
-					'name' => $category->getName(),
+					'name'     => $category->getName(),
 					'products' => $category->getProducts()
 				]
 			);

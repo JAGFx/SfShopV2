@@ -17,10 +17,8 @@
 		 *
 		 */
 		public function editAction( Request $request, Order $order ) {
-			
-			
 			$deleteForm = $this->createDeleteForm( $order );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\OrderType', $order );
+			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\OrderType', $order );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -65,10 +63,10 @@
 		 */
 		private function createDeleteForm( Order $order ) {
 			return $this->createFormBuilder()
-				    ->setAction(
-					    $this->generateUrl( 'order_delete', [ 'id' => $order->getId() ] )
-				    )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction(
+					$this->generateUrl( 'order_delete', [ 'id' => $order->getId() ] )
+				)
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}

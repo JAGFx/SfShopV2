@@ -1,22 +1,21 @@
 # ------------------------------- #
-# ---------- Cart----------- #
+# ------------ Cart------------ #
 # ------------------------------- #
-
-
 
 # ---------- Application ----------
 
-# -- Liste contenu
+# -- Content cart
 sil21_cartContent:
      path:     /
      defaults: { _controller: sil21VitrineBundle:Cart:cartContent}
-     
+
+ # -- Validate cart
 sil21_validateCart:
      path:       /validate
      defaults: { _controller: sil21VitrineBundle:Cart:validateCart}
      methods:  GET
 
-# -- Ajout d'Article
+# -- Add product
 sil21_addArticle:
      path:     /addArticle/{id}/{qte}
      defaults: { _controller: sil21VitrineBundle:Cart:addArticle, qte: 1}
@@ -24,7 +23,7 @@ sil21_addArticle:
           id: \d+
           qte: \d+
 
-  # -- Definir qté Article
+# -- Change quantity of product
 sil21_changeQuantityProduct:
     path:     /changeQuantityProduct/{id}/{qte}
     defaults: { _controller: sil21VitrineBundle:Cart:changeQutantity, qte: 1}
@@ -35,7 +34,7 @@ sil21_changeQuantityProduct:
         id: \d+
         qte: \d+
 
-# -- Retirer une quantité d'un Article
+# -- Remove quantify of product in cart
 sil21_removeQteProduct:
      path:     /removeOneProduct/{articleId}/{qte}
      defaults: { _controller: sil21VitrineBundle:Cart:removeQteProduct, articleId: 0, qte: 1}
@@ -43,14 +42,14 @@ sil21_removeQteProduct:
           articleId: \d+
           qte: \d+
 
-# -- Retirer l'Article
+# -- Remove product form cart
 sil21_removeProduct:
      path:     /removeProduct/{articleId}
      defaults: { _controller: sil21VitrineBundle:Cart:removeProduct, articleId: 0}
      requirements:
           articleId: \d+
 
-# -- Vider
+# -- Empty the cart content
 sil21_emptyCart:
      path:     /empty
      defaults: { _controller: sil21VitrineBundle:Cart:emptyCart}

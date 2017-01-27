@@ -1,8 +1,16 @@
+# --------------------------------- #
+# ------------ Order ----------- #
+# --------------------------------- #
+
+# ---------- Application ----------
+
+# -- List all order for current user logged
 order_listUser:
     path:     /listUser
     defaults: { _controller: "sil21VitrineBundle:Order:listAllUser" }
     methods:  GET
 
+# -- Show orders
 order_show:
     path:     /{id}/show
     defaults: { _controller: "sil21VitrineBundle:Order:show" }

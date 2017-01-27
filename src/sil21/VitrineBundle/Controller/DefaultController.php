@@ -11,12 +11,15 @@
 				->findAllBetterSales();
 			
 			$listMarquePop = $this->getDoctrine()->getManager()
-					      ->getRepository( 'sil21VitrineBundle:Brand' )
-					      ->findAllBetterSales();
+				->getRepository( 'sil21VitrineBundle:Brand' )
+				->findAllBetterSales();
 			
 			return $this->render(
 				'sil21VitrineBundle:Default:index.html.twig',
-				[ 'listProductPop' => $listProductPop, 'listMarquePop' => $listMarquePop ]
+				[
+					'listProductPop' => $listProductPop,
+					'listMarquePop'  => $listMarquePop
+				]
 			);
 		}
 		

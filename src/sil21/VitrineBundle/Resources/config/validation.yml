@@ -1,3 +1,6 @@
+# --------------------------------- #
+# ----------- Brand ----------- #
+# --------------------------------- #
 sil21\VitrineBundle\Entity\Brand:
     properties:
         name:
@@ -9,6 +12,10 @@ sil21\VitrineBundle\Entity\Brand:
                 minMessage: validation.brand.length.minMessage
                 maxMessage: validation.brand.length.max Message
 
+
+# --------------------------------- #
+# --------- Category --------- #
+# --------------------------------- #
 sil21\VitrineBundle\Entity\Category:
     properties:
         name:
@@ -20,6 +27,10 @@ sil21\VitrineBundle\Entity\Category:
                 minMessage: validation.category.length.minMessage
                 maxMessage: validation.category.length.maxMessage
 
+
+# --------------------------------- #
+# ----------- Client ----------- #
+# --------------------------------- #
 sil21\VitrineBundle\Entity\Client:
     properties:
         name:
@@ -48,6 +59,10 @@ sil21\VitrineBundle\Entity\Client:
 
             - Type: \DateTime
 
+
+# --------------------------------- #
+# ---------- Product --------- #
+# --------------------------------- #
 sil21\VitrineBundle\Entity\Product:
     properties:
         name:

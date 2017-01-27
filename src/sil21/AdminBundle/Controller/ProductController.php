@@ -24,8 +24,8 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Product:index.html.twig', [
-										  'products' => $products,
-									  ]
+					'products' => $products,
+				]
 			);
 		}
 		
@@ -35,7 +35,7 @@
 		 */
 		public function newAction( Request $request ) {
 			$product = new Product();
-			$form    = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
+			$form = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
 			$form->handleRequest( $request );
 			
 			if ( $form->isSubmitted() && $form->isValid() ) {
@@ -49,9 +49,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Product:new.html.twig', [
-										'product' => $product,
-										'form'    => $form->createView(),
-									]
+					'product' => $product,
+					'form'    => $form->createView(),
+				]
 			);
 		}
 		
@@ -64,10 +64,9 @@
 			
 			return $this->render(
 				'sil21AdminBundle:Product:show.html.twig', [
-										 'product'     => $product,
-										 'delete_form' => $deleteForm->createView(
-										 ),
-									 ]
+					'product'     => $product,
+					'delete_form' => $deleteForm->createView(),
+				]
 			);
 		}
 		
@@ -77,7 +76,7 @@
 		 */
 		public function editAction( Request $request, Product $product ) {
 			$deleteForm = $this->createDeleteForm( $product );
-			$editForm   = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
+			$editForm = $this->createForm( 'sil21\VitrineBundle\Form\ProductType', $product );
 			$editForm->handleRequest( $request );
 			
 			if ( $editForm->isSubmitted() && $editForm->isValid() ) {
@@ -124,8 +123,8 @@
 		 */
 		private function createDeleteForm( Product $product ) {
 			return $this->createFormBuilder()
-				    ->setAction( $this->generateUrl( 'product_delete', [ 'id' => $product->getId() ] ) )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction( $this->generateUrl( 'product_delete', [ 'id' => $product->getId() ] ) )
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}

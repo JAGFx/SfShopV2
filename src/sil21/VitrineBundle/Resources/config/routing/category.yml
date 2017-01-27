@@ -1,8 +1,16 @@
+# --------------------------------- #
+# --------- Category --------- #
+# --------------------------------- #
+
+# ---------- Application ----------
+
+# -- List all
 category_liste:
     path:       /listUser
     defaults: { _controller: sil21VitrineBundle:Category:list}
     methods:  GET
 
+# -- List product by category
 category_articlesByCategory:
     path:       /{id}/articles
     defaults: { _controller: sil21VitrineBundle:Category:articlesByCategory, id: 0}

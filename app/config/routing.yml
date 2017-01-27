@@ -1,21 +1,20 @@
+# -- Admin routing
 sil21_admin:
     resource: "@sil21AdminBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/admin
     requirements:
         _locale: en|fr
 
+# -- App routing
 sil21_vitrine:
     resource: "@sil21VitrineBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
 
+# -- User routing
 fos_user:
     resource: "rooting/fos_user_all.yml"
     prefix:   /{_locale}
     requirements:
         _locale: en|fr
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation

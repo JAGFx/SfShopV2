@@ -1,29 +1,40 @@
+# --------------------------------- #
+# ---------- Product ---------- #
+# --------------------------------- #
+
+# ---------- CRUD ----------
+
+# -- List all
 product_index:
     path:     /
     defaults: { _controller: "sil21AdminBundle:Product:index" }
     methods:  GET
 
+# -- Show
 product_show:
     path:     /{id}/show
     defaults: { _controller: "sil21AdminBundle:Product:show" }
     methods:  GET
 
+# -- Create
 product_new:
     path:     /new
     defaults: { _controller: "sil21AdminBundle:Product:new" }
     methods:  [GET, POST]
 
+# -- Edit
 product_edit:
     path:     /{id}/edit
     defaults: { _controller: "sil21AdminBundle:Product:edit" }
     methods:  [GET, POST]
 
+# -- Delete
 product_delete:
     path:     /{id}/delete
     defaults: { _controller: "sil21AdminBundle:Product:delete" }
     methods:  DELETE
 
-# -- Suppression de l'image
+# -- Delete picture
 product_delete_image:
     path:     /{id}/deleteImage
     defaults: { _controller: "s4smitheVitrineBundle:Product:deleteImage" }

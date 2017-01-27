@@ -1,16 +1,16 @@
 # ---------- IMPORT ----------
 
-# -- Catégorie
+# -- Category
 sil21_admin_categories:
     resource: "@sil21AdminBundle/Resources/config/routing/category.yml"
     prefix: /category
 
-# -- Produit
+# -- Product
 sil21_admin_products:
     resource: "@sil21AdminBundle/Resources/config/routing/product.yml"
     prefix: /product
 
-# -- Marque
+# -- Brand
 sil21_admin_brands:
     resource: "@sil21AdminBundle/Resources/config/routing/Brand.yml"
     prefix: /brand

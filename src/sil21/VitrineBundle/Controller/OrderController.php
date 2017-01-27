@@ -26,10 +26,7 @@
 			$orders = $user->getOrders();
 			
 			return $this->render(
-				'sil21VitrineBundle:Order:index.html.twig',
-				[
-					'orders' => $orders,
-				]
+				'sil21VitrineBundle:Order:index.html.twig', [ 'orders' => $orders ]
 			);
 			
 		}
@@ -62,10 +59,10 @@
 		 */
 		private function createDeleteForm( Order $order ) {
 			return $this->createFormBuilder()
-				    ->setAction(
-					    $this->generateUrl( 'order_delete', [ 'id' => $order->getId() ] )
-				    )
-				    ->setMethod( 'DELETE' )
-				    ->getForm();
+				->setAction(
+					$this->generateUrl( 'order_delete', [ 'id' => $order->getId() ] )
+				)
+				->setMethod( 'DELETE' )
+				->getForm();
 		}
 	}
