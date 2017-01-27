@@ -32,26 +32,28 @@
 		 * @return bool
 		 */
 		public function addArticle( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
-			
-			if ( key_exists( $product->getId(), $this->cartItems )
-			     && $this->cartItems[ $product->getId() ][ 'qte' ] < $product->getStock()
-			) {
-				$this->cartItems[ $product->getId() ][ 'qte' ] += $qte;
-				$this->cartItems[ $product->getId() ][ 'product' ] = $product;
 				
-			} elseif ( !key_exists( $product->getId(), $this->cartItems ) && $qte <= $product->getStock() ) {
-				$this->cartItems[ $product->getId() ] = [
-					'id'      => (int) $product->getId(),
-					'product' => $product,
-					'qte'     => (int) $qte
-				];
+				if ( key_exists( $product->getId(), $this->cartItems )
+					&& $this->cartItems[ $product->getId() ][ 'qte' ] < $product->getStock()
+				) {
+					$this->cartItems[ $product->getId() ][ 'qte' ] += $qte;
+					$this->cartItems[ $product->getId() ][ 'product' ] = $product;
+					
+				} elseif ( !key_exists( $product->getId(), $this->cartItems )
+					&& $qte <= $product->getStock()
+				) {
+					$this->cartItems[ $product->getId() ] = [
+						'id'      => (int) $product->getId(),
+						'product' => $product,
+						'qte'     => (int) $qte
+					];
+					
+				} else {
+					return false;
+				}
 				
-			} else {
-				return false;
+				return true;
 			}
-			
-			return true;
-		}
 		
 		/**
 		 * @param Product $product
@@ -60,21 +62,21 @@
 		 * @return bool
 		 */
 		public function changeQuantity( \sil21\VitrineBundle\Entity\Product $product, $qte ) {
-			if ( $qte <= $product->getStock() ) {
-				if ( key_exists( $product->getId(), $this->cartItems ) ) {
-					$this->cartItems[ $product->getId() ][ 'qte' ] = $qte;
-					
-				} else {
-					$this->cartItems[ $product->getId() ] = [
-						'id'      => (int) $product->getId(),
-						'product' => $product,
-						'qte'     => (int) $qte
-					];
+				if ( $qte <= $product->getStock() ) {
+					if ( key_exists( $product->getId(), $this->cartItems ) ) {
+						$this->cartItems[ $product->getId() ][ 'qte' ] = $qte;
+						
+					} else {
+						$this->cartItems[ $product->getId() ] = [
+							'id'      => (int) $product->getId(),
+							'product' => $product,
+							'qte'     => (int) $qte
+						];
+					}
 				}
+				
+				return $this->cartItems[ $product->getId() ][ 'qte' ];
 			}
-			
-			return $this->cartItems[ $product->getId() ][ 'qte' ] ;
-		}
 		
 		/**
 		 * remove article
@@ -82,13 +84,17 @@
 		 * @param string $productID
 		 */
 		public function removeOneArticle( $productID, $qte ) {
-			if ( key_exists( $productID, $this->cartItems ) && $this->cartItems[ $productID ][ 'qte' ] > 1 ) {
-				$this->cartItems[ $productID ][ 'qte' ] -= $qte;
-				
-			} else {
-				unset( $this->cartItems[ $productID ] );
+				if ( key_exists(
+						$productID, $this->cartItems
+					)
+					&& $this->cartItems[ $productID ][ 'qte' ] > 1
+				) {
+					$this->cartItems[ $productID ][ 'qte' ] -= $qte;
+					
+				} else {
+					unset( $this->cartItems[ $productID ] );
+				}
 			}
-		}
 		
 		/**
 		 * remove article
@@ -96,17 +102,17 @@
 		 * @param string $productID
 		 */
 		public function removeArticles( $productID ) {
-			if ( key_exists( $productID, $this->cartItems ) ) {
-				unset( $this->cartItems[ $productID ] );
+				if ( key_exists( $productID, $this->cartItems ) ) {
+					unset( $this->cartItems[ $productID ] );
+				}
 			}
-		}
 		
 		/**
 		 *
 		 */
 		public function clearCart() {
-			unset( $this->cartItems );
-		}
+				unset( $this->cartItems );
+			}
 		
 		/**
 		 * Get articles
@@ -114,30 +120,34 @@
 		 * @return array
 		 */
 		public function getCartItems() {
-			return $this->cartItems;
-		}
+				return $this->cartItems;
+			}
 		
 		/**
 		 * @return int
 		 */
 		public function getNbProduct() {
-			$nb = 0;
-			
-			foreach ( $this->cartItems as $product ) {
-				$nb += $product[ 'qte' ];
+				$nb = 0;
+				
+				foreach ( $this->cartItems as $product ) {
+					$nb += $product[ 'qte' ];
+				}
+				
+				return $nb;
 			}
-			
-			return $nb;
-		}
 		
 		public function getTotalCart() {
-			$total = 0;
-			
-			foreach ( $this->getCartItems() as $item ) {
-				$total += $item[ 'product' ]->getPriceSavedAmount() * $item[ 'qte' ];
+				$total = 0;
+				
+				foreach ( $this->getCartItems() as $item ) {
+					$total += $item[ 'product' ]->getPriceSavedAmount() * $item[ 'qte' ];
+				}
+				
+				return $total;
 			}
-			
-			return $total;
-		}
+		
+		public function isEmpty() {
+				return empty( $this->cartItems );
+			}
 		
 	}

@@ -1,0 +1,55 @@
+registration:
+    register_title: Register
+    login_title: Log in
+    logout_title: Log out
+
+form:
+    see: See
+    create: Create
+    edit: Edit
+    update: Update
+    delete: Delete
+    cancel: Cancel
+    action: Actions
+
+brand:
+    entity: Brand|]1,+Inf]Brands
+    name: Name
+
+
+category:
+    entity: Category|]1,+Inf]Categories
+    name: Name
+
+client:
+    entity: Client|]1,+Inf]Clients
+    name: Name
+    roles: Roles
+    email: Email address
+    firstname: Firstname
+    address: Address
+    tel: Cellphone number
+    birthday: Birthday
+    last_login: Last log in
+
+order:
+    entity: Order|]1,+Inf]Orders
+    date: Register day
+    client: Client
+    etat: State
+    total: Total €
+    owner: Owner
+
+product:
+    entity: Product|]1,+Inf]Products
+    name: Name
+    file: Image
+    price: Price
+    qte: Quantity
+    saved_amount: Save amount
+    stock: Available stock
+    description: Description
+    category: Category
+    brand: Brand
+
+    delete_file: Delete image

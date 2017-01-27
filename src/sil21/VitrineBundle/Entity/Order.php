@@ -8,6 +8,7 @@
 	 * Order
 	 */
 	class Order {
+		const CMD_STATE_CANCELED = -1;
 		const CMD_STATE_CHECKOUT  = 0;
 		const CMD_STATE_VALIDATE  = 1;
 		const CMD_STATE_PAYED     = 2;
@@ -198,6 +199,7 @@
 		 */
 		public static function getStatesConstants() {
 			return [
+				self::CMD_STATE_CANCELED => 'Annulé',
 				self::CMD_STATE_CHECKOUT  => 'Enregistré',
 				self::CMD_STATE_VALIDATE  => 'Validé',
 				self::CMD_STATE_PAYED     => 'Payement reçus',

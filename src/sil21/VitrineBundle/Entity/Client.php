@@ -4,11 +4,14 @@
 	
 	use Doctrine\ORM\Mapping as ORM;
 	use FOS\UserBundle\Entity\User as BaseUser;
+	use FOS\UserBundle\Model\UserInterface;
 	
 	/**
 	 * Client
 	 */
-	class Client extends BaseUser {
+	class Client implements UserInterface {//extends BaseUser {
+		
+		
 		/**
 		 * @var string
 		 */

@@ -20,11 +20,22 @@ nav.navbar {
 			position:       relative;
 			padding-top:    21px;
 			padding-bottom: 21px;
+			padding-left:   30px;
+			
+			&.btn.navbar-btn { margin: 13px 0; }
+			
+			> span.ico {
+				position:  absolute;
+				font-size: 2rem;
+				left:      5px;
+				transform: translateY(-50%);
+				top:       50%;
+			}
 			
 			&:after {
 				content:    '';
 				position:   absolute;
-				bottom:     -4px;
+				bottom:     -5px;
 				left:       0;
 				height:     4px;
 				width:      100%;

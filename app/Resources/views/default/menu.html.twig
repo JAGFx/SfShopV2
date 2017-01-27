@@ -30,7 +30,9 @@
 			<ul class="nav navbar-nav navbar-right" >
 				{% if is_granted('ROLE_ADMIN') %}
 					<li class="dropdown" >
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ 'menu.admin'|trans({}, 'VitrineBundle') }}
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+							<span class="ico glyphicon glyphicon-lock" ></span >
+							{{ 'menu.admin'|trans({}, 'VitrineBundle') }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
 							<li >
@@ -53,20 +55,29 @@
 				{% endif %}
 				
 				<li class="active" >
-					<a href="{{ path( 'product_list' ) }}" >{{ 'menu.catalog'|trans({}, 'VitrineBundle') }}
+					<a href="{{ path( 'product_list' ) }}" >
+						<span class="ico glyphicon glyphicon-th-list" ></span >
+						{{ 'menu.catalog'|trans({}, 'VitrineBundle') }}
 						<span class="sr-only" >(current)</span ></a ></li >
 				<li >
-					<a href="{{ path('sil21_mention') }}" >{{ 'menu.legal_notice'|trans({}, 'VitrineBundle') }}</a >
+					<a href="{{ path('sil21_mention') }}" >
+						<span class="ico glyphicon glyphicon-list-alt" ></span >
+						{{ 'menu.legal_notice'|trans({}, 'VitrineBundle') }}</a >
 				</li >
 				<li >
-					<a href="{{ path('sil21_cartContent') }}" >{{ 'cart.entity'|trans({}, 'VitrineBundle') }}
-						<span class="badge" >{{ cart_session.getCartSession().getTotalCart()|number_format(2, ',', ' ') }}
-							€</span ></a >
+					<a href="{{ path('sil21_cartContent') }}" >
+						<span class="ico glyphicon glyphicon-shopping-cart" ></span >
+						{{ 'cart.entity'|trans({}, 'VitrineBundle') }}
+						{% if not cart_session.cartSession.isEmpty %}
+							<span class="badge" >{{ cart_session.cartSession.nbProduct }}</span >
+						{% endif %}</a >
 				</li >
 				
 				{% if is_granted('ROLE_USER') %}
 					<li class="dropdown" >
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >{{ app.user.firstname ~ ' ' ~ app.user.name }}
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+							<span class="ico glyphicon glyphicon-user" ></span >
+							{{ app.user.firstname ~ ' ' ~ app.user.name }}
 							<span class="caret" ></span ></a >
 						<ul class="dropdown-menu" >
 							<li >

@@ -12,7 +12,8 @@ sil21\VitrineBundle\Entity\Brand:
 sil21\VitrineBundle\Entity\Category:
     properties:
         name:
-            - NotBlank: validation.category.name.notBlank
+            - NotBlank:
+                message: validation.category.name.notBlank
             - Length:
                 min: 2
                 max: 100
@@ -52,6 +53,11 @@ sil21\VitrineBundle\Entity\Product:
         name:
             - NotBlank:
                 message: validation.product.name.notBlank
+
+        image:
+            - Image:
+                mimeTypesMessage: validation.product.file.image.mime_type_message
+                maxSize: 6000000
 
         price:
             - NotBlank:

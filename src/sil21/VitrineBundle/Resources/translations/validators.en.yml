@@ -1,0 +1,55 @@
+validation:
+    brand:
+        name:
+            notBlank: The name don't stay empty
+            length:
+                minMessage: The name it's too short: Min size: 5
+                maxMessage: The name it's too long: Max size: 100
+
+    category:
+        name:
+            notBlank: The name don't stay empty
+            length:
+                minMessage: The name it's too short: Min size: 5
+                maxMessage: The name it's too long: Max size: 100
+
+    client:
+        name:
+            notBlank: The name don't stay empty
+
+        firstname:
+            notBlank: The firstname don't stay empty
+
+        address:
+            notBlank: The address don't stay empty
+
+        tel:
+            noBlank: The cellphone number don't stay empty
+            regex: The cellphone number it's wrang. Ex: 0123456789 or +33123456789.
+
+        dateBirtday:
+            date: The birthday don't stay empty
+
+    product:
+        name:
+            notBlank: The name don't stay empty
+
+        file:
+            image:
+                mime_type_message: Unsupported file
+
+        price:
+            notBlank: The price don't stay empty
+            range: The price must be a positive number
+
+        stock:
+            range: The stock must be a positive number
+
+        description:
+            notBlank: The description don't stay empty
+
+        category:
+            notBlank: The product need to be attached to Category
+
+        brand:
+            notBlank: The product need to be attached to Brand

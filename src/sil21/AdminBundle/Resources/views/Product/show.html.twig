@@ -35,10 +35,11 @@
 				<th >{{ 'product.price'|trans({}, 'AdminBundle') }}</th >
 				<td >{{ product.price }}</td >
 			</tr >
-			{% if product.savedAmount > 0%}
+			{% if product.savedAmount > 0 %}
 				<tr >
 					<th >{{ 'product.saved_amount'|trans({}, 'AdminBundle') }}</th >
-					<td ><span class="label label-danger">-{{ product.savedAmount * 100 }}%</span></td >
+					<td ><span class="label label-danger" >-{{ product.savedAmount * 100 }}%</span >
+					</td >
 				</tr >
 			{% endif %}
 			<tr >
@@ -55,11 +56,6 @@
 	<ul >
 		<li >
 			<a href="{{ path('product_index') }}" >Back to the list</a >
-		</li >
-		<li >
-			{{ form_start(delete_form) }}
-			<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
-			{{ form_end(delete_form) }}
 		</li >
 	</ul >
 {% endblock %}

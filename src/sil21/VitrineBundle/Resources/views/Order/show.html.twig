@@ -8,7 +8,7 @@
 			<a href="{{ path('order_edit', { 'id': order.id }) }}" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" ></span ></a >
 		{% endif %}
 	</h1 >
-
+	
 	<article class="noPaddingSide" >
 		<table class="stylized" >
 			<tr >
@@ -21,7 +21,7 @@
 			</tr >
 		</table >
 	</article >
-
+	
 	<h3 class="text-center" >{{ 'product.entity'|transchoice(order.orderItems|length, {}, 'AdminBundle') }}</h3 >
 	<article class="noPaddingSide panier" >
 		<table class="stylized" >
@@ -34,13 +34,15 @@
 			{% for orderItem in order.orderItems %}
 				<tr class="cartProduct" >
 					<td >
-						<img src="{{ asset("uploads/products/" ~ orderItem.product.image) }}" class="img-responsive" >
+						<img src="{{ vich_uploader_asset(orderItem.product, 'image') }}" class="img-responsive" >
 					</td >
 					<td class="infoProduct" >
 						<h3 >{{ orderItem.product.name }}</h3 >
 					</td >
 					<td >{{ orderItem.qte }}</td >
-					<td class="price" >{{ (orderItem.qte * orderItem.price)|number_format(2, ',', ' ') }} €</td >
+					<td class="price" >{{ (orderItem.qte * orderItem.price)|number_format(2, ',', ' ') }}
+						€
+					</td >
 				</tr >
 			{% endfor %}
 			<tr class="mainColorAcent" >
@@ -53,22 +55,10 @@
 			</tr >
 		</table >
 	</article >
-
+	
 	<ul >
-		{% if is_granted('ROLE_ADMIN') %}
-			<li >
-				<a href="{{ path('order_listUser') }}" >Back to the list</a >
-			</li >
-			<li >
-				{{ form_start(delete_form) }}
-				<button type="submit" >{{ 'form.delete'|trans({}, 'AdminBundle') }}</button >
-				{{ form_end(delete_form) }}
-			</li >
-
-		{% else %}
-			<li >
-				<a href="{{ path('order_listUser') }}" >Back to the list</a >
-			</li >
-		{% endif %}
+		<li >
+			<a href="{{ path('order_listUser') }}" >Back to the list</a >
+		</li >
 	</ul >
 {% endblock %}

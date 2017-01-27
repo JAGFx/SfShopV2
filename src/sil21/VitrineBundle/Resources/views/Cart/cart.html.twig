@@ -6,7 +6,7 @@
 	<h1 class="text-center" >{{ 'cart.entity'|trans({}, 'VitrineBundle') }}</h1 >
 	{% if cart.cartItems|length > 0 %}
 		<p class="text-center" >
-			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >Vider</a >
+			<a href="{{ path("sil21_emptyCart" ) }}" class="btn btn-primary" >{{ 'cart.actions.empty'|trans({}, 'VitrineBundle') }}</a >
 		</p >
 	{% endif %}
 

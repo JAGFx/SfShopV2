@@ -5,11 +5,11 @@
 	{% for product in listProductPop %}
 		{% include 'sil21VitrineBundle:Product:widget.html.twig' %}
 	{% endfor %}
-
+	
 	<h1 >{{ 'brand.entity'|transchoice(listMarquePop|length, {}, 'AdminBundle') }} populaires</h1 >
-	{% for marque in  listMarquePop %}
-		<div class="text-center">
+	<div class="text-center" >
+		{% for marque in  listMarquePop %}
 			<a href="{{ path('brand_articleByBrand', {'id': marque.id}) }}" class="btn btn-lg btn-primary" >{{ marque.name }}</a >
-		</div>
-	{% endfor %}
+		{% endfor %}
+	</div >
 {% endblock %}

@@ -29,7 +29,7 @@
 					[ 'label' => 'client.address', 'translation_domain' => 'AdminBundle' ]
 				)
 				->add(
-					'tel', IntegerType::class,
+					'tel', null,
 					[ 'label' => 'client.tel', 'translation_domain' => 'AdminBundle' ]
 				)
 				->add(

@@ -1,33 +1,33 @@
 cart:
     entity: Cart
     products:
-        name: Désignation
-        available: Disponibilité
-        qte: Quantité
-        price: Prix
+        name: Name
+        available: Availability
+        qte: Quantity
+        price: Price
     actions:
-        empty: Vider
-        process_order: Passer commande
+        empty: Clear
+        process_order: Check out
     messages:
-        empty_cart: Pas d'article dans le panier
-        forbidden_acces: Ce connecter avant de valider le panier
+        empty_cart: Cart it's empty
+        forbidden_acces: You must be logged to check out
     total: Total
 
 order:
-    no_order_do: Aucunes commandes effectué
+    no_order_do: No orders available
 
 profile:
-    title: Profil
-    edit_title: Modification du profil
+    title: Profile
+    edit_title: Editing profile
 
 register:
     messages:
-        success: Inscription réussi !
+        success: Success registration !
 
 menu:
-    catalog: Catalogue
+    catalog: Catalog
     admin: Administration
     legal_notice: Legal notice
 
 product:
-    no_saved_amount: Pas de réduction
+    no_saved_amount: No saved amount
