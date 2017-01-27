@@ -152,50 +152,60 @@
 		public function validateCartAction() {
 			$em = $this->getDoctrine()->getManager();
 			
-			$user = $user = $this->container
-				->get( 'security.token_storage' )
-				->getToken()->getUser();
-			
-			$order = new Order( $user );
-			$em->persist( $order );
-			$em->flush();
-			
 			/** @var CartService $cartSession * */
 			$cartSession = $this->container->get( 'sil21.cart.session' );
 			
-			$cart = $cartSession->getCartSession();
-			foreach ( $cart->getCartItems() as $item ) {
+			if ( $cartSession->getCartSession()->isEmpty() ) {
+				return $this->redirectToRoute( 'sil21_cartContent' );
 				
-				// Récupération du produit et retrait stock
-				$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
-					$item[ 'product' ]->getId()
+			} else {
+				$user = $user = $this->container
+					->get( 'security.token_storage' )
+					->getToken()->getUser();
+				
+				$order = new Order( $user );
+				$em->persist( $order );
+				$em->flush();
+				
+				/** @var CartService $cartSession * */
+				$cartSession = $this->container->get( 'sil21.cart.session' );
+				
+				$cart = $cartSession->getCartSession();
+				foreach ( $cart->getCartItems() as $item ) {
+					
+					// Récupération du produit et retrait stock
+					$product = $em->getRepository( 'sil21VitrineBundle:Product' )->find(
+						$item[ 'product' ]->getId()
+					);
+					$product->setStock( $product->getStock() - $item[ 'qte' ] );
+					
+					// Création d'une ligne de Order
+					$orderLine = new OrderLine( $product, $order, $item[ 'qte' ] );
+					$order->addOrderLines( $orderLine );
+					
+					$em->persist( $product );
+				}
+				
+				$em->persist( $order );
+				$em->flush();
+				
+				$cartSession->setCartSession( new Cart() );
+				$this->get( 'session' )->getFlashBag()->add(
+					'message', [
+						'type'    => 'success',
+						'title'   => "Order effectué avec succès",
+						'message' => 'Accèdez à votre Order depuis votre espace'
+					]
 				);
-				$product->setStock( $product->getStock() - $item[ 'qte' ] );
 				
-				// Création d'une ligne de Order
-				$orderLine = new OrderLine( $product, $order, $item[ 'qte' ] );
-				$order->addOrderLines( $orderLine );
-				
-				$em->persist( $product );
+				return $this->render(
+					'sil21VitrineBundle:Cart:successValidation.html.twig',
+					[
+						'idOrder' => $order->getId()
+					]
+				);
 			}
 			
-			$em->persist( $order );
-			$em->flush();
 			
-			$cartSession->setCartSession( new Cart() );
-			$this->get( 'session' )->getFlashBag()->add(
-				'message', [
-					'type'    => 'success',
-					'title'   => "Order effectué avec succès",
-					'message' => 'Accèdez à votre Order depuis votre espace'
-				]
-			);
-			
-			return $this->render(
-				'sil21VitrineBundle:Cart:successValidation.html.twig',
-				[
-					'idOrder' => $order->getId()
-				]
-			);
 		}
 	}

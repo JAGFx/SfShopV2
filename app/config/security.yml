@@ -33,30 +33,11 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        # -- Categorie
-        #- { path: ^/category/listUser, role: ROLE_USER }
-        #- { path: ^/category/\d+/articles, role: ROLE_USER }
-        #- { path: ^/category/, role: ROLE_ADMIN }
-
-        # -- Client
-        #- { path: ^/client/, role: ROLE_ADMIN }
-        #- { path: ^/profile/, role: ROLE_USER }
-
         # -- Order
-        #- { path: ^/Order/\d+/show, role: ROLE_USER }
-        #- { path: ^/Order/listUser, role: ROLE_USER }
-        #- { path: ^/Order/, role: ROLE_ADMIN }
-
-        # -- Brand
-        #- { path: ^/marque/listUser, role: ROLE_USER }
-        #- { path: ^/marque/\d+/articles, role: ROLE_USER }
-        #- { path: ^/marque/, role: ROLE_ADMIN }
+        - { path: ^/(fr|en)/order/, role: ROLE_USER }
 
         # -- Cart
-        - { path: ^/cart/validate, role: ROLE_USER }
+        - { path: ^/(fr|en)/cart/validate, role: ROLE_USER }
 
-        # -- Produit
-        #- { path: ^/product/listUser, role: ROLE_USER }
-        #- { path: ^/product/, role: ROLE_ADMIN }
-
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        # -- Admin
+        - { path: ^/(fr|en)/admin/, role: ROLE_ADMIN }
