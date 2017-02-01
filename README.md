@@ -1,4 +1,4 @@
-)A Symfony project created on November 28, 2016, 9:56 am.
+A Symfony project created on November 28, 2016, 9:56 am.
 # SfShopV2
 
 ## Installation
@@ -51,7 +51,7 @@ php app/console assetic:dump --force
 
 * Assetics ( Gestions des resosurces web )
 * FOSUser ( Gestion utilisateurs )
-* VishUpploader ( Gestion d'images )
+* VichUploader ( Gestion d'images )
 * DoctirneFixtures ( Préchargement des données )
 
 ### Fonctionalités attendus
